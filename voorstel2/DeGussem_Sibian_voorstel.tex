@@ -1,0 +1,95 @@
+%==============================================================================
+% Sjabloon onderzoeksvoorstel bachelorproef
+%==============================================================================
+% Gebaseerd op LaTeX-sjabloon ‘Stylish Article’ (zie voorstel.cls)
+% Auteur: Jens Buysse, Bert Van Vreckem
+%
+% Compileren in TeXstudio:
+%
+% - Zorg dat Biber de bibliografie compileert (en niet Biblatex)
+%   Options > Configure > Build > Default Bibliography Tool: "txs:///biber"
+% - F5 om te compileren en het resultaat te bekijken.
+% - Als de bibliografie niet zichtbaar is, probeer dan F5 - F8 - F5
+%   Met F8 compileer je de bibliografie apart.
+%
+% Als je JabRef gebruikt voor het bijhouden van de bibliografie, zorg dan
+% dat je in ``biblatex''-modus opslaat: File > Switch to BibLaTeX mode.
+
+\documentclass{voorstel}
+\usepackage[dutch]{babel}
+\usepackage{lipsum}
+
+%------------------------------------------------------------------------------
+% Metadata over het voorstel
+%------------------------------------------------------------------------------
+
+%---------- Titel & auteur ----------------------------------------------------
+
+\PaperTitle{Nursery Tone Monitor: detecteren van elderspeak via AI}
+\PaperType{Onderzoeksvoorstel Bachelorproef 2021-2022} % Type document
+
+% TODO: vul je eigen naam in als auteur, geef ook je emailadres mee!
+\Authors{Sibian {De Gussem}\textsuperscript{1}} % Authors
+\CoPromotor{Jorrit {Campens}\textsuperscript{2} (Hogeschool Gent)}
+\affiliation{\textbf{Contact:}
+  \textsuperscript{1} \href{mailto:sibian.degussem@student.hogent.be}{sibian.degussem@student.hogent.be};
+  \textsuperscript{2} \href{mailto:jorrit.campens@hogent.be}{jorrit.campens@hogent.be};
+}
+
+%---------- Abstract ----------------------------------------------------------
+
+\Abstract{In dit onderzoek zal er verder gewerkt worden op twee voorgaande eindwerken waarbij men op een softwarematige manier kijkt of er \textit{elderspeak} wordt toegepast of niet. Hierdoor krijgt de persoon in kwestie een idee van welke eigenschappen die toepast zodat dit in de toekomst verbeterd kan worden. Dit zal gerealiseerd worden met Python, spraakherkenning, herkenningsmethoden, \textit{Machine Learning} of \textit{Deep Learning} en als laatste zal dit gepresenteerd worden via een webapplicatie met \textit{Flask} als backend.
+
+}
+
+%---------- Onderzoeksdomein en sleutelwoorden --------------------------------
+% TODO: Sleutelwoorden:
+%
+% Het eerste sleutelwoord beschrijft het onderzoeksdomein. Je kan kiezen uit
+% deze lijst:
+%
+% - Mobiele applicatieontwikkeling
+% - Webapplicatieontwikkeling
+% - Applicatieontwikkeling (andere)
+% - Systeembeheer
+% - Netwerkbeheer
+% - Mainframe
+% - E-business
+% - Databanken en big data
+% - Machineleertechnieken en kunstmatige intelligentie
+% - Andere (specifieer)
+%
+% De andere sleutelwoorden zijn vrij te kiezen
+
+\Keywords{Machineleertechnieken en kunstmatige intelligentie, Artificiële Intelligentie, Elderspeak, spraakherkenning, verpleegkudne, Python, applicatieontwikkeling, zorg} % Keywords
+\newcommand{\keywordname}{Sleutelwoorden} % Defines the keywords heading name
+
+%---------- Titel, inhoud -----------------------------------------------------
+
+\begin{document}
+
+\flushbottom % Makes all text pages the same height
+\maketitle % Print the title and abstract box
+\tableofcontents % Print the contents section
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%------------------------------------------------------------------------------
+% Hoofdtekst
+%------------------------------------------------------------------------------
+
+% De hoofdtekst van het voorstel zit in een apart bestand, zodat het makkelijk
+% kan opgenomen worden in de bijlagen van de bachelorproef zelf.
+\input{voorstel-inhoud}
+
+%------------------------------------------------------------------------------
+% Referentielijst
+%------------------------------------------------------------------------------
+% TODO: de gerefereerde werken moeten in BibTeX-bestand ``voorstel.bib''
+% voorkomen. Gebruik JabRef om je bibliografie bij te houden en vergeet niet
+% om compatibiliteit met Biber/BibLaTeX aan te zetten (File > Switch to
+% BibLaTeX mode)
+
+\phantomsection
+\printbibliography[heading=bibintoc]
+
+\end{document}
