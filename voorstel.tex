@@ -1,0 +1,93 @@
+%==============================================================================
+% Voorbeeld gebruik documentklasse hogent-article
+%==============================================================================
+%
+% Compileren in TeXstudio:
+%
+% - Zorg dat Biber de bibliografie compileert (en niet Biblatex)
+%   Options > Configure > Build > Default Bibliography Tool: "txs:///biber"
+% - F5 om te compileren en het resultaat te bekijken.
+% - Als de bibliografie niet zichtbaar is, probeer dan F5 - F8 - F5
+%   Met F8 compileer je de bibliografie apart.
+%
+% Als je JabRef gebruikt voor het bijhouden van de bibliografie, zorg dan
+% dat je in ``biblatex''-modus opslaat: File > Switch to BibLaTeX mode.
+
+\documentclass{hogent-article}
+
+\usepackage{lipsum} % Voor vultekst
+\usepackage{graphicx}
+\graphicspath{ {./imgAnalyse/} }
+
+%------------------------------------------------------------------------------
+% Metadata over het artikel
+%------------------------------------------------------------------------------
+
+%---------- Titel & auteur ----------------------------------------------------
+
+\PaperTitle{Voorstel}
+% Dit is typisch de opdracht en het vak waarvoor dit artikel geschreven is, bv.
+% ``Verslag onderzoeksproject Onderzoekstechnieken 2018-2019''
+\PaperType{C}
+
+\Authors{Sibian {De Gussem}\textsuperscript{1}} % Authors
+
+
+% Als het hier gaat om een voorstel voor de bachelorproef, dan ben je hier
+% verplicht de naam van je co-promotor in te vullen. Zoniet, dan kan je het
+% leeg laten.
+\CoPromotor{Jorrit {Campens}\textsuperscript{2}}
+
+% Contactinfo: Geef hier de contactgegevens van elke auteur van het artikel (en
+% indien van toepassing ook van de co-promotor).
+
+\affiliation{
+  \textsuperscript{2} \href{mailto:sibian.degussem@student.hogent.be}{sibian.degussem@student.hogent.be}}
+\affiliation{
+    \textsuperscript{1} \href{mailto:jorrit.campens@student.hogent.be}{jorrit.campens@hogent.be}}
+
+
+%---------- Abstract ----------------------------------------------------------
+
+%-- \Abstract{Hier schrijf je de samenvatting van je artikel, als een doorlopende tekst van één paragraaf. Wat hier zeker in moet vermeld worden: \textbf{Context} (Waarom is dit werk belangrijk?); \textbf{Nood} (Waarom moet dit onderzocht worden?); \textbf{Taak} (Wat ga je (ongeveer) doen?); \textbf{Object} (Wat staat in dit document geschreven?); \textbf{Resultaat} (Wat verwacht je van je onderzoek?); \textbf{Conclusie} (Wat verwacht je van van de conclusies?); \textbf{Perspectief} (Wat zegt de toekomst voor dit werk?).
+
+\Abstract{
+    ABC
+}
+
+% --Bij de sleutelwoorden geef je het onderzoeksdomein, samen met andere sleutelwoorden die je werk beschrijven.
+
+%---------- Onderzoeksdomein en sleutelwoorden --------------------------------
+
+\Keywords{a}
+\newcommand{\keywordname}{Sleutelwoorden} % Defines the keywords heading name
+
+%---------- Titel, inhoud -----------------------------------------------------
+
+\begin{document}
+
+\flushbottom % Makes all text pages the same height
+\maketitle % Print the title and abstract box
+\tableofcontents % Print the contents section
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%------------------------------------------------------------------------------
+% Hoofdtekst
+%------------------------------------------------------------------------------
+
+\section{Inleiding}\label{sec:inleiding}
+
+\section{Overzicht literatuur}\label{sec:overzicht-literatuur}
+
+%------------------------------------------------------------------------------
+% Referentielijst
+%------------------------------------------------------------------------------
+% TODO: de gerefereerde werken moeten in BibTeX-bestand ``bibliografie.bib''
+% voorkomen. Gebruik JabRef om je bibliografie bij te houden en vergeet niet
+% om compatibiliteit met Biber/BibLaTeX aan te zetten (File > Switch to
+% BibLaTeX mode)
+
+\phantomsection
+\printbibliography[heading=bibintoc]
+
+\end{document}
