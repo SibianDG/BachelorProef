@@ -14,10 +14,11 @@
 % dat je in ``biblatex''-modus opslaat: File > Switch to BibLaTeX mode.
 
 \documentclass{hogent-article}
-
+\usepackage[dutch]{babel}
 \usepackage{lipsum} % Voor vultekst
 \usepackage{graphicx}
 \graphicspath{ {./imgAnalyse/} }
+
 
 %------------------------------------------------------------------------------
 % Metadata over het artikel
@@ -25,10 +26,10 @@
 
 %---------- Titel & auteur ----------------------------------------------------
 
-\PaperTitle{Voorstel}
+\PaperTitle{Nursery Tone Monitor: detecteren van elderspeak via AI}
 % Dit is typisch de opdracht en het vak waarvoor dit artikel geschreven is, bv.
 % ``Verslag onderzoeksproject Onderzoekstechnieken 2018-2019''
-\PaperType{C}
+\PaperType{Onderzoeksvoorstel Bachelorproef 2021-2022}
 
 \Authors{Sibian {De Gussem}\textsuperscript{1}} % Authors
 
@@ -36,7 +37,7 @@
 % Als het hier gaat om een voorstel voor de bachelorproef, dan ben je hier
 % verplicht de naam van je co-promotor in te vullen. Zoniet, dan kan je het
 % leeg laten.
-\CoPromotor{Jorrit {Campens}\textsuperscript{2}}
+\CoPromotor{Jorrit {Campens}\textsuperscript{2} (Hogeschool Gent)}
 
 % Contactinfo: Geef hier de contactgegevens van elke auteur van het artikel (en
 % indien van toepassing ook van de co-promotor).
@@ -52,14 +53,14 @@
 %-- \Abstract{Hier schrijf je de samenvatting van je artikel, als een doorlopende tekst van één paragraaf. Wat hier zeker in moet vermeld worden: \textbf{Context} (Waarom is dit werk belangrijk?); \textbf{Nood} (Waarom moet dit onderzocht worden?); \textbf{Taak} (Wat ga je (ongeveer) doen?); \textbf{Object} (Wat staat in dit document geschreven?); \textbf{Resultaat} (Wat verwacht je van je onderzoek?); \textbf{Conclusie} (Wat verwacht je van van de conclusies?); \textbf{Perspectief} (Wat zegt de toekomst voor dit werk?).
 
 \Abstract{
-    ABC
+    In dit onderzoek zal er verder gewerkt worden op twee voorgaande eindwerken waarbij men op een softwarematige manier kijkt of er elderspeak wordt toegepast of niet. Hierdoor krijgt de persoon in kwestie een idee van welke eigenschappen die toepast zodat dit in de toekomst verbeterd kan worden. Dit zal gerealiseerd worden met Python, spraakherkenning, herkenningsmethoden, \textit{Machine Learning} of \textit{Deep Learning} en als laatste zal dit gepresenteerd worden via een webapplicatie met \textit{Flask} als backend.
 }
 
 % --Bij de sleutelwoorden geef je het onderzoeksdomein, samen met andere sleutelwoorden die je werk beschrijven.
 
 %---------- Onderzoeksdomein en sleutelwoorden --------------------------------
 
-\Keywords{a}
+\Keywords{Elderspeak, Artificiële Intelligentie, kunstmatige intelligentie, spraakherkenning, verpleegkudne, Python, applicatieontwikkeling, zorg}
 \newcommand{\keywordname}{Sleutelwoorden} % Defines the keywords heading name
 
 %---------- Titel, inhoud -----------------------------------------------------
@@ -76,6 +77,38 @@
 %------------------------------------------------------------------------------
 
 \section{Inleiding}\label{sec:inleiding}
+De veroudering van de bevolking in de Vlaamse steden en gemeenten zet zich in de komende 10 jaar verder \textcite{StatistiekVlaanderen2018}. Dit staat te lezen in een artikel van Statistiek Vlaanderen. Volgens hun voorspellingen zou tegen 2033 25\% van de bevolking een 65-plusser zijn~\autocite{StatistiekVlaanderen2018}.
+
+Hoe meer ouderen er in de samenleving zijn, hoe meer zorg die natuurlijk gaan nodig hebben en hoe meer zorgverleners zich moeten bezig houden met die leeftijdscategorie. Die zorgverleners, maar evengoed familie of omstaanders weten niet altijd even goed hoe ze moeten omgaan met senioren.
+
+Daarnaast is het woord 'waardigheid' actueler dan ooit. Na de schrijnende omstandigheden van de Tweede Wereldoorlog stond dat woord centraal bij het opstellen van het verdrag van de Verenigde Naties (1945), de Universele Verklaring van de Rechten van de mens (1948) en in de grondrechten van de Europese Unie (2000). Dat begrip 'waardigheid' wordt ook toegepast naar de zorgcontext. Dit wil zeggen dat ouderen niet gediscrimineerd mogen worden op vlak van leeftijd, maar ook dat ze niet op een kinderlijke, betuttelende of onvriendelijke wijze aangesproken worden en dat ze met respect bejegend moeten worden.~\autocite{Campens}
+
+Wanneer een jonger persoon anders spreekt tegen een senior dan tegen een leeftijdsgenoot, spreken we over \textit{elderspeak}. \textcite{Williams2011} omschrijft \textit{elderspeak} als het volgende: `Elderspeak is a common intergenerational speech style used by younger persons in communication with older adults in a variety of community and health care settings. Based on negative stereotypes of older adults as less competent communicators, younger speakers (in this case nursing home staff) modify their communication with nursing home residents by simplifying the vocabulary and grammar and by adding clarifications such as repetitions and altered prosody.`. Om elderspeak te bestrijden gaven Wick en \textcite{Wick2007} een paar tips mee in hun onderzoek. Zo spreek je de persoon aan hoe ze aangesproken willen worden, vraag om ze aan te spreken met de voornaam, vermijd troetelnamen, wees bewust van non-verbaal gedrag, verhoog je stemvolume enkel en alleen wanneer de gesprekspartner hardhorig is, herhaal alleen je zin als de gesprekspartner het niet verstaan heeft, vermijd kort, langzame en makkelijke zinnen, vermijd verklein woorden en hanteer beleefd taalgebruik.
+
+Dit onderwerp was vorig jaar al een onderzoeksonderwerp voor een eindwerk. Dit onderwerp werd gekozen door Glenn Beeckman~\autocite{Beeckman2021} en Victor Standaert~\autocite{Standaert2021}. Zij hebben al een basis gelegd in de goede richting om dit tot een goed einde te brengen. Ik kan dan ook sommige stukken programmeercode van hen gebruiken om zo een beter model op te stellen.
+
+Met dit eindwerk of bachelorproef zal ik alle mogelijkheden en capaciteiten van mezelf inzetten om een applicatie én AI-model te maken zodat dit kan getest en gebruikt worden in de opleiding verpleegkunde.
+
+\section{State-of-the-art}\label{sec:state-of-the-art}
+Momenteel is er al werk gemaakt van het speech-to-text, verkleinwoorden detecteren, een frequentiemeter, herhalende zinnen herkennen, emotie-herkenner en een basis applicatie in 'Tkinter', een standaard Graphical User Interface (GUI) in Python.
+
+Het is de bedoeling dat de twee reeds vernoemde eindwerken samengevoegd en verbeterd worden. Flask, een micro webframework in Python, kan gebruikt worden om een webpagina te maken waar men kan oefenen op \textit{elderspeak}.
+
+Ook het gebruiken van Machinaal leren of \textit{Deep Learning}, meer specifiek een \textit{Convolutional Neural Network} (CNN) kan een positief effect hebben op het detecteren van alle parameters rond \textit{elderspeak}.
+
+\section{Methodologie}\label{sec:methodologie}
+Voor dit onderzoek zal ik het kort hebben wat \textit{elderspeak} precies is. Dit zal een literatuuronderzoek zijn naar de reden waarom \textit{elderspeak} niet goed is, de kenmerken en hoe men dit kan helpen voorkomen.
+
+Met deze kenmerken en samen met de twee eindwerken van vorig jaar kan ik methodes opstellen en verbeteren om die kenmerken te herkennen. Daarbij is het gebruik van Artificiële Intelligentie aan te raden om het verschil te weten tussen iemand die normaal praat en die aan \textit{elderspeak} doet.
+
+Als laatste moet alles omgezet worden naar een duidelijk webapplicatie via \textit{Flask} zodat het in latere fases niet geïnstalleerd moet worden op de computer, maar wel zodat het door iedereen thuis of op verplaatsing, zoals een rusthuis, kan gebruikt worden.
+
+
+\section{Verwachte resultaten}\label{sec:verwachte-resultaten}
+Het verwachte resultaat is een webapplicatie met \textit{Flask} als backend, waarbij men de optie heeft om het model te trainen en waarbij het model voorspelt wat of het \textit{elderspeak} is, met daarboven op dat het model aangeeft a.d.h.v. welke parameters het denkt dat het om \textit{elderspeak} gaat.
+
+\section{Verwachte conclusies}\label{sec:verwachte-conclusies}
+De conclusie bij de resultaten zou zijn dat er een meetbaar verschik is tussen personen die \textit{nursery tone} gebruiken t.o.v. mensen die normaal praten. Het model kan nooit 100\% werken. In de praktijk spreekt met sneller dialect tegen ouderen. De algoritmes zijn getraind op Algemeen Nederlands (AN) en niet op dialect. Die algoritmes zijn ook vaker getraind op Nederlanders i.p.v. op Belgen, waardoor sommige klanken minder goed herkend zullen worden. Ook het achtergrondlawaai zal een uitdaging worden om dat er uit te filteren.
 
 \section{Overzicht literatuur}\label{sec:overzicht-literatuur}
 
