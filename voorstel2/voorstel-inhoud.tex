@@ -46,19 +46,19 @@ Om écht te weten wat \textit{elderspeak} precies inhoudt, zal er eerst een kort
 	\item Wat zijn tips om dat te verhelpen?
 \end{itemize}
 
-Ook zal er literatuuronderzoek gedaan moeten worden naar welke soort machineleren of \textit{deep learning} er het beste past bij al die verschillende parameters.
+Ook zal er literatuuronderzoek gedaan moeten worden naar welke soort machineleren of \textit{deep learning} er het beste past bij al die verschillende parameters. Of het mogelijk is om het model ter plekke te trainen en hoe dit moet worden toegepast in de back-end van ``Flask''.
 
 \subsection{Stand van zaken}
 Zoals al vermeld in de inleiding hebben vorig jaar al twee studenten dit onderwerp gekregen voor hun bachelorproef. Zij hebben werk gemaakt van het speech-to-text, verkleinwoorden detecteren, een frequentiemeter, herhalende zinnen herkennen, emotie-herkenner en een basis applicatie in 'Tkinter', een standaard Graphical User Interface (GUI) in Python.
-%TODO: wat zei Victor? of beiden?
-Victor vermeldde een paar tips....
+
+\textcite{Beeckman2021} vermeldde dat er nog werk was om herhaling en verkleinwoorden te detecteren. \textcite{Standaert2021} haalde aan dat er nog onderzoek nodig was voor de spraakherkenning en de frequentiemeter om de applicatie preciezer te maken.
 
 \subsection{Wat is mijn aandeel TODO andere titel}
 
-Beide studenten hebben niet echt Kunstmatige Intelligentie gebruikt om het resultaat te bekomen. Victor heeft wel methoden geschreven om een paar kenmerken te herkennen, maar da dat is op basis van vaste parameters.
-Mocht ik AI kunnen gebruiken om de nauwkeurigheid te kunnen opschalen, dan zou dat alvast een winst zijn. Het gebruik van Machinaal leren of \textit{Deep Learning}, meer specifiek een \textit{Convolutional Neural Network} (CNN) kan een positief effect hebben op het detecteren van alle parameters rond \textit{elderspeak}.
+Beide studenten hebben niet echt Kunstmatige Intelligentie gebruikt om het resultaat te bekomen. Victor heeft wel methoden geschreven om een paar kenmerken te herkennen, maar dat is op basis van vaste parameters.
+Mocht AI gebruikt kunnen worden om de nauwkeurigheid te kunnen opschalen, dan zou dat alvast een winst zijn. Het gebruik van Machinaal leren of \textit{Deep Learning}, meer specifiek een \textit{Convolutional Neural Network} (CNN) kan een positief effect hebben op het detecteren van alle parameters rond \textit{elderspeak}.
 
-Het is de bedoeling dat de twee reeds vernoemde eindwerken samengevoegd en verbeterd worden. Glenn gebruikte Tkinter voor de \textit{front-end} te maken, maar haalde een paar redenen aan waarom dat toch niet te verkiezen is waaronder het amateuristische uiterlijk en de beperkte mogelijkheden. Ik zou dan verkiezen voor Flask, een micro webframework in Python, kan gebruikt worden om een webpagina te maken en te linken naar de \textit{back-end}.
+Het is de bedoeling dat de twee reeds vernoemde eindwerken samengevoegd en verbeterd worden. \textcite{Beeckman2021} gebruikte Tkinter voor de \textit{front-end} te maken, maar haalde een paar redenen aan waarom dat toch niet te verkiezen is waaronder het amateuristische uiterlijk en de beperkte mogelijkheden. Ik zou dan verkiezen voor ``Flask'', een micro webframework in Python, kan gebruikt worden om een webpagina te maken en te linken naar de \textit{back-end}.
 
 \textcolor{blue}{
 Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein. Dit kan bijvoorbeeld een literatuurstudie zijn. Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek? Wat is de relevantie met jouw onderzoek?
@@ -71,11 +71,11 @@ Je mag gerust gebruik maken van subsecties in dit onderdeel.}
 
 \textcolor{blue}{Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor experimenten, vragenlijsten, simulaties? Je beschrijft ook al welke tools je denkt hiervoor te gebruiken of te ontwikkelen.}
 
-Voor dit onderzoek zal ik het kort hebben wat \textit{elderspeak} precies is. Dit zal een literatuuronderzoek zijn naar de reden waarom \textit{elderspeak} niet goed is, de kenmerken en hoe men dit kan helpen voorkomen.
+Om er zeker van te zijn dat er genoeg data beschikbaar is, zal het beste zijn dat er audiosamples opgenomen worden. Dit zal idealiter gebeuren voor de 1e examenperiode. 
 
-Met deze kenmerken en samen met de twee eindwerken van vorig jaar kan ik methodes opstellen en verbeteren om die kenmerken te herkennen. Daarbij is het gebruik van Artificiële Intelligentie aan te raden om het verschil te weten tussen iemand die normaal praat en die aan \textit{elderspeak} doet.
+Met deze kenmerken die verzameld werden van het literatuuronderzoek en samen met de twee eindwerken van vorig jaar kunnen er  methodes opgesteld en verbeterd worden die die kenmerken herkennen. Daarbij is het gebruik van Artificiële Intelligentie aan te raden om het verschil te weten tussen iemand die normaal praat en die aan \textit{elderspeak} doet.
 
-Als laatste moet alles omgezet worden naar een duidelijk webapplicatie via \textit{Flask} zodat het in latere fases niet geïnstalleerd moet worden op de computer, maar wel zodat het door iedereen thuis of op verplaatsing, zoals een rusthuis, kan gebruikt worden.
+Als laatste moet alles omgezet worden naar een duidelijk webapplicatie via ``Flask'' zodat het in latere fases niet geïnstalleerd moet worden op de computer, maar wel zodat het door iedereen thuis of op verplaatsing, zoals een rusthuis, kan gebruikt worden.
 
 
 %---------- Verwachte resultaten ----------------------------------------------
@@ -84,7 +84,7 @@ Als laatste moet alles omgezet worden naar een duidelijk webapplicatie via \text
 
 \textcolor{blue}{Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de stukken van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet hoe je je data gaat moeten structureren.}
 
-Het verwachte resultaat is een webapplicatie met \textit{Flask} als backend, waarbij men de optie heeft om het model te trainen en waarbij het model voorspelt wat of het \textit{elderspeak} is, met daarboven op dat het model aangeeft a.d.h.v. welke parameters het denkt dat het om \textit{elderspeak} gaat.
+Het verwachte resultaat is een webapplicatie met ``Flask'' als \textit{back-end}, waarbij men de optie heeft om het model te trainen en waarbij het model voorspelt wat of het \textit{elderspeak} is, met daarboven op dat het model aangeeft a.d.h.v. welke parameters het 'denkt' dat het om \textit{elderspeak} gaat.
 
 
 %---------- Verwachte conclusies ----------------------------------------------
@@ -93,5 +93,4 @@ Het verwachte resultaat is een webapplicatie met \textit{Flask} als backend, waa
 
 \textcolor{blue}{Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.}
 
-De conclusie bij de resultaten zou zijn dat er een meetbaar verschik is tussen personen die \textit{nursery tone} gebruiken t.o.v. mensen die normaal praten. Het model kan nooit 100\% werken. In de praktijk spreekt met sneller dialect tegen ouderen. De algoritmes zijn getraind op Algemeen Nederlands (AN) en niet op dialect. Die algoritmes zijn ook vaker getraind op Nederlanders i.p.v. op Belgen, waardoor sommige klanken minder goed herkend zullen worden. Ook het achtergrondlawaai zal een uitdaging worden om dat er uit te filteren.
-
+De conclusie bij de resultaten zou zijn dat er een meetbaar verschil is tussen personen die \textit{nursery tone} gebruiken t.o.v. mensen die normaal praten. Het model kan nooit 100\% werken. In de praktijk spreekt met sneller dialect tegen ouderen. De algoritmes zijn getraind op Algemeen Nederlands (AN) en niet op dialect. Die algoritmes zijn ook vaker getraind op Nederlanders i.p.v. op Vlamingen, waardoor sommige klanken minder goed herkend zullen worden. Ook het achtergrondlawaai zal een uitdaging worden om dat er uit te filteren.
