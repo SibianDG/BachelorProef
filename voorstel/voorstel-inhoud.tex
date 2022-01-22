@@ -42,16 +42,10 @@ Ik hoop ook dat ik ouderen op deze manier een betere levenskwaliteit kan bieden 
 
 \subsection{Literatuuronderzoek}\label{subsec:literatuuronderzoek}
 
-Om écht te weten wat \textit{elderspeak} precies inhoudt, zal er eerst een kort literatuuronderzoek uitgevoerd moeten worden.
-Dit zullen de belangrijkste vragen zijn om te beantwoorden:
-\begin{itemize}
-	\item Wat is \textit{elderspeak}?
-	\item Waarom storen senioren zich aan \textit{elderspeak}?
-	\item In welke context komt dit het meest naar boven?
-	\item Wat zijn tips om dat te verhelpen?
-\end{itemize}
+Omdat voorgaande studenten al uitgezocht hebben wat \textit{elderspeak} precies is, zal dit niet herhaald worden in dit onderzoek.
+Wel zal er op basis van de beschikbare literatuur onderzocht worden welk soort machinaal leren of \textit{deep learning} het meest geschikt is. Zowel \textit{machine learning} als \textit{deep learning} hebben elk verschillende onderlinge modellen. Er moet dan bekeken worden welke hypothese het beste past om deze parameters te integreren in het model of verschillende modellen.
 
-Ook zal er op basis van de beschikbare literatuur onderzocht worden welke soort machinaal leren of \textit{deep learning} het meest geschikt is om deze parameters te integreren in het model.
+Een extra obstakel kan verschijnen wanneer er te veel achtergrond lawaai aanwezig is. Mogelijks moet er dan eerst een filter worden uitgevoerd op de audiobestanden om dit weg te filteren zodat deze wel gebruikt kunnen worden voor het herkennen van eigenschappen op \textit{elderspeak}.
 
 \subsection{Stand van zaken}\label{subsec:stand-van-zaken}
 
@@ -64,7 +58,7 @@ Zij hebben zich gefocust op de \textit{speech-to-text}, verkleinwoorden detecter
 
 Beide studenten hebben niet echt Kunstmatige Intelligentie gebruikt om het resultaat te bekomen. \textcite{Standaert2021} heeft wel methoden beschreven om een paar kenmerken te herkennen, maar dit gebeurt op basis van vaste parameters.
 Mocht AI gebruikt kunnen worden om de nauwkeurigheid op te schalen, dan zou dat alvast een winst zijn.
-Het gebruik van Machinaal leren of \textit{Deep Learning}, meer specifiek een \textit{Convolutional Neural Network} (CNN) kan een positief effect hebben op het detecteren van alle parameters rond \textit{elderspeak}.
+Het gebruik van Machinaal leren of \textit{Deep Learning}, meer specifiek een \textit{Convolutional Neural Network} (CNN) kan een positief effect hebben op het detecteren van alle parameters rond \textit{elderspeak}. Mijn aandeel zal dus zijn om te onderzoeken welke modellen het beste gebruikt worden om die parameters te detecteren.
 
 Het doel is om de twee eerder vernoemde eindwerken samen te voegen en te verbeteren. \textcite{Beeckman2021} gebruikte ``Tkinter'' om de \textit{front-end} te maken, maar haalde een paar redenen aan waarom dat toch niet te verkiezen is, zoals bijvoorbeeld het amateuristische uiterlijk en de beperkte mogelijkheden.
 Mijn voorkeur gaat eerder uit naar het gebruik van ``Flask'', een \textit{micro-webframework} in Python, dat kan gebruikt worden om een webpagina te maken en te linken naar de \textit{back-end}.
@@ -75,12 +69,21 @@ Het voordeel hiervan is dat men sneller én mooier een website kan ontwerpen.
 \section{Methodologie}
 \label{sec:methodologie}
 
-Om te verzekeren dat er genoeg data beschikbaar is, is het aan te raden dat er audiosamples verzameld worden voor de 1\textsuperscript{ste} examenperiode.
+Om te verzekeren dat er genoeg data beschikbaar is, is het aan te raden dat er audiosamples verzameld worden voor het 2\textsuperscript{e} semester.
 
 Op basis van de resultaten van het literatuuronderzoek en beide eindwerken van vorig jaar, kunnen er methodes opgesteld worden die de belangrijkste kenmerken van \textit{nursery tone} en \textit{eldery speak} herkennen.
-Daarbij is het gebruik van Artificiële Intelligentie een handige manier om het verschil te kennen tussen iemand die \textit{elderspeak} gebruikt en iemand die dat niet doet.
+Daarbij is het gebruik van Artificiële Intelligentie een handige manier om het verschil te kennen tussen iemand die \textit{elderspeak} gebruikt en iemand die dat niet doet. Met welke model en op welke wijze dit het beste gerealiseerd wordt, zal onderzocht worden in dit eindwerk.
 
-Ten slotte moet alles omgezet worden naar een duidelijke webapplicatie via ``Flask'' zodat het in latere fases niet geïnstalleerd moet worden op een computer. Zo kan iedereen de applicatie gebruiken zonder vooraf iets te downloaden, wat het gebruiksgemak thuis en op verplaatsing, bijvoorbeeld in een rusthuis, optimaliseert.
+Daarnaast moet alles omgezet worden naar een duidelijke webapplicatie via ``Flask'' zodat het in latere fases niet geïnstalleerd moet worden op een computer. Zo kan iedereen de applicatie gebruiken zonder vooraf iets te downloaden, wat het gebruiksgemak thuis en op verplaatsing, bijvoorbeeld in een rusthuis, optimaliseert.
+
+Tot slotte zullen het beantwoorden van de volgende deelvragen hierbij moeten helpen:
+\begin{itemize}
+	\item Welk type Artificiële Intelligentie past het beste bij deze opstelling?
+	\item Welk type model van \textit{machine learning} of \textit{deep learning} werkt het beste per eigenschap?
+	\item Kan je achtergrond lawaai wegfilteren en hoe precies?
+	\item Zal spraakherkenning lukken met de gratis beschikbare softwarebibliotheken?
+	\item Hoe zet je een \{Flask} server op waar je {webrequests} naar stuurt? En hoe verbind je daar een model mee?
+\end{itemize}
 
 
 %---------- Verwachte resultaten ----------------------------------------------
