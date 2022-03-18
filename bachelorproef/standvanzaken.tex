@@ -54,7 +54,7 @@ Tenslotte is het belangrijk om te weten dat bij elderspeak de inhoud van de bood
 
 \subsection{Wat zijn de tips om \textit{elderspeak} te voorkomen?}
 
-De onderstaande tips zijn enkele van de tips die \textcite{Wick2007} meegeven ter “bestrijding” van \textit{elderspeak}:
+De onderstaande tips zijn enkele van de tips die \textcite{Wick2007} meegeven ter ``bestrijding'' van \textit{elderspeak}:
 
 \begin{itemize}
     \item Spreek personen aan met de naam waarmee ze willen aangesproken worden. Gebruik geen collectieve voornaamwoorden als die niet van toepassing zijn.
@@ -68,3 +68,64 @@ De onderstaande tips zijn enkele van de tips die \textcite{Wick2007} meegeven te
     \item Vermijd overdreven directieve boodschappen en bied keuzevrijheid.
     \item Hanteer een beleefd taalgebruik en beleefde omgangsvormen (bv. op de kamerdeur kloppen alvorens de kamer binnen te gaan).
 \end{itemize}
+
+\section{Artificiële Intelligentie}
+\subsection{Wat is AI?}
+Er zijn bijzonder veel beschrijvingen rond wat AI is, maar alleen uit verschillende bronnen kan je een accuraat beeld krijgen van wat AI is.
+
+Volgens \textcite{Oracle2014} heeft AI (kunstmatige intelligentie) betrekking op systemen of machines die onze eigen intelligentie nabootsen om taken uit te voeren en die zichzelf tijdens dat proces kunnen verbeteren op basis van de vergaarde informatie.
+
+Het \textcite{EuropeesParlement2020} geeft de volgende definitie van artificiële intelligentie (of kunstmatige intelligentie): ``AI is de mogelijkheid van een machine om mensachtige vaardigheden te vertonen - zoals redeneren, leren, plannen en creativiteit.
+AI maakt het voor technische systemen mogelijk om hun omgeving waar te nemen, om te gaan met deze waarnemingen en problemen op te lossen om een specifiek doel te bereiken. De computer ontvangt data - reeds voorbereid en verzameld via eigen sensoren, zoals een camera - verwerkt deze en reageert erop.
+AI-systemen zijn in staat om hun gedrag in zekere mate aan te passen, door het effect van vorige acties te analyseren en autonoom te werken.''
+
+Samengevat is AI een technisch systeem om onze eigen intelligentie na te bootsen op basis van vergaarde informatie en waarbij het systeem acties aanpast op die data.
+
+\subsection{Welke vormen zijn van AI?}
+Artificiële Intelligentie is een verzamelnaam voor 2 soorten. Zo heb je enerzijds \textit{machine learning} en anderzijds \textit{deep learning} \autocite{Kavlakoglu2020}.
+Dit kan mooi geïllustreerd worden a.d.h.v. figuur \ref{fig:1}. Daarop kan er afgeleid worden dat Artificiële Intelligentie een verzamelnaam is. Specifieker heb je dan \textit{machine learning} en daaronder heb je nog \textit{deep learning} die onderdeel is van neurale netwerken. Een aanvullende afbeelding, figuur \ref{fig:2}, is die van \textcite{Bansal2019}. Daarop is te zien dat \textit{deep learning} een onderdeeltje is van \textit{machine learning} dat op zijn beurt weer onderdeel is van het grotere begrip kunstmatige intelligentie.
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{./img/RussianNestingDollsAI.png}
+    \caption{\label{fig:1} Soorten AI matroesjka's \autocite{Kavlakoglu2020}}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{./img/ai_fields.png}
+    \caption{\label{fig:2} Soorten AI in diagram \autocite{Bansal2019}}
+\end{figure}
+
+\subsection{\textit{Machine learning}}
+\textit{Machine learning} of machinaal leren is het deelgebied van kunstmatige intelligentie dat computers het vermogen geeft te leren zonder expliciet geprogrammeerd te zijn, aldus \textcite{Lievens2021}. Machinaal leren heeft drie types namelijk \textit{supervised learning} of gesuperviseerd leren, \textit{unsupervised learning} of leren zonder toezicht en als laatste type is er \textit{reinforcement learning} of leren door bekrachtiging.
+
+\subsubsection{Supervised learning}
+Een defenitie gegeven door \textcite{Lievens2021} over \textit{supervised learning} gaat als volgt: ``De taak van \textit{supervised learning} is een hypothese op te bouwen op basis van een reeks gelabelde trainingsgegevens. Deze hypothese kan dan worden gebruikt om het label voor een (nieuwe) input te voorspellen. Wanneer het label een reëel getal is, spreekt men van een regressieprobleem; wanneer het label beperkt is tot één van een (beperkt) aantal vooraf gedefinieerde klassen, wordt het probleem een classificatieprobleem genoemd.''
+
+Een voorbeeld van het regressieprobleem is het voorspellen van huisprijzen. De input van het model is dan een reeks vectoren die de eigenschappen van het huis voorstellen zoals aantal slaapkamers, oppervlakte, bouwjaar etc.
+Voorbeelden van het classificatieprobleem zijn spam detectie of nummerherkenning. Bij spam dectactie heb je twee vooraf gedefinieerde klassen: spam en geen spam. Bij het herkennen van nummers heb je 10 klassen: 0 t.e.m. 10.
+
+\subsubsection{Unsupervised learning}
+\textcite{Lievens2021} omschrijft \textit{unsupervised learning} als de taak van een algoritme voor leren zonder toezicht is het ontdekken van structuur te ontdekken in een ongelabelde gegevensreeks. De meest prominente taak bij \texit{unsupervised learning} is clustering, d.w.z. de ontdekking van coherente
+groepen. Andere mogelijke taken zijn anomalie detectie en hoofdcomponentenanalyse (PCA).
+
+Een voorbeelden van clustering is markt segmentatie waarbij klanten worden opgedeeld in verschillende segmenten zoals trouwe klant, mogelijke vertrekkende klant, niet tevreden klant etc.
+Je hebt algoritmen die fraude opsporen op een website die dus vreemd gedrag gaan detecteren. Dit is dan een voorbeeld van anomalie detectie.
+Bij PCA worden de data gereduceerd zodat de minder relevante data afneemt in de dataset.
+
+
+\subsubsection{Reinforcement learning}
+\textcite{Lievens2021} beschrijft leren door bekrachtiging door een techniek dat niet echt een dataset gebruikt, maar dat het eerder een identiteit is die leeft in een (on)bekende wereld die beloningssignalen krijgt. De opdracht is dan om uit te zoeken wat de regels zijn die leiden tot een grote beloning.
+
+Het bekendste voorbeeld van \textit{reinforcement learning} is zelfrijdende wagens waarbij het model alles zelf moet aanleren zoals het remmen en gas geven in welke hoeveelheid en hoe er gestuurd moet worden.
+
+\subsubsection{AI in het dagelijkse leven}
+
+Andere voorbeelden van kunstmatige intelligentie kan je vinden in figuur \ref{fig:3}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{./img/ai_voorbeelden.jpg}
+    \caption{\label{fig:3} AI in het dagelijkse leven. \autocite{EuropeesParlement2020}}
+\end{figure}
+
