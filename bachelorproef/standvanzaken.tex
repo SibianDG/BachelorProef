@@ -35,7 +35,7 @@ Daarnaast beschrijft \textcite{Williams2011} het begrip als het volgende:
 “Elderspeak is a common intergenerational speech style used by younger persons in communication with older adults in a variety of community and health care settings. Based on negative stereotypes of older adults as less competent communicators, younger speakers (in this case nursing home staff) modify their communication with nursing home residents by simplifying the vocabulary and grammar and by adding clarifications such as repetitions and altered prosody.”
 
 \subsection{Wat zijn de kenmerken?}
-Deze kenmerken komen overeen met een communicatiestijl die men hanteert wanneer men tegen (afhankelijke) kinderen praat. Vandaar dat \textit{elderspeak} ook wel als \textit{secondary baby} talk wordt benoemd.
+Deze kenmerken komen overeen met een communicatiestijl die men hanteert wanneer men tegen (afhankelijke) kinderen praat. Vandaar dat \textit{elderspeak} ook wel als \textit{secondary baby} talk wordt benoemd. Die kenmerken zijn hieronder opgesomd:
 
 \begin{itemize}
     \item Langzaam spreken
@@ -135,6 +135,7 @@ Een volledig neuraal netwerk kan er uit zien zoals in figuur~\ref{fig:layers}
 
 \subsection{AI in het dagelijkse leven}
 Om een klein overzicht te maken wat AI allemaal inhoudt, zijn er andere voorbeelden geïllustreerd van kunstmatige intelligentie in figuur~\ref{fig:ai_dagelijkse_leven}.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{./img/ai_voorbeelden.jpg}
@@ -142,4 +143,54 @@ Om een klein overzicht te maken wat AI allemaal inhoudt, zijn er andere voorbeel
 \end{figure}
 
 \section{AI technieken die gebruikt worden om elderspeak te detecteren}
-\subsection{Google Text-to-Speech}
+
+\subsection{NLP of \textit{natural language processing}}
+Om te kunnen detecteren of men verkleinwoorden, troetelnamen, collectieve voornaamwoorden of veel tussenwerpsels gebruikt, moet het model of eerder gezegd de Python bibliotheek die het model bevat, weten of deze eigenschappen voorkomen. Hiervoor moeten we gebruik maken van \textit{natural language processing} of kort NLP. Maar wat is NLP precies?
+
+\textit{Natural language processing} of vertaald ``natuurlijke taalverwerking'' zit in de tak van de computerwetenschappen, meer bepaald de tak van de kunstmatige intelligentie. NLP zit binnen de bubbel van AI, heeft een stuk \textit{machine learning} en een stukje \textit{deep learning}. De visuele voorstelling van die verhoudingen zijn te vinden in figuur \ref{fig:nlp_field}.
+
+Volgens \textcite{Kleinings2022} is die natuurlijke taalverwerking is een technologie die gebruikt wordt om computers te helpen om natuurlijke menselijke taal te begrijpen en te interpreteren.
+
+NLP combineert computationele linguïstiek - op regels gebaseerde modellering van menselijke taal - met statistische, \textit{machine learning}- en \textit{deep learning}-modellen. Samen stellen deze technologieën computers in staat menselijke taal in de vorm van tekst of spraakgegevens te verwerken en de volledige betekenis ervan te ``begrijpen'', compleet met de bedoeling en het sentiment van de spreker of schrijver.
+
+NLP stuurt computerprogramma's aan die tekst van de ene taal naar de andere vertalen, reageren op gesproken opdrachten en grote hoeveelheden tekst snel samenvatten, zelfs in realtime. Enkele voorbeelden van NLP-systemen in het dagelijkse leven zijn: spraakgestuurde GPS-systemen, digitale assistenten, spraak-naar-tekst dicteersoftware in bijvoorbeeld de smartphone of Microsoft Word, chatbots voor de klantenservice en andere gemakken voor de consument. Maar NLP speelt ook een steeds grotere rol in bedrijfsoplossingen die helpen bij het stroomlijnen van de bedrijfsvoering, het verhogen van de productiviteit van werknemers en het vereenvoudigen van bedrijfskritische bedrijfsprocessen, aldus \textcite{IBMCloudEducation2021}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{./img/nlp_field_ai.jpeg}
+    \caption{\label{fig:nlp_field} Situering van NLP binnen het AI-veld.~\autocite{Kleinings2022}}
+\end{figure}
+
+\subsubsection{Waarom is het analyseren van taal moeilijk?}
+Volgens \textcite{Kleinings2022} zijn er vele redenen waarom het verwerken van taal door een computer of AI-systeem nog steeds moeilijk is en zal blijven.
+
+Eerst en vooral heb je alle linguïstische regels per taal. Zo zijn er meer dan 6500 talen die nog steeds gesproken worden vandaag de dag, die dus elke hun aparte regels hebben.
+Daarnaast is er het probleem van de uniformiteit. Om taal te kunnen verwerken moet je die eerst omzetten in een systeem of formaat dat de computer kan begrijpen. Door middel van machinaal leren identificeert het model ongestructureerde taal en zet deze om naar bruikbare, niet dubbelzinnige informatie die de computer dan kan begrijpen en er verder mee kan rekenen. Dit stukje wordt de \textit{pre-processing} genoemd.
+Bovendien speelt de context ook vaak parten. \textit{Natural Language Processing} werkt fundamenteel door de hiërarchie van linguïstische dictie tussen elk woord te begrijpen en deze om te zetten in een vorm die computers kunnen interpreteren. Onze talen zijn niet eenvoudig. Woorden hebben meerdere betekenissen, die alleen begrepen worden door het verschil in context. Een voorbeeld hiervan is het woord ``bank''. In de ene context is het de financiële instelling en in een andere context is het de rustbank in het park.
+Als laatste kan de toon van de stem ook nog verschillen. Mensen kunnen sarcasme of ironie in hun taal steken zodat het een andere betekenis krijgt. Om deze andere betekenis uit een tekst te halen is er heel veel moeite voor nodig.
+
+\subsubsection{Hoe werkt NLP?}
+NLP is niet één statische methode, maar een ketting van manipulaties van de tekst zodat er meer lagen informatie tevoorschijn komen. Dit wordt gerealiseerd met neurale netwerken waarbij elke node een bepaalde functie uitvoert.
+Er zijn vier grote stappen i.v.m. de taalverwerking: morfologie, syntaxis, semantiek en pragmatiek schrijft \textcite{Kleinings2022}, wat te lezen is op een \textit{low-code/no-code} platform genaamd Levity. Daar kan je blokken slepen en gebruiken om een AI-model op te stellen.
+
+Met behulp van morfologie kan er per woord een type geclassificeerd worden zoals een zelfstandig naamwoord, bijvoeglijk naamwoord, voornaamwoord, lidwoord enzovoort. Wat dit markeren juist moeilijker maakt is de context waarin het woord gebruikt wordt. Denk hierbij aan het voorbeeld met de bank.
+
+Om de syntaxis aan te leren heb je twee manieren om dit te verwezenlijken. Eenderzijds kan je woorden gaan labelen waarbij je zegt dat woord A de stam is, woord B de 2e persoon enkelvoud, woord C het voltooid deelwoord etc. Anderzijds kan er een \textit{unsupervised machine learning} model gemaakt worden waarbij de computer de regels afleidt uit verschillende gelabelde teksten en die logica gebruikt om nieuwe, niet-gelabelde, teksten te begrijpen met dezelfde logica.
+
+Daarnaast is het ook aan te raden dat stopwoorden verwijderd worden als het model de tekst wil begrijpen. Stopwoorden zoals ``een, de, euh'' moeten verwijderd worden. Daarbij aansluitend is lemmatiseren waarbij  werkwoorden naar de tegenwoordige tijd verandert worden, en stemming, waarbij er prefixen of affixen verwijderd worden, ook nodig om te conversie te maken. Een voorbeelden is dan van ``wij dachten'' naar ``denk''. Woorden worden vervangen door meer gebruikte synoniemen zoals van ``enorm'' naar ``groot''.
+
+Als laatste systeem of layer heb je \textit{tokenization}. Dit is het proces waarbij het systeem de zin indeelt in verschillende eenheden waaruit informatie kan gehaald worden.
+Er kan een \textit{token} gekozen worden op basis van regels, leestekens, spaties, maar dit geeft wel steeds een ander resultaat wat geïllustreerd is in figuur \ref{fig:tokens}. Hoe die \textit{tokenization} zich verhoudt met die layer van het \textit{deep learning} NLP model is te vinden in figuur \ref{fig:tokens_verhouding_dl}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{./img/tokenize_manier.png}
+    \caption{\label{fig:tokens} Manieren om een zin om te delen volgens een \textit{token}.~\autocite{Horan2020}}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{./img/tokenization-1.png}
+    \caption{\label{fig:tokens_verhouding_dl}Verhouding \textit{deep learning} NLP model met de layers en de verschillende \textit{tokens}.~\autocite{Horan2020}}
+\end{figure}
+
