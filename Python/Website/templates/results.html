@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Elderspeak detector results</title>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <h1>Elderspeak detector results:</h1>
+        <p>Dit is wat je zei:</p>
+        <p id="text">{{text}}</p>
+    </div>
+</div>
+{% endblock %}

@@ -50,9 +50,16 @@
       fetch('http://127.0.0.1:5000/receive', {
           method: 'POST',
           body: data_to_send
-      }).then(response => response.json()
-      ).then(json => {
-          console.log(json)
+      }).then(response => {
+          console.log("OKEEEEEEEEEEEEE")
+          console.log(response);
+          return response.json();
+      }).then(json => {
+          console.log(json);
+          document.getElementById('saved').innerText = json;
+      }).catch((error) => {
+          console.log("NOPEEEEEEEE")
+          console.log(error)
       });
     }
 
