@@ -10,9 +10,12 @@
         <h1>Elderspeak detector</h1>
         <img src="{{ url_for('static', filename='img/rusthuis.jpg') }}" alt="rusthuis foto" class="img-fluid img-medium">
         <p>Spreek in hoe je tegen deze bejaarde dame zou praten:</p>
-        <button type="button" id="btn-record" class="btn btn-primary">Record</button>
-<!--        <button type="button" id="stopRecord" disabled>Stop</button>-->
-        <audio id=recordedAudio></audio>
+        <button type="button" id="btn-record" class="btn btn-secondary">Record</button>
+        <div class="d-flex flex-column">
+            <p id="saved" class="text-primary hidden">The audio was saved!</p>
+            <br>
+            <audio id=recordedAudio></audio>
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -28,7 +31,7 @@
         rec.ondataavailable = e => {
             audioChunks.push(e.data);
             if (rec.state === "inactive"){
-                let blob = new Blob(audioChunks,{type:'audio/wav'});
+                let blob = new Blob(audioChunks,{type:'audio/mp3'});
                 let audioUrl = URL.createObjectURL(blob);
                 let recordedAudio = document.getElementById('recordedAudio')
                 recordedAudio.src = audioUrl;
@@ -43,7 +46,7 @@
 
     function sendData(blob) {
       let data_to_send = new FormData();
-      data_to_send.append('file', blob , 'file.wav');
+      data_to_send.append('audio_data', blob);
       fetch('http://127.0.0.1:5000/receive', {
           method: 'POST',
           body: data_to_send
@@ -55,18 +58,18 @@
 
     const btn_record = document.getElementById('btn-record');
     btn_record.addEventListener('click', () => {
-        if (btn_record.innerText.toLowerCase() === "record"){
+        if (btn_record.innerText.toLowerCase().includes("record")){
             btn_record.classList.remove("btn-primary");
             btn_record.classList.add("btn-warning");
             btn_record.innerText = "Stop"
             audioChunks = [];
             rec.start();
         } else if (btn_record.innerText.toLowerCase().includes("stop")){
+            rec.stop();
             btn_record.classList.remove("btn-warning");
             btn_record.classList.add("btn-secondary");
-            btn_record.innerText = "Done"
-            btn_record.disabled = true;
-            rec.stop();
+            btn_record.innerText = "New recording"
+            document.getElementById('saved').classList.remove('hidden')
         }
 
     });

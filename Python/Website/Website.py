@@ -1,18 +1,59 @@
+import math
+
 from flask import Flask, render_template, url_for, request, redirect, jsonify
 # from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
 import json
 import speech_recognition as sr
+from datetime import datetime
+from pydub import AudioSegment
+# from pydub.utils import mediainfo
+from pydub.utils import make_chunks, which
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-# db = SQLAlchemy(app)
+app.config['UPLOAD_EXTENSIONS'] = ['.wav']
 r = sr.Recognizer()
 
+def to_chuncks(file):
+    print(file, ' to chunks')
+    AudioSegment.converter = which("ffmpeg")
+    myaudio = AudioSegment.from_file(file)
+    channel_count = myaudio.channels  # Get channels
+    sample_width = myaudio.sample_width  # Get sample width
+    duration_in_sec = len(myaudio) / 1000  # Length of audio in sec
+    sample_rate = myaudio.frame_rate
 
-def abc():
-    print("test")
+    print("sample_width=", sample_width)
+    print("channel_count=", channel_count)
+    print("duration_in_sec=", duration_in_sec)
+    print("frame_rate=", sample_rate)
+    bit_rate = 16  # assumption , you can extract from mediainfo("test.wav") dynamically
+
+    wav_file_size = (sample_rate * bit_rate * channel_count * duration_in_sec) / 20
+    print("wav_file_size = ", wav_file_size)
+
+    file_split_size = 20000000  # 10Mb OR 10, 000, 000 bytes
+    total_chunks = wav_file_size // file_split_size
+
+    # Get chunk size by following method #There are more than one ofcourse
+    # for  duration_in_sec (X) -->  wav_file_size (Y)
+    # So   whats duration in sec  (K) --> for file size of 10Mb
+    #  K = X * 10Mb / Y
+
+    chunk_length_in_sec = math.ceil((duration_in_sec * 10000000) / wav_file_size)  # in sec
+    chunk_length_ms = chunk_length_in_sec * 1000
+    chunks = make_chunks(myaudio, chunk_length_ms)
+
+    # Export all of the individual chunks as wav files
+
+    if not os.path.exists('./uploads/chunks'):
+        os.makedirs('./uploads/chunks')
+
+    for i, chunk in enumerate(chunks):
+        chunk_name = f"./uploads/chunks/chunck{i}.flac"
+        print("exporting", chunk_name)
+        chunk.export(chunk_name, format="flac")
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -35,58 +76,33 @@ def index():
 # https://stackoverflow.com/questions/70733510/send-blob-to-python-flask-and-then-save-it
 @app.route('/receive', methods=['POST'])
 def receive():
+    now = datetime.now()
+    d1 = now.strftime("%Y%m%d%H%M%S")
+
     # TODO: eerst in chuncks
-    f = open('./file.wav', 'wb')
-    f.write(request.data)
-    f.close()
-    # audio_input = request.files['file']
-    # # file = files.get('file')
-    # print("0000000000000000000000000000")
-    # print(audio_input)
-    audio_file = sr.AudioFile(request.data)
+    data = request.files['audio_data'].read()
+
+    file = f'./uploads/{d1}.wav'
+    with open(os.path.abspath(file), 'wb') as f:
+        f.write(data)
+    to_chuncks(file)
+    audio_file = sr.AudioFile('./uploads/chunks/chunck0.flac')
     with audio_file as source:
-        audio_file = r.record(source)
-        text = r.recognize_google(audio_data=audio_file, language="nl-be")
+        r.adjust_for_ambient_noise(source)
+        audio = r.record(source)
+        text = r.recognize_google(audio_data=audio, language="nl-BE")
+        print("######## Google Recognize ####################")
         print(text)
-    return text
-    # # with open(os.path.abspath(f'uploads/test.wav'), 'wb') as f:
-    # #     f.write(audio_input)
-    #
-    # response = jsonify("File received and saved!")
-    # response.headers.add('Access-Control-Allow-Origin', '*')
-    #
-    # return response
+        print("##############################################")
+    response = jsonify(text)
+    response.headers.add('Access-Control-Allow-Origin', '*')
 
-
-# @app.route('/delete/<int:id>')
-# def delete(id):
-#     r = 1
-#     # task_to_delete = Todo.query.get_or_404(id)
-#
-#     # try:
-#     #     db.session.delete(task_to_delete)
-#     #     db.session.commit()
-#     #     return redirect('/')
-#     # except:
-#     #     return 'There was a problem deleting that task'
-
-
-# @app.route('/update/<int:id>', methods=['GET', 'POST'])
-# def update(id):
-#     b= 1
-#     # task = Todo.query.get_or_404(id)
-#
-#     # if request.method == 'POST':
-#     #     task.content = request.form['content']
-#     #
-#     #     try:
-#     #         db.session.commit()
-#     #         return redirect('/')
-#     #     except:
-#     #         return 'There was an issue updating your task'
-#     #
-#     # else:
-#     #     return render_template('update.html', task=task)
+    # laatste stap!
+    #if os.path.exists('./uploads/chunks'):
+    #    os.rmdir('./uploads/chunks')
+    #    if os.path.exists(file):
+#        os.remove(file)
+    return response
 
 
 if __name__ == "__main__":
