@@ -8,14 +8,32 @@
 <div class="row">
     <div class="col-12">
         <h1>Elderspeak detector</h1>
-        <img src="{{ url_for('static', filename='img/rusthuis.jpg') }}" alt="rusthuis foto" class="img-fluid img-medium">
-        <p>Spreek in hoe je tegen deze bejaarde dame zou praten:</p>
-        <button type="button" id="btn-record" class="btn btn-secondary">Record</button>
-        <div class="d-flex flex-column">
-            <p id="saved" class="text-primary hidden">The audio was saved!</p>
-            <br>
-            <audio id=recordedAudio></audio>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Audio opnemen</h3>
+                <img src="{{ url_for('static', filename='img/rusthuis.jpg') }}" alt="rusthuis foto" class="img-fluid img-medium">
+                <p>Spreek in hoe je tegen deze bejaarde dame zou praten:</p>
+                <button type="button" id="btn-record" class="btn btn-primary">Audio opnemen</button>
+                <div class="d-flex flex-column">
+                    <p id="saved" class="text-primary hidden my-2">De audio is opgeslagen!</p>
+                    <audio id=recordedAudio></audio>
+                </div>
+            </div>
+            <div class="col-md-6 hidden" id="eigenschappen_elderspeak">
+                <h3>Eigenschappen van <i>Elderspeak</i>:</h3>
+                <div id="loading_eigenschappen">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div id="eigenschappen_content" class="hidden">
+                    <div id="wat_gezegd"></div>
+                    <div id="verkleinwoorden"></div>
+                    <div id=""></div>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 {% endblock %}
@@ -51,21 +69,20 @@
           method: 'POST',
           body: data_to_send
       }).then(response => {
-          console.log("OKEEEEEEEEEEEEE")
-          console.log(response);
           return response.json();
       }).then(json => {
-          console.log(json);
-          document.getElementById('saved').innerText = json;
+          document.getElementById('wat_gezegd').insertAdjacentHTML("beforeend", `<h4>Wat heb je gezegd?</h4><p>${json['speech_recognition']}</p>`);
+          document.getElementById('verkleinwoorden').insertAdjacentHTML("beforeend", `<h4>Verkleinwoorden:</h4><p>${json}</p>`);
+          document.getElementById('loading_eigenschappen').classList.add('hidden');
+          document.getElementById('eigenschappen_content').classList.remove('hidden');
       }).catch((error) => {
-          console.log("NOPEEEEEEEE")
           console.log(error)
       });
     }
 
     const btn_record = document.getElementById('btn-record');
     btn_record.addEventListener('click', () => {
-        if (btn_record.innerText.toLowerCase().includes("record")){
+        if (btn_record.innerText.toLowerCase().includes("opn")){
             btn_record.classList.remove("btn-primary");
             btn_record.classList.add("btn-warning");
             btn_record.innerText = "Stop"
@@ -73,10 +90,12 @@
             rec.start();
         } else if (btn_record.innerText.toLowerCase().includes("stop")){
             rec.stop();
+            document.getElementById('eigenschappen_elderspeak').classList.remove('hidden');
+            document.getElementById('')
             btn_record.classList.remove("btn-warning");
-            btn_record.classList.add("btn-secondary");
-            btn_record.innerText = "New recording"
-            document.getElementById('saved').classList.remove('hidden')
+            btn_record.classList.add("btn-primary");
+            btn_record.innerText = "Nieuwe opname";
+            document.getElementById('saved').classList.remove('hidden');
         }
 
     });
