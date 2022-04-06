@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, jsonify
 import os
 from datetime import datetime
 import Calculations
+
 app = Flask(__name__)
 app.config['UPLOAD_EXTENSIONS'] = ['.wav']
 
@@ -37,21 +38,28 @@ def receive():
         f.write(data)
     try:
         total_text = Calculations.speech_recognition(file)
+        verkleinwoorden = Calculations.verkleinwoorden(total_text)
+        herhalingen = Calculations.herhalende_zinnen(total_text)
     except:
-        total_text = "ERROR"
+        print("KON NIET HERKEND WORDEN")
+        total_text = "Er kon geen spraak gedetecteerd worden."  # TODO: no connection
+        verkleinwoorden = "Omdat er geen spraak kon gedetecteerd worden, konden er ook geen verkleinwoorden gevonden worden."
+        herhalingen = "Omdat er geen spraak kon gedetecteerd worden, konden er ook geen herhalingen gedetecteerd worden."
+
     response_data["speech_recognition"] = total_text
+    response_data["verkleinwoorden"] = verkleinwoorden
+    response_data["herhalingen"] = herhalingen
 
     response = jsonify(response_data)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-
-    #return render_template('results.html', text=total_text)
+    # return render_template('results.html', text=total_text)
     # laatste stap!
     # if os.path.exists('./uploads/chunks'):
     #    os.rmdir('./uploads/chunks')
     #    if os.path.exists(file):
-#        os.remove(file)
+    #        os.remove(file)
 
 
 if __name__ == "__main__":

@@ -29,6 +29,7 @@
                 <div id="eigenschappen_content" class="hidden">
                     <div id="wat_gezegd"></div>
                     <div id="verkleinwoorden"></div>
+                    <div id="herhalingen"></div>
                     <div id=""></div>
                 </div>
             </div>
@@ -40,64 +41,5 @@
 
 {% block scripts %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    navigator.mediaDevices.getUserMedia({audio:true})
-        .then(stream => {handlerFunction(stream)})
-
-    function handlerFunction(stream) {
-        rec = new MediaRecorder(stream);
-        rec.ondataavailable = e => {
-            audioChunks.push(e.data);
-            if (rec.state === "inactive"){
-                let blob = new Blob(audioChunks,{type:'audio/mp3'});
-                let audioUrl = URL.createObjectURL(blob);
-                let recordedAudio = document.getElementById('recordedAudio')
-                recordedAudio.src = audioUrl;
-                recordedAudio.controls=true;
-                recordedAudio.autoplay=true;
-                sendData(blob)
-            }
-        }
-    }
-
-    //https://stackoverflow.com/questions/70733510/send-blob-to-python-flask-and-then-save-it
-
-    function sendData(blob) {
-      let data_to_send = new FormData();
-      data_to_send.append('audio_data', blob);
-      fetch('http://127.0.0.1:5000/receive', {
-          method: 'POST',
-          body: data_to_send
-      }).then(response => {
-          return response.json();
-      }).then(json => {
-          document.getElementById('wat_gezegd').insertAdjacentHTML("beforeend", `<h4>Wat heb je gezegd?</h4><p>${json['speech_recognition']}</p>`);
-          document.getElementById('verkleinwoorden').insertAdjacentHTML("beforeend", `<h4>Verkleinwoorden:</h4><p>${json}</p>`);
-          document.getElementById('loading_eigenschappen').classList.add('hidden');
-          document.getElementById('eigenschappen_content').classList.remove('hidden');
-      }).catch((error) => {
-          console.log(error)
-      });
-    }
-
-    const btn_record = document.getElementById('btn-record');
-    btn_record.addEventListener('click', () => {
-        if (btn_record.innerText.toLowerCase().includes("opn")){
-            btn_record.classList.remove("btn-primary");
-            btn_record.classList.add("btn-warning");
-            btn_record.innerText = "Stop"
-            audioChunks = [];
-            rec.start();
-        } else if (btn_record.innerText.toLowerCase().includes("stop")){
-            rec.stop();
-            document.getElementById('eigenschappen_elderspeak').classList.remove('hidden');
-            document.getElementById('')
-            btn_record.classList.remove("btn-warning");
-            btn_record.classList.add("btn-primary");
-            btn_record.innerText = "Nieuwe opname";
-            document.getElementById('saved').classList.remove('hidden');
-        }
-
-    });
-</script>
+<script src="{{ url_for('static', filename='js/elderspeak_detector.js') }}"></script>
 {% endblock %}
