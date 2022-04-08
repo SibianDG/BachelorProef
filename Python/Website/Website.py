@@ -36,19 +36,23 @@ def receive():
     response_data = {"test": "Hello?"}
     with open(os.path.abspath(file), 'wb') as f:
         f.write(data)
-    try:
+    try: #TODO fix for 1 methode only!
         total_text = Calculations.speech_recognition(file)
         verkleinwoorden = Calculations.verkleinwoorden(total_text)
         herhalingen = Calculations.herhalende_zinnen(total_text)
+        pitch = Calculations.calculate_pitch(file)
     except:
         print("KON NIET HERKEND WORDEN")
         total_text = "Er kon geen spraak gedetecteerd worden."  # TODO: no connection
         verkleinwoorden = "Omdat er geen spraak kon gedetecteerd worden, konden er ook geen verkleinwoorden gevonden worden."
         herhalingen = "Omdat er geen spraak kon gedetecteerd worden, konden er ook geen herhalingen gedetecteerd worden."
+        pitch = "Geen pitch?"
+
 
     response_data["speech_recognition"] = total_text
     response_data["verkleinwoorden"] = verkleinwoorden
     response_data["herhalingen"] = herhalingen
+    response_data["pitch"] = pitch
 
     response = jsonify(response_data)
     response.headers.add('Access-Control-Allow-Origin', '*')

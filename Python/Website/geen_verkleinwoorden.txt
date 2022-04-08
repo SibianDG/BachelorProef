@@ -4,3 +4,5 @@ koopje
 etentje
 dutje
 toetje
+mannelijke
+vrouwelijke

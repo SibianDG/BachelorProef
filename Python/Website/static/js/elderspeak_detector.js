@@ -22,6 +22,7 @@ let wat_gezegd = document.getElementById('wat_gezegd')
 let verkleinwoorden = document.getElementById('verkleinwoorden')
 let loading_eigenschappen = document.getElementById('loading_eigenschappen')
 let herhalingen = document.getElementById('herhalingen')
+let pitch = document.getElementById('pitch')
 
 
 function sendData(blob) {
@@ -37,6 +38,7 @@ function sendData(blob) {
       wat_gezegd.insertAdjacentHTML("beforeend", `<h4>Wat heb je gezegd?</h4><p>${json['speech_recognition']}</p>`);
       verkleinwoorden.insertAdjacentHTML("beforeend", `<h4>Verkleinwoorden:</h4><p>${json['verkleinwoorden']}</p>`);
       herhalingen.insertAdjacentHTML("beforeend", `<h4>Herhalingen:</h4><p>${json['herhalingen']}</p>`);
+      pitch.insertAdjacentHTML("beforeend", `<h4>Toonhoogte:</h4><p>${json['pitch']}</p>`);
       loading_eigenschappen.classList.add('hidden');
       document.getElementById('eigenschappen_content').classList.remove('hidden');
   }).catch((error) => {
@@ -55,6 +57,7 @@ btn_record.addEventListener('click', () => {
         wat_gezegd.innerHTML = "";
         verkleinwoorden.innerHTML = "";
         herhalingen.innerHTML = "";
+        pitch.innerHTML = "";
     } else if (btn_record.innerText.toLowerCase().includes("stop")){
         rec.stop();
         loading_eigenschappen.classList.remove('hidden');
