@@ -25,6 +25,8 @@ let pitch = document.getElementById('pitch')
 const btn_record = document.getElementById('btn-record');
 const picture = document.getElementById('picture');
 const text_under_pic = document.getElementById('saved')
+const loudness = document.getElementById('loudness')
+const loudness_1 = document.getElementById('loudness_1')
 
 function sendData(blob, kind) {
   let data_to_send = new FormData();
@@ -40,6 +42,15 @@ function sendData(blob, kind) {
         verkleinwoorden.insertAdjacentHTML("beforeend", `<h4>Verkleinwoorden:</h4><p>${json['verkleinwoorden']}</p>`);
         herhalingen.insertAdjacentHTML("beforeend", `<h4>Herhalingen:</h4><p>${json['herhalingen']}</p>`);
         pitch.insertAdjacentHTML("beforeend", `<h4>Toonhoogte:</h4><p>${json['pitch']}</p>`);
+        let volume;
+        if(parseFloat(loudness_1.innerText) < parseFloat(json['loudness'])){
+            volume = `<span class="text-danger">Luider</span>`
+        } else if(parseFloat(loudness_1.innerText) > parseFloat(json['loudness'])){
+            volume = `<span class="text-success">Stiller</span>`
+        } else {
+            volume = "???"
+        }
+        loudness.insertAdjacentHTML("beforeend", `<h4>Verhoogd stemvolume:</h4><p>${volume}</p>`);
         loading_eigenschappen.classList.add('hidden');
         document.getElementById('eigenschappen_content').classList.remove('hidden');
     }).catch((error) => {
@@ -53,6 +64,7 @@ function sendData(blob, kind) {
         return response.json();
     }).then(json => {
         text_under_pic.innerText = json['pitch']
+        loudness_1.innerText = json['loudness']
     }).catch((error) => {
         console.log(error)
     });

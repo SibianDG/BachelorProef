@@ -47,12 +47,14 @@ def receive_elderspeak():
     total_text = Calculations.speech_recognition(file)
     verkleinwoorden = Calculations.verkleinwoorden(total_text)
     herhalingen = Calculations.herhalende_zinnen(total_text)
-    pitch = Calculations.calculate_pitch(file)
+    pitch = Calculations.calculate_pitch(Calculations.maketempfile_wav(file))
+    loudness = Calculations.loudness(Calculations.maketempfile_wav(file))
 
     response_data["speech_recognition"] = total_text
     response_data["verkleinwoorden"] = verkleinwoorden
     response_data["herhalingen"] = herhalingen
     response_data["pitch"] = pitch
+    response_data["loudness"] = loudness
 
     # return render_template('results.html', text=total_text)
     # laatste stap!
@@ -78,13 +80,16 @@ def receive_normal():
         f.write(data)
 
     print("PITCH BEREKENEN")
-    pitch = Calculations.calculate_pitch(file)
+    pitch = Calculations.calculate_pitch(Calculations.maketempfile_wav(file))
+    loudness = Calculations.loudness(Calculations.maketempfile_wav(file))
 
     response_data["pitch"] = pitch
+    response_data["loudness"] = loudness
 
     if os.path.exists(file):
         os.remove(file)
 
+    print(response_data)
     response = jsonify(response_data)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response

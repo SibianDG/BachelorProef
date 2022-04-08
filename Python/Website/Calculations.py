@@ -13,6 +13,7 @@ import speech_recognition as sr
 
 import librosa
 import soundfile as sf
+import pyloudnorm as pyln
 
 r = sr.Recognizer()
 
@@ -141,6 +142,13 @@ def herhalende_zinnen(text):
     return highlight_words_in_text(text, set(repetition))
 
 
+def maketempfile_wav(wav_file):
+    x, _ = librosa.load(wav_file, sr=16000)
+    tmp_file = './uploads/tmp.wav'
+    sf.write(tmp_file, x, 16000)
+    return tmp_file
+
+
 def calculate_pitch(wav_file):
     try:
         x, _ = librosa.load(wav_file, sr=16000)
@@ -198,6 +206,18 @@ def calculate_pitch(wav_file):
     finally:
         if tmp_file is not None and os.path.exists(tmp_file):
             os.remove(tmp_file)
+
+
+def loudness(wav):
+    data, rate = sf.read(wav)  # load audio (with shape (samples, channels))
+    meter = pyln.Meter(rate)  # create BS.1770 meter
+    loudness_range = meter.integrated_loudness(data)  # measure loudness
+    print(f"LOUUUUUDDDDD: {loudness_range}")
+    if float('inf') == loudness_range:
+        loudness_range = 10000
+    elif float('-inf') == loudness_range:
+        loudness_range = -10000
+    return loudness_range
 
 
 def make_array_words(text):
