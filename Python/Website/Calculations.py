@@ -11,6 +11,9 @@ from pydub import AudioSegment
 from pydub.utils import make_chunks, which
 import speech_recognition as sr
 
+import librosa
+import soundfile as sf
+
 r = sr.Recognizer()
 
 geen_verkleinwoorden = []
@@ -140,43 +143,47 @@ def herhalende_zinnen(text):
 
 def calculate_pitch(wav_file):
     try:
+        x, _ = librosa.load(wav_file, sr=16000)
+        tmp_file = './uploads/tmp.wav'
+        sf.write(tmp_file, x, 16000)
+
         chunk = 16384
-        wf = wave.open(wav_file, 'rb')
-        swidth = wf.getsampwidth()
-        RATE = wf.getframerate()
-        window = np.blackman(chunk)
-        p = pyaudio.PyAudio()
-        stream = p.open(format=
-                        p.get_format_from_width(wf.getsampwidth()),
-                        channels=wf.getnchannels(),
-                        rate=RATE,
-                        output=True)
-        data = wf.readframes(chunk)
-        freqlist = []
-        while len(data) == chunk * swidth:
-            # write data out to the audio stream
-            stream.write(data)
-            # unpack the data and times by the hamming window
-            indata = np.array(wave.struct.unpack("%dh" % (len(data) / swidth),
-                                                 data)) * window
-            # Take the fft and square each value
-            fftData = abs(np.fft.rfft(indata)) ** 2
-            # find the maximum
-            which = fftData[1:].argmax() + 1
-            # use quadratic interpolation around the max
-            if which != len(fftData) - 1:
-                y0, y1, y2 = np.log(fftData[which - 1:which + 2:])
-                x1 = (y2 - y0) * .5 / (2 * y1 - y2 - y0)
-                # find the frequency and output it
-                thefreq = (which + x1) * RATE / chunk
-                print("The freq is %.0f Hz." % (thefreq))
-                freqlist.append(thefreq)
-            else:
-                thefreq = which * RATE / chunk
-                print("The freq is %.0f Hz." % (thefreq))
-                freqlist.append(thefreq)
-            # read some more data
+        with wave.open(tmp_file, 'r') as wf:
+            swidth = wf.getsampwidth()
+            RATE = wf.getframerate()
+            window = np.blackman(chunk)
+            p = pyaudio.PyAudio()
+            stream = p.open(format=
+                            p.get_format_from_width(wf.getsampwidth()),
+                            channels=wf.getnchannels(),
+                            rate=RATE,
+                            output=True)
             data = wf.readframes(chunk)
+            freqlist = []
+            while len(data) == chunk * swidth:
+                # write data out to the audio stream
+                stream.write(data)
+                # unpack the data and times by the hamming window
+                indata = np.array(wave.struct.unpack("%dh" % (len(data) / swidth),
+                                                     data)) * window
+                # Take the fft and square each value
+                fftData = abs(np.fft.rfft(indata)) ** 2
+                # find the maximum
+                which = fftData[1:].argmax() + 1
+                # use quadratic interpolation around the max
+                if which != len(fftData) - 1:
+                    y0, y1, y2 = np.log(fftData[which - 1:which + 2:])
+                    x1 = (y2 - y0) * .5 / (2 * y1 - y2 - y0)
+                    # find the frequency and output it
+                    thefreq = (which + x1) * RATE / chunk
+                    print("The freq is %.0f Hz." % (thefreq))
+                    freqlist.append(thefreq)
+                else:
+                    thefreq = which * RATE / chunk
+                    print("The freq is %.0f Hz." % (thefreq))
+                    freqlist.append(thefreq)
+                # read some more data
+                data = wf.readframes(chunk)
         if data:
             stream.write(data)
         freqlistavg = sum(freqlist) / len(freqlist)
@@ -188,6 +195,9 @@ def calculate_pitch(wav_file):
         error_message = f'Fout bij het berekenen van de toonhoogte: {error}.'
         print(error_message)
         return error_message
+    finally:
+        if tmp_file is not None and os.path.exists(tmp_file):
+            os.remove(tmp_file)
 
 
 def make_array_words(text):

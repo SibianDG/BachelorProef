@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, jsonify
 import os
 from datetime import datetime
 import Calculations
+import shutil
 
 app = Flask(__name__)
 app.config['UPLOAD_EXTENSIONS'] = ['.wav']
@@ -15,6 +16,13 @@ def index():
         return render_template('index.html')
 
 
+@app.route('/picture_old_woman', methods=['GET'])
+def picture_old_woman():
+    url = url_for('static', filename='img/rusthuis.jpg')
+    print(url)
+    return url
+
+
 @app.route('/privacy', methods=['GET'])
 def privacy():
     return render_template('privacy.html')
@@ -25,45 +33,61 @@ def elderspeak():
     return render_template('elderspeak.html')
 
 
-# https://stackoverflow.com/questions/70733510/send-blob-to-python-flask-and-then-save-it
-@app.route('/receive', methods=['POST'])
-def receive():
+@app.route('/receive_elderspeak', methods=['POST'])
+def receive_elderspeak():
     now = datetime.now()
     d1 = now.strftime("%Y%m%d%H%M%S")
     data = request.files['audio_data'].read()
     file = f'./uploads/{d1}.wav'
 
-    response_data = {"test": "Hello?"}
+    response_data = {"Hello": "World"}
     with open(os.path.abspath(file), 'wb') as f:
         f.write(data)
-    try: #TODO fix for 1 methode only!
-        total_text = Calculations.speech_recognition(file)
-        verkleinwoorden = Calculations.verkleinwoorden(total_text)
-        herhalingen = Calculations.herhalende_zinnen(total_text)
-        pitch = Calculations.calculate_pitch(file)
-    except:
-        print("KON NIET HERKEND WORDEN")
-        total_text = "Er kon geen spraak gedetecteerd worden."  # TODO: no connection
-        verkleinwoorden = "Omdat er geen spraak kon gedetecteerd worden, konden er ook geen verkleinwoorden gevonden worden."
-        herhalingen = "Omdat er geen spraak kon gedetecteerd worden, konden er ook geen herhalingen gedetecteerd worden."
-        pitch = "Geen pitch?"
 
+    total_text = Calculations.speech_recognition(file)
+    verkleinwoorden = Calculations.verkleinwoorden(total_text)
+    herhalingen = Calculations.herhalende_zinnen(total_text)
+    pitch = Calculations.calculate_pitch(file)
 
     response_data["speech_recognition"] = total_text
     response_data["verkleinwoorden"] = verkleinwoorden
     response_data["herhalingen"] = herhalingen
     response_data["pitch"] = pitch
 
+    # return render_template('results.html', text=total_text)
+    # laatste stap!
+
+    shutil.rmtree('./uploads/chunks')
+    if os.path.exists(file):
+        os.remove(file)
+
     response = jsonify(response_data)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-    # return render_template('results.html', text=total_text)
-    # laatste stap!
-    # if os.path.exists('./uploads/chunks'):
-    #    os.rmdir('./uploads/chunks')
-    #    if os.path.exists(file):
-    #        os.remove(file)
+
+@app.route('/receive_normal', methods=['POST'])
+def receive_normal():
+    now = datetime.now()
+    d1 = now.strftime("%Y%m%d%H%M%S")
+    data = request.files['audio_data'].read()
+    file = f'./uploads/{d1}.wav'
+
+    response_data = {"Hello": "World"}
+    with open(os.path.abspath(file), 'wb') as f:
+        f.write(data)
+
+    print("PITCH BEREKENEN")
+    pitch = Calculations.calculate_pitch(file)
+
+    response_data["pitch"] = pitch
+
+    if os.path.exists(file):
+        os.remove(file)
+
+    response = jsonify(response_data)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 if __name__ == "__main__":
