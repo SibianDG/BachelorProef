@@ -25,6 +25,10 @@ nietzeggendewoorden = []
 with open('nietszeggendewoorden.txt', 'r') as f:
     nietzeggendewoorden = f.read().splitlines()
 
+tussenwerpels_woorden = []
+with open('tussenwerpsels.txt', 'r') as f:
+    tussenwerpels_woorden = f.read().splitlines()
+
 
 def speech_recognition(file):
     try:
@@ -97,6 +101,34 @@ def speech_recognition(file):
         return error_message
 
 
+def collectieve_voornaamwoorden(text):
+    collectieve_voornaamwoorden_array = []
+    words = make_array_words(text)
+    for word in words:
+        if word is not None and word == "we":  # TODO uitbreiden?
+            collectieve_voornaamwoorden_array.append(word)
+    c = dict(Counter(collectieve_voornaamwoorden_array))
+    filtered_dict = {k: v for (k, v) in c.items() if v > 1}
+    l = list(filtered_dict.keys())
+    if len(l) == 0:
+        return '<span class="text-success">Er werden geen of niet genoeg collectieve voornaamwoorden gebruikt.</span>'
+    return highlight_words_in_text(text, set(l))
+
+
+def tussenwerpsels(text):
+    tussenwerpsels_array = []
+    words = make_array_words(text)
+    for word in words:
+        if word is not None and word in tussenwerpels_woorden:  # TODO uitbreiden?
+            tussenwerpsels_array.append(word)
+    c = dict(Counter(tussenwerpsels_array))
+    filtered_dict = {k: v for (k, v) in c.items() if v > 1}
+    l = list(filtered_dict.keys())
+    if len(l) == 0:
+        return '<span class="text-success">Er werden geen of niet genoeg tussenwerpsels gebruikt.</span>'
+    return highlight_words_in_text(text, set(l))
+
+
 def verkleinwoorden(text):
     verkleinwoorden_array = []
     words = make_array_words(text)
@@ -106,7 +138,7 @@ def verkleinwoorden(text):
                     word.endswith('je') or word.endswith('ke') or word.endswith('kes') or word.endswith('jes')):
                 verkleinwoorden_array.append(word)
     if len(verkleinwoorden_array) == 0:
-        return '<span class="text-muted">Er zijn geen verkleinwoorden gevonden</span>'
+        return '<span class="text-success">Er zijn geen verkleinwoorden gevonden</span>'
     return highlight_words_in_text(text, set(verkleinwoorden_array))
 
 
@@ -138,7 +170,7 @@ def herhalende_zinnen(text):
             del sameequals[word]
 
     if len(repetition) == 0:
-        return '<span class="text-muted">Er zijn geen herhalingen gevonden</span>'
+        return '<span class="text-success">Er zijn geen herhalingen gevonden</span>'
     return highlight_words_in_text(text, set(repetition))
 
 
@@ -198,7 +230,7 @@ def calculate_pitch(wav_file):
         print("Average: %0.2f Hz." % (freqlistavg))
         stream.close()
         p.terminate()
-        return f"Average: {round(freqlistavg, 2)} Hz."
+        return round(freqlistavg, 2)
     except Exception as error:
         error_message = f'Fout bij het berekenen van de toonhoogte: {error}.'
         print(error_message)
@@ -208,11 +240,19 @@ def calculate_pitch(wav_file):
             os.remove(tmp_file)
 
 
+def make_text_compare(normal, current, difference, danger, success):
+    if normal is not None and current is not None and normal != 0 and current != 0:
+        if normal + difference < current:
+            return danger
+        return success
+    else:
+        return '<span class="text-muted">Er was een probleem met deze functie. Probeer opnieuw.</span>'
+
+
 def loudness(wav):
     data, rate = sf.read(wav)  # load audio (with shape (samples, channels))
     meter = pyln.Meter(rate)  # create BS.1770 meter
     loudness_range = meter.integrated_loudness(data)  # measure loudness
-    print(f"LOUUUUUDDDDD: {loudness_range}")
     if float('inf') == loudness_range:
         loudness_range = 10000
     elif float('-inf') == loudness_range:

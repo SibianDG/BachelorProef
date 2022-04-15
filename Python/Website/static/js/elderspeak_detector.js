@@ -17,43 +17,74 @@ function handlerFunction(stream) {
     }
 }
 
-let wat_gezegd = document.getElementById('wat_gezegd')
-let verkleinwoorden = document.getElementById('verkleinwoorden')
-let loading_eigenschappen = document.getElementById('loading_eigenschappen')
-let herhalingen = document.getElementById('herhalingen')
-let pitch = document.getElementById('pitch')
+let loading_eigenschappen = document.getElementById('loading_eigenschappen');
 const btn_record = document.getElementById('btn-record');
 const picture = document.getElementById('picture');
-const text_under_pic = document.getElementById('saved')
-const loudness = document.getElementById('loudness')
-const loudness_1 = document.getElementById('loudness_1')
+const text_under_pic = document.getElementById('saved');
+const big_content = document.getElementById('big-content');
+const small_content = document.getElementById('small-content');
+
+//normal parameters
+let pitch_normal = 0;
+let loudness_normal = 0;
+
 
 function sendData(blob, kind) {
   let data_to_send = new FormData();
   data_to_send.append('audio_data', blob);
   if (kind.toLowerCase().includes("saved")){
+    data_to_send.append('extra_data', [pitch_normal, loudness_normal])
     fetch('http://127.0.0.1:5000/receive_elderspeak', {
         method: 'POST',
         body: data_to_send
     }).then(response => {
+        console.log("||||||||||||||||||||||||||||||||||")
+        console.log(response)
         return response.json();
     }).then(json => {
-        wat_gezegd.insertAdjacentHTML("beforeend", `<h4>Wat heb je gezegd?</h4><p>${json['speech_recognition']}</p>`);
-        verkleinwoorden.insertAdjacentHTML("beforeend", `<h4>Verkleinwoorden:</h4><p>${json['verkleinwoorden']}</p>`);
-        herhalingen.insertAdjacentHTML("beforeend", `<h4>Herhalingen:</h4><p>${json['herhalingen']}</p>`);
-        pitch.insertAdjacentHTML("beforeend", `<h4>Toonhoogte:</h4><p>${json['pitch']}</p>`);
+        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+        console.log(json)
+        big_content.insertAdjacentHTML("beforeend", `<div><h4>Wat heb je gezegd?</h4><p>${json['speech_recognition']}</p></div>`);
+        big_content.insertAdjacentHTML("beforeend", `<div><h4>Verkleinwoorden:</h4><p>${json['verkleinwoorden']}</p></div>`);
+        big_content.insertAdjacentHTML("beforeend", `<div><h4>Herhalingen:</h4><p>${json['herhalingen']}</p></div>`);
+        big_content.insertAdjacentHTML("beforeend", `<div><h4>Collectieve voornaamwoorden:</h4><p>${json['collectieve_voornaamwoorden']}</p></div>`);
+        big_content.insertAdjacentHTML("beforeend", `<div><h4>Tussenwerpsels:</h4><p>${json['tussenwerpsels']}</p></div>`);
+
+        small_content.insertAdjacentHTML("beforeend", `<div class="col-6"><h4>Stemfrequentie:</h4><p>${json['pitch']}</p></div>`);
+        small_content.insertAdjacentHTML("beforeend", `<div class="col-6"><h4>Stemvolume:</h4><p>${json['loudness']}</p></div>`);
+
+        // TODO: pitch in backend
+
+        let pitch_var;
+        let pitch_elderspeak = json['pitch']
+        console.log("###############")
+        console.log(pitch_normal)
+        console.log(pitch_elderspeak)
+        console.log("###############")
+        if(pitch_normal + 20 < pitch_elderspeak){
+            pitch_var = `<span class="text-danger">Hoger</span>`
+        } else /*if(pitch_normal > pitch_elderspeak)*/{
+            pitch_var = `<span class="text-success">Lager of ongeveer gelijk</span>`
+        } /*else {
+            pitch_var = "???"
+        }*/
+        small_content.insertAdjacentHTML("beforeend", `<div class="col-6"><h4>Stemfrequentie:</h4><p>${pitch_var}</p></div>`);
+
         let volume;
-        if(parseFloat(loudness_1.innerText) < parseFloat(json['loudness'])){
-            volume = `<span class="text-danger">Luider</span>`
-        } else if(parseFloat(loudness_1.innerText) > parseFloat(json['loudness'])){
+        let volume_elderspeak = json['loudness'];
+        if(loudness_normal + 10 < volume_elderspeak){
+            volume = ``
+        } else /*if(loudness_normal > volume_elderspeak)*/{
             volume = `<span class="text-success">Stiller</span>`
-        } else {
+        } /*else {
             volume = "???"
-        }
-        loudness.insertAdjacentHTML("beforeend", `<h4>Verhoogd stemvolume:</h4><p>${volume}</p>`);
+        }*/
+        small_content.insertAdjacentHTML("beforeend", `<div class="col-6"><h4>Stemvolume:</h4><p>${volume}</p></div>`);
+
         loading_eigenschappen.classList.add('hidden');
         document.getElementById('eigenschappen_content').classList.remove('hidden');
     }).catch((error) => {
+        document.getElementById('errors').classList.remove('hidden');
         console.log(error);
     });
   } else {
@@ -63,8 +94,11 @@ function sendData(blob, kind) {
     }).then(response => {
         return response.json();
     }).then(json => {
-        text_under_pic.innerText = json['pitch']
-        loudness_1.innerText = json['loudness']
+        btn_record.disabled = false;
+          console.log("FETCHEEEE")
+          console.log(json['pitch'])
+        pitch_normal = json['pitch'];
+        loudness_normal = json['loudness'];
     }).catch((error) => {
         console.log(error)
     });
@@ -99,6 +133,7 @@ btn_record.addEventListener('click', () => {
         start_audio("Stop standaard opname")
     } else if (btn_record.innerText.toLowerCase() === "stop standaard opname"){
         stop_audio("stop standaard opname", "Elderspeak audio opnemen")
+        btn_record.disabled = true;
     } else if (btn_record.innerText.toLowerCase() === "elderspeak audio opnemen"){
         start_audio("Stop elderspeak audio opname")
     } else if (btn_record.innerText.toLowerCase() === "stop elderspeak audio opname"){
@@ -106,3 +141,7 @@ btn_record.addEventListener('click', () => {
     }
 
 });
+
+document.getElementById('reset').addEventListener('click', () => {
+    location.reload()
+})

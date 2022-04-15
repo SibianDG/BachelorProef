@@ -38,6 +38,10 @@ def receive_elderspeak():
     now = datetime.now()
     d1 = now.strftime("%Y%m%d%H%M%S")
     data = request.files['audio_data'].read()
+    extra_data = request.form.get('extra_data', "0,0")
+    extra_data = extra_data.split(',')
+    extra_data = list(map(float, extra_data))
+    pitch_normal, loudness_normal = extra_data
     file = f'./uploads/{d1}.wav'
 
     response_data = {"Hello": "World"}
@@ -47,14 +51,26 @@ def receive_elderspeak():
     total_text = Calculations.speech_recognition(file)
     verkleinwoorden = Calculations.verkleinwoorden(total_text)
     herhalingen = Calculations.herhalende_zinnen(total_text)
-    pitch = Calculations.calculate_pitch(Calculations.maketempfile_wav(file))
-    loudness = Calculations.loudness(Calculations.maketempfile_wav(file))
+    pitch = Calculations.make_text_compare(pitch_normal,
+                                           Calculations.calculate_pitch(Calculations.maketempfile_wav(file)),
+                                           20,
+                                           '<span class="text-danger">Hoger</span>',
+                                           '<span class="text-success">Lager of niet significant hoger.</span>')
+    loudness = Calculations.make_text_compare(pitch_normal,
+                                              Calculations.loudness(Calculations.maketempfile_wav(file)),
+                                              10,
+                                              '<span class="text-danger">Luider</span>',
+                                              '<span class="text-success">Stiller of niet significant luider.</span>')
+    collectieve_voornaamwoorden = Calculations.collectieve_voornaamwoorden(total_text)
+    tussenwerpsels = Calculations.tussenwerpsels(total_text)
 
     response_data["speech_recognition"] = total_text
     response_data["verkleinwoorden"] = verkleinwoorden
     response_data["herhalingen"] = herhalingen
     response_data["pitch"] = pitch
     response_data["loudness"] = loudness
+    response_data["collectieve_voornaamwoorden"] = collectieve_voornaamwoorden
+    response_data["tussenwerpsels"] = tussenwerpsels
 
     # return render_template('results.html', text=total_text)
     # laatste stap!

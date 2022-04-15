@@ -16,7 +16,6 @@
                 <button type="button" id="btn-record" class="btn btn-primary">Standaard audio opnemen</button>
                 <div class="d-flex flex-column">
                     <p id="saved" class="text-primary hidden my-2">De audio is opgeslagen!</p>
-                    <span class="hidden" id="loudness_1"></span>
                     <audio id=recordedAudio></audio>
                 </div>
             </div>
@@ -28,12 +27,11 @@
                     </div>
                 </div>
                 <div id="eigenschappen_content" class="hidden">
-                    <div id="wat_gezegd"></div>
-                    <div id="verkleinwoorden"></div>
-                    <div id="herhalingen"></div>
-                    <div id="pitch"></div>
-                    <div id="loudness"></div>
+                    <div class="row" id="big-content"></div>
+                    <div class="row" id="small-content"></div>
                 </div>
+                <div class="hidden text-danger" id="errors">Er zijn fouten in het verwerken van de data...</div>
+                <button class="btn btn-warning" id="reset">Opnieuw proberen</button>
             </div>
         </div>
 
