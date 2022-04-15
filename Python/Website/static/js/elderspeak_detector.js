@@ -20,6 +20,7 @@ function handlerFunction(stream) {
 let loading_eigenschappen = document.getElementById('loading_eigenschappen');
 const btn_record = document.getElementById('btn-record');
 const picture = document.getElementById('picture');
+const tekst_bij_foto = document.getElementById('tekst_bij_foto');
 const text_under_pic = document.getElementById('saved');
 const big_content = document.getElementById('big-content');
 const small_content = document.getElementById('small-content');
@@ -53,38 +54,11 @@ function sendData(blob, kind) {
         small_content.insertAdjacentHTML("beforeend", `<div class="col-6"><h4>Stemfrequentie:</h4><p>${json['pitch']}</p></div>`);
         small_content.insertAdjacentHTML("beforeend", `<div class="col-6"><h4>Stemvolume:</h4><p>${json['loudness']}</p></div>`);
 
-        // TODO: pitch in backend
-
-        let pitch_var;
-        let pitch_elderspeak = json['pitch']
-        console.log("###############")
-        console.log(pitch_normal)
-        console.log(pitch_elderspeak)
-        console.log("###############")
-        if(pitch_normal + 20 < pitch_elderspeak){
-            pitch_var = `<span class="text-danger">Hoger</span>`
-        } else /*if(pitch_normal > pitch_elderspeak)*/{
-            pitch_var = `<span class="text-success">Lager of ongeveer gelijk</span>`
-        } /*else {
-            pitch_var = "???"
-        }*/
-        small_content.insertAdjacentHTML("beforeend", `<div class="col-6"><h4>Stemfrequentie:</h4><p>${pitch_var}</p></div>`);
-
-        let volume;
-        let volume_elderspeak = json['loudness'];
-        if(loudness_normal + 10 < volume_elderspeak){
-            volume = ``
-        } else /*if(loudness_normal > volume_elderspeak)*/{
-            volume = `<span class="text-success">Stiller</span>`
-        } /*else {
-            volume = "???"
-        }*/
-        small_content.insertAdjacentHTML("beforeend", `<div class="col-6"><h4>Stemvolume:</h4><p>${volume}</p></div>`);
-
         loading_eigenschappen.classList.add('hidden');
         document.getElementById('eigenschappen_content').classList.remove('hidden');
     }).catch((error) => {
         document.getElementById('errors').classList.remove('hidden');
+        loading_eigenschappen.classList.add('hidden');
         console.log(error);
     });
   } else {
@@ -95,8 +69,6 @@ function sendData(blob, kind) {
         return response.json();
     }).then(json => {
         btn_record.disabled = false;
-          console.log("FETCHEEEE")
-          console.log(json['pitch'])
         pitch_normal = json['pitch'];
         loudness_normal = json['loudness'];
     }).catch((error) => {
@@ -116,7 +88,8 @@ function start_audio(text_after){
 function stop_audio(innertext, text_after){
     if (innertext === "stop standaard opname") {
         document.getElementById('saved').classList.remove('hidden');
-        picture.src = "/static/img/rusthuis.jpg"
+        picture.src = "/static/img/rusthuis.jpg";
+        tekst_bij_foto.innerText = "Spreek in hoe je tegen deze bejaarde dame zou praten:";
     } else {
         loading_eigenschappen.classList.remove('hidden');
         document.getElementById('eigenschappen_elderspeak').classList.remove('hidden');

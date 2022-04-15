@@ -3,6 +3,7 @@ import os
 import re
 import wave
 from collections import Counter
+from unidecode import unidecode
 
 import numpy as np
 import pyaudio
@@ -107,11 +108,13 @@ def collectieve_voornaamwoorden(text):
     for word in words:
         if word is not None and word == "we":  # TODO uitbreiden?
             collectieve_voornaamwoorden_array.append(word)
+    if len(collectieve_voornaamwoorden_array) == 0:
+        return '<span class="text-success">Er werden geen collectieve voornaamwoorden gebruikt.</span>'
     c = dict(Counter(collectieve_voornaamwoorden_array))
     filtered_dict = {k: v for (k, v) in c.items() if v > 1}
     l = list(filtered_dict.keys())
     if len(l) == 0:
-        return '<span class="text-success">Er werden geen of niet genoeg collectieve voornaamwoorden gebruikt.</span>'
+        return '<span class="text-success">Er werden niet genoeg collectieve voornaamwoorden gebruikt.</span>'
     return highlight_words_in_text(text, set(l))
 
 
@@ -121,11 +124,13 @@ def tussenwerpsels(text):
     for word in words:
         if word is not None and word in tussenwerpels_woorden:  # TODO uitbreiden?
             tussenwerpsels_array.append(word)
+    if len(tussenwerpsels_array) == 0:
+        return '<span class="text-success">Er werden geen tussenwerpsels gebruikt.</span>'
     c = dict(Counter(tussenwerpsels_array))
     filtered_dict = {k: v for (k, v) in c.items() if v > 1}
     l = list(filtered_dict.keys())
     if len(l) == 0:
-        return '<span class="text-success">Er werden geen of niet genoeg tussenwerpsels gebruikt.</span>'
+        return '<span class="text-success">Er werden niet genoeg tussenwerpsels gebruikt.</span>'
     return highlight_words_in_text(text, set(l))
 
 
@@ -268,6 +273,8 @@ def make_array_words(text):
 
 
 def highlight_words_in_text(text: str, words: set):
+    text = text.lower()
+    text = unidecode(text)
     for word in words:
-        text = text.replace(f'{word}', f'<span class="text-danger">{word}</span>')
+        text = text.replace(unidecode(word), f'<span class="text-danger">{word}</span>')
     return text
