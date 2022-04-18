@@ -8,12 +8,12 @@ app = Flask(__name__)
 app.config['UPLOAD_EXTENSIONS'] = ['.wav']
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/detector', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         print("POST")
     else:
-        return render_template('index.html')
+        return render_template('detector.html')
 
 
 @app.route('/picture_old_woman', methods=['GET'])
@@ -53,12 +53,12 @@ def receive_elderspeak():
     herhalingen = Calculations.herhalende_zinnen(total_text)
     pitch = Calculations.make_text_compare(pitch_normal,
                                            Calculations.calculate_pitch(Calculations.maketempfile_wav(file)),
-                                           20,
+                                           40,
                                            '<span class="text-danger">Hoger</span>',
                                            '<span class="text-success">Lager of niet significant hoger.</span>')
     loudness = Calculations.make_text_compare(pitch_normal,
                                               Calculations.loudness(Calculations.maketempfile_wav(file)),
-                                              10,
+                                              5,
                                               '<span class="text-danger">Luider</span>',
                                               '<span class="text-success">Stiller of niet significant luider.</span>')
     collectieve_voornaamwoorden = Calculations.collectieve_voornaamwoorden(total_text)
@@ -112,4 +112,4 @@ def receive_normal():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

@@ -122,7 +122,7 @@ def tussenwerpsels(text):
     tussenwerpsels_array = []
     words = make_array_words(text)
     for word in words:
-        if word is not None and word in tussenwerpels_woorden:  # TODO uitbreiden?
+        if word is not None and word in tussenwerpels_woorden:  # TODO uitbreiden? + HALLO hé ==> hey
             tussenwerpsels_array.append(word)
     if len(tussenwerpsels_array) == 0:
         return '<span class="text-success">Er werden geen tussenwerpsels gebruikt.</span>'
