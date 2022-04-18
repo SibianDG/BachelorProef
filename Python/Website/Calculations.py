@@ -237,9 +237,8 @@ def calculate_pitch(wav_file):
         p.terminate()
         return round(freqlistavg, 2)
     except Exception as error:
-        error_message = f'Fout bij het berekenen van de toonhoogte: {error}.'
-        print(error_message)
-        return error_message
+        print(f'Fout bij het berekenen van de toonhoogte: {error}.')
+        return -10000
     finally:
         if tmp_file is not None and os.path.exists(tmp_file):
             os.remove(tmp_file)
@@ -278,3 +277,9 @@ def highlight_words_in_text(text: str, words: set):
     for word in words:
         text = text.replace(unidecode(word), f'<span class="text-danger">{word}</span>')
     return text
+
+def remove_uploads():
+    uploads = os.listdir('./uploads/')
+    uploads.remove('tmp.wav')
+    for file in uploads:
+        os.remove(file)

@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, jsonify
 import os
 from datetime import datetime
 import Calculations
+from Calculations import remove_uploads
 import shutil
 
 app = Flask(__name__)
@@ -97,8 +98,8 @@ def receive_elderspeak():
 def receive_normal():
     now = datetime.now()
     d1 = now.strftime("%Y%m%d%H%M%S")
-    data = request.files['audio_data'].read()
     file = f'./uploads/{d1}.wav'
+    data = request.files['audio_data'].read()
 
     response_data = {"Hello": "World"}
     with open(os.path.abspath(file), 'wb') as f:
@@ -119,13 +120,6 @@ def receive_normal():
     response.headers.add('Access-Control-Allow-Origin', '*')
     # remove_uploads()
     return response
-
-
-def remove_uploads():
-    uploads = os.listdir('./uploads/')
-    uploads.remove('tmp.wav')
-    for file in uploads:
-        os.remove(file)
 
 
 if __name__ == "__main__":
