@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Elderspeak detector</title>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <h1>Elderspeak detector</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Audio opnemen</h3>
+                <img src="{{ url_for('static', filename='img/jonge_mensen.jpg') }}" alt="rusthuis foto" class="img-fluid img-medium" id="picture">
+                <p id="tekst_bij_foto">Spreek in hoe je tegen deze vrienden zou praten:</p>
+                <button type="button" id="btn-record" class="btn btn-primary">Standaard audio opnemen</button>
+                <div class="d-flex flex-column">
+                    <p id="saved" class="text-primary hidden my-2">De audio is opgeslagen!</p>
+                    <audio id=recordedAudio></audio>
+                </div>
+            </div>
+            <div class="col-md-6 hidden" id="eigenschappen_elderspeak">
+                <h3>Eigenschappen van <i>Elderspeak</i>:</h3>
+                <div id="loading_eigenschappen">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div id="eigenschappen_content" class="hidden">
+                    <div class="row" id="big-content"></div>
+                    <div class="row" id="small-content"></div>
+                </div>
+                <div class="hidden text-danger" id="errors">Er zijn fouten in het verwerken van de data...</div>
+                <button class="btn btn-warning" id="reset">Opnieuw proberen</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/elderspeak_detector.js') }}"></script>
+{% endblock %}
