@@ -5,11 +5,19 @@ import Calculations
 import shutil
 
 app = Flask(__name__)
-app.config['UPLOAD_EXTENSIONS'] = ['.wav']
+app.config['UPLOAD_EXTENSIONS'] = ['.wav', '.mp3']
+
+
+@app.route('/', methods=['POST', 'GET'])
+def index():
+    if request.method == 'POST':
+        print("POST")
+    else:
+        return render_template('index.html')
 
 
 @app.route('/detector', methods=['POST', 'GET'])
-def index():
+def detector():
     if request.method == 'POST':
         print("POST")
     else:
@@ -81,6 +89,7 @@ def receive_elderspeak():
 
     response = jsonify(response_data)
     response.headers.add('Access-Control-Allow-Origin', '*')
+    # remove_uploads()
     return response
 
 
@@ -108,8 +117,19 @@ def receive_normal():
     print(response_data)
     response = jsonify(response_data)
     response.headers.add('Access-Control-Allow-Origin', '*')
+    # remove_uploads()
     return response
 
 
+def remove_uploads():
+    uploads = os.listdir('./uploads/')
+    uploads.remove('tmp.wav')
+    for file in uploads:
+        os.remove(file)
+
+
 if __name__ == "__main__":
-    app.run(debug=False)
+    try:
+        app.run(debug=False)
+    finally:
+        remove_uploads()
