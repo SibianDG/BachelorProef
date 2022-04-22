@@ -214,7 +214,7 @@ Er kan een \textit{token} gekozen worden op basis van regels, leestekens, spatie
 Volgens \textcite{Jung2021} helpen \textit{convolutional neural networks} of CNN's - een specifieke opstelling van een \textit{deep learning} model waarbij een
 data-array van twee of meer dimensies, zoals een afbeelding of geluidsfragment, wordt gestapeld door een veelvoud van tweedimensionale filters - bijzonder veel om achtergrondlawaai weg te filteren.
 
-Om achtergrond lawaai weg te werken zijn AI gebaseerde filters zoals de \textit{short-time Fourier transform} of STFT ideaal. Het STFT-filter verbetert in het algemeen de kwaliteit van het inkomende geluidssignaal door ruis uit het geluidssignaal te verwijderen.
+Om achtergrond lawaai weg te werken zijn AI gebaseerde filters zoals de \textit{short-time Fourier transform} of STFT ideaal. De STFT-filter verbetert in het algemeen de kwaliteit van het inkomende geluidssignaal door ruis uit het geluidssignaal te verwijderen.
 De STFT is een Fourier-gerelateerde transformatie die wordt gebruikt om de sinusoïdale frequentie- en fase-inhoud van plaatselijke delen van een signaal te bepalen terwijl dit in de tijd verandert, zie figuur~\ref{fig:conversion}. In de praktijk worden STFT's berekend door een tijdsignaal op te delen in kortere segmenten van gelijke lengte en de Fouriertransformatie afzonderlijk te berekenen voor elk korter segment. Aldus wordt het Fourier-spectrum voor elk korter segment onthuld. Gewoonlijk zet men dan de veranderende spectra
 als functie van de tijd;
 de grafiek staat bekend als een spectrogram of watervalgrafiek, zie figuur~\ref{fig:The_original_noise-removed_audio}.~\autocite{Jung2021}
