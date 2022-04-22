@@ -156,7 +156,7 @@ def herhalende_zinnen(text):
 
     for word in words:
         if word is not None:
-            while len(cache) >= 30:
+            while len(cache) >= 25:
                 cache.pop(0)
             if word not in nietzeggendewoorden:
                 cache.append(word)
