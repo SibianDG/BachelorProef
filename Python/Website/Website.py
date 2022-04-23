@@ -58,6 +58,7 @@ def receive_elderspeak():
         f.write(data)
 
     total_text = Calculations.speech_recognition(file)
+    total_text = Calculations.replace_hey(total_text)
     verkleinwoorden = Calculations.verkleinwoorden(total_text)
     herhalingen = Calculations.herhalende_zinnen(total_text)
     pitch = Calculations.make_text_compare(pitch_normal,
@@ -87,6 +88,11 @@ def receive_elderspeak():
     shutil.rmtree('./uploads/chunks')
     if os.path.exists(file):
         os.remove(file)
+
+    try:
+        remove_uploads()
+    except Exception as e:
+        print(f"Fout bij het verwijderen van de tempfiles: {e}")
 
     response = jsonify(response_data)
     response.headers.add('Access-Control-Allow-Origin', '*')

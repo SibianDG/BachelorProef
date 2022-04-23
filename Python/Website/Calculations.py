@@ -122,7 +122,7 @@ def tussenwerpsels(text):
     tussenwerpsels_array = []
     words = make_array_words(text)
     for word in words:
-        if word is not None and word in tussenwerpels_woorden:  # TODO uitbreiden? + HALLO hé ==> hey
+        if word is not None and word in tussenwerpels_woorden:
             tussenwerpsels_array.append(word)
     if len(tussenwerpsels_array) == 0:
         return '<span class="text-success">Er werden geen tussenwerpsels gebruikt.</span>'
@@ -278,8 +278,20 @@ def highlight_words_in_text(text: str, words: set):
         text = text.replace(unidecode(word), f'<span class="text-danger">{word}</span>')
     return text
 
+
 def remove_uploads():
     uploads = os.listdir('./uploads/')
     uploads.remove('tmp.wav')
     for file in uploads:
         os.remove(file)
+
+
+def replace_hey(text):
+    text = text.replace("hé", "hey")
+    text = text.replace("hè", "hey")
+    text = text.replace("he", "hey")
+    text = text.replace("hoi", "hey")
+    text = text.replace("hee", "hey")
+    text = text.replace("heyy", "hey")
+    return text
+
