@@ -1,4 +1,383 @@
 \chapter{Bijlagen}
 \label{ch:bijlagen}
 
-\section{A}
+\section{Flask code}
+
+\begin{python}
+from flask import Flask, render_template, url_for, request, redirect, jsonify
+import os
+from datetime import datetime
+import Calculations
+from Calculations import remove_uploads
+import shutil
+
+app = Flask(__name__)
+app.config['UPLOAD_EXTENSIONS'] = ['.wav', '.mp3']
+
+
+@app.route('/', methods=['POST', 'GET'])
+def index():
+   if request.method == 'POST':
+        print("POST")
+   else:
+        return render_template('index.html')
+
+
+@app.route('/detector', methods=['POST', 'GET'])
+def detector():
+   if request.method == 'POST':
+        print("POST")
+   else:
+        return render_template('detector.html')
+
+
+@app.route('/picture_old_woman', methods=['GET'])
+def picture_old_woman():
+   url = url_for('static', filename='img/rusthuis.jpg')
+   print(url)
+   return url
+
+
+@app.route('/privacy', methods=['GET'])
+def privacy():
+    return render_template('privacy.html')
+
+
+@app.route('/elderspeak', methods=['GET'])
+def elderspeak():
+    return render_template('elderspeak.html')
+
+
+@app.route('/receive_elderspeak', methods=['POST'])
+def receive_elderspeak():
+   now = datetime.now()
+   d1 = now.strftime("%Y%m%d%H%M%S")
+   data = request.files['audio_data'].read()
+   extra_data = request.form.get('extra_data', "0,0")
+   extra_data = extra_data.split(',')
+   extra_data = list(map(float, extra_data))
+   pitch_normal, loudness_normal = extra_data
+   file = f'./uploads/{d1}.wav'
+
+   response_data = {"Hello": "World"}
+   with open(os.path.abspath(file), 'wb') as f:
+   f.write(data)
+
+   total_text = Calculations.speech_recognition(file)
+   total_text = Calculations.replace_hey(total_text)
+   verkleinwoorden = Calculations.verkleinwoorden(total_text)
+   herhalingen = Calculations.herhalende_zinnen(total_text)
+   pitch = Calculations.make_text_compare(pitch_normal,
+   Calculations.calculate_pitch(Calculations.maketempfile_wav(file)),
+        40,
+       '<span class="text-danger">Hoger</span>',
+       '<span class="text-success">Lager of niet significant hoger.</span>')
+   loudness = Calculations.make_text_compare(pitch_normal,
+       Calculations.loudness(Calculations.maketempfile_wav(file)),
+       5,
+       '<span class="text-danger">Luider</span>',
+       '<span class="text-success">Stiller of niet significant luider.</span>')
+   collectieve_voornaamwoorden = Calculations.collectieve_voornaamwoorden(total_text)
+   tussenwerpsels = Calculations.tussenwerpsels(total_text)
+
+   response_data["speech_recognition"] = total_text
+   response_data["verkleinwoorden"] = verkleinwoorden
+   response_data["herhalingen"] = herhalingen
+   response_data["pitch"] = pitch
+   response_data["loudness"] = loudness
+   response_data["collectieve_voornaamwoorden"] = collectieve_voornaamwoorden
+   response_data["tussenwerpsels"] = tussenwerpsels
+
+   # return render_template('results.html', text=total_text)
+   # laatste stap!
+
+   shutil.rmtree('./uploads/chunks')
+   if os.path.exists(file):
+        os.remove(file)
+
+   try:
+        remove_uploads()
+   except Exception as e:
+        print(f"Fout bij het verwijderen van de tempfiles: {e}")
+
+   response = jsonify(response_data)
+   response.headers.add('Access-Control-Allow-Origin', '*')
+   # remove_uploads()
+   return response
+
+
+@app.route('/receive_normal', methods=['POST'])
+def receive_normal():
+   now = datetime.now()
+   d1 = now.strftime("%Y%m%d%H%M%S")
+   file = f'./uploads/{d1}.wav'
+   data = request.files['audio_data'].read()
+
+   response_data = {"Hello": "World"}
+   with open(os.path.abspath(file), 'wb') as f:
+   f.write(data)
+
+   print("PITCH BEREKENEN")
+   pitch = Calculations.calculate_pitch(Calculations.maketempfile_wav(file))
+   loudness = Calculations.loudness(Calculations.maketempfile_wav(file))
+
+   response_data["pitch"] = pitch
+   response_data["loudness"] = loudness
+
+   if os.path.exists(file):
+        os.remove(file)
+
+   print(response_data)
+   response = jsonify(response_data)
+   response.headers.add('Access-Control-Allow-Origin', '*')
+   # remove_uploads()
+   return response
+
+
+if __name__ == "__main__":
+   try:
+        app.run(debug=False)
+   finally:
+        remove_uploads()
+
+\end{python}
+
+\section{Speech Recognition}
+\begin{python}
+def speech_recognition(file):
+    try:
+
+        print(file, ' to chunks')
+        AudioSegment.converter = which("ffmpeg")
+        myaudio = AudioSegment.from_file(file)
+        channel_count = myaudio.channels  # Get channels
+        sample_width = myaudio.sample_width  # Get sample width
+        duration_in_sec = len(myaudio) / 1000  # Length of audio in sec
+        sample_rate = myaudio.frame_rate
+
+        print("sample_width=", sample_width)
+        print("channel_count=", channel_count)
+        print("duration_in_sec=", duration_in_sec)
+        print("frame_rate=", sample_rate)
+        bit_rate = 16  # assumption , you can extract from mediainfo("test.wav") dynamically
+
+        wav_file_size = (sample_rate * bit_rate * channel_count * duration_in_sec) / 20
+        print("wav_file_size = ", wav_file_size)
+
+        file_split_size = 25000000  # 10Mb OR 10, 000, 000 bytes
+        total_chunks = wav_file_size // file_split_size
+
+        # Get chunk size by following method #There are more than one ofcourse
+        # for  duration_in_sec (X) -->  wav_file_size (Y)
+        # So   whats duration in sec  (K) --> for file size of 10Mb
+        #  K = X * 10Mb / Y
+
+        chunk_length_in_sec = math.ceil((duration_in_sec * 20000000) / wav_file_size)  # in sec
+        chunk_length_ms = chunk_length_in_sec * 2000
+        chunks = make_chunks(myaudio, chunk_length_ms)
+
+        # Export all of the individual chunks as wav files
+
+        if not os.path.exists('./uploads/chunks'):
+            os.makedirs('./uploads/chunks')
+
+        for i, chunk in enumerate(chunks):
+            chunk_name = f"./uploads/chunks/chunck{i}.flac"
+            print("exporting", chunk_name)
+            chunk.export(chunk_name, format="flac")
+    except Exception as error:
+        error_message = f'Fout bij het bewerken van de audiofile: {error}.'
+        print(error_message)
+        return error_message
+
+    DIR = './uploads/chunks/'
+
+    numberOfItems = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
+
+    total_text = ""
+
+    try:
+        for i in range(numberOfItems):
+        # Speech Recognition
+        audio_file = sr.AudioFile(f'./uploads/chunks/chunck{i}.flac')
+        with audio_file as source:
+            r.adjust_for_ambient_noise(source)
+            audio = r.record(source)
+            text = r.recognize_google(audio_data=audio, language="nl-BE")
+            total_text += " " + text
+            print("######## Google Recognize ####################")
+            print(text)
+            print("##############################################")
+            return total_text.strip()
+    except Exception as error:
+        error_message = f'Fout bij de spraakherkenning: {error}.'
+        print(error_message)
+        return error_message
+
+\end{python}
+
+\section{Verkleinwoorden}
+\begin{python}
+def verkleinwoorden(text):
+
+    verkleinwoorden_array = []
+    words = make_array_words(text)
+    for word in words:
+        if word is not None:
+            if (len(word) > 3 and word not in geen_verkleinwoorden) and (
+                word.endswith('je') or word.endswith('ke') or word.endswith('kes') or word.endswith('jes')):
+                verkleinwoorden_array.append(word)
+    if len(verkleinwoorden_array) == 0:
+        return '<span class="text-success">Er zijn geen verkleinwoorden gevonden</span>'
+    return highlight_words_in_text(text, set(verkleinwoorden_array))
+\end{python}
+
+\section{Herhalingen}
+\begin{python}
+def herhalende_zinnen(text):
+
+    words = make_array_words(text)
+
+    cache = []
+    toBeDeleted = []
+    repetition = []
+
+    for word in words:
+        if word is not None:
+            while len(cache) >= 25:
+                cache.pop(0)
+            if word not in nietzeggendewoorden:
+                cache.append(word)
+
+    sameequals = dict()
+
+    sameequals = {word: cache.count(word) for word in cache}
+
+    if sameequals is not None and len(sameequals) != 0:
+        for word in sameequals:
+            if sameequals[word] == 1:
+                toBeDeleted.append(word)
+            else:
+                repetition.append(word)
+        for word in toBeDeleted:
+            del sameequals[word]
+
+    if len(repetition) == 0:
+        return '<span class="text-success">Er zijn geen herhalingen gevonden</span>'
+    return highlight_words_in_text(text, set(repetition))
+\end{python}
+
+\section{Collectieve voornaamwoorden}
+\begin{python}
+def collectieve_voornaamwoorden(text):
+    collectieve_voornaamwoorden_array = []
+    words = make_array_words(text)
+    for word in words:
+        if word is not None and word == "we":  # TODO uitbreiden?
+            collectieve_voornaamwoorden_array.append(word)
+    if len(collectieve_voornaamwoorden_array) == 0:
+        return '<span class="text-success">Er werden geen collectieve voornaamwoorden gebruikt.</span>'
+    c = dict(Counter(collectieve_voornaamwoorden_array))
+    filtered_dict = {k: v for (k, v) in c.items() if v > 1}
+    l = list(filtered_dict.keys())
+    if len(l) == 0:
+        return '<span class="text-success">Er werden niet genoeg collectieve voornaamwoorden gebruikt.</span>'
+    return highlight_words_in_text(text, set(l))
+\end{python}
+
+\section{Tussenwerpsels}
+\begin{python}
+def tussenwerpsels(text):
+    tussenwerpsels_array = []
+    words = make_array_words(text)
+    for word in words:
+        if word is not None and word in tussenwerpels_woorden:
+            tussenwerpsels_array.append(word)
+    if len(tussenwerpsels_array) == 0:
+        return '<span class="text-success">Er werden geen tussenwerpsels gebruikt.</span>'
+    c = dict(Counter(tussenwerpsels_array))
+    filtered_dict = {k: v for (k, v) in c.items() if v > 1}
+    l = list(filtered_dict.keys())
+    if len(l) == 0:
+        return '<span class="text-success">Er werden niet genoeg tussenwerpsels gebruikt.</span>'
+    return highlight_words_in_text(text, set(l))
+\end{python}
+
+\section{Stemfrequentie}
+\begin{python}
+def calculate_pitch(wav_file):
+    try:
+        x, _ = librosa.load(wav_file, sr=16000)
+        tmp_file = './uploads/tmp.wav'
+        sf.write(tmp_file, x, 16000)
+
+        chunk = 16384
+        with wave.open(tmp_file, 'r') as wf:
+            swidth = wf.getsampwidth()
+            RATE = wf.getframerate()
+            window = np.blackman(chunk)
+            p = pyaudio.PyAudio()
+            stream = p.open(format=
+                p.get_format_from_width(wf.getsampwidth()),
+                channels=wf.getnchannels(),
+                rate=RATE,
+                output=True)
+            data = wf.readframes(chunk)
+            freqlist = []
+            while len(data) == chunk * swidth:
+                # write data out to the audio stream
+                stream.write(data)
+                # unpack the data and times by the hamming window
+                indata = np.array(wave.struct.unpack("%dh" % (len(data) / swidth),
+                data)) * window
+                # Take the fft and square each value
+                fftData = abs(np.fft.rfft(indata)) ** 2
+                # find the maximum
+                which = fftData[1:].argmax() + 1
+                # use quadratic interpolation around the max
+                if which != len(fftData) - 1:
+                    y0, y1, y2 = np.log(fftData[which - 1:which + 2:])
+                    x1 = (y2 - y0) * .5 / (2 * y1 - y2 - y0)
+                    # find the frequency and output it
+                    thefreq = (which + x1) * RATE / chunk
+                    print("The freq is %.0f Hz." % (thefreq))
+                    freqlist.append(thefreq)
+                else:
+                    thefreq = which * RATE / chunk
+                    print("The freq is %.0f Hz." % (thefreq))
+                    freqlist.append(thefreq)
+                # read some more data
+                data = wf.readframes(chunk)
+        if data:
+            stream.write(data)
+        freqlistavg = sum(freqlist) / len(freqlist)
+        print("Average: %0.2f Hz." % (freqlistavg))
+        stream.close()
+        p.terminate()
+        return round(freqlistavg, 2)
+    except Exception as error:
+        print(f'Fout bij het berekenen van de toonhoogte: {error}.')
+        return -10000
+    finally:
+        if tmp_file is not None and os.path.exists(tmp_file):
+            os.remove(tmp_file)
+\end{python}
+
+\section{Stemvolume}
+\begin{python}
+def loudness(wav):
+    data, rate = sf.read(wav)  # load audio (with shape (samples, channels))
+    meter = pyln.Meter(rate)  # create BS.1770 meter
+    loudness_range = meter.integrated_loudness(data)  # measure loudness
+    if float('inf') == loudness_range:
+        loudness_range = 10000
+    elif float('-inf') == loudness_range:
+        loudness_range = -10000
+    return loudness_range
+\end{python}
+
+\section{Front-end}
+\subsection{HTML code}
+
+\subsection{Javascript code}
+
