@@ -11,7 +11,7 @@
 %% mogelijke manier toegepast hebt om een antwoord te vinden op de
 %% onderzoeksvraag.
 
-Na het literatuuronderzoek dat uitgeschreven is in de stand van zaken over wat \textit{elderspeak} en \textit{nursery tone} precies zijn, is het doel van deze bachelorproef om een website te ontwikkelen  waarmee er \textit{elderspeak} kan gedetecteerd worden via een detector. In het literatuur werd er ook theoretisch beschreven wat AI is en welke types er zijn, wat en hoe \textit{speech recognition} werkt en hoe men achtergrond lawaai filtert.
+Na het literatuuronderzoek dat uitgeschreven is in de stand van zaken over wat \textit{elderspeak} en \textit{nursery tone} precies zijn, is het doel van deze bachelorproef om een website te ontwikkelen waarmee er \textit{elderspeak} kan gedetecteerd worden via een detector. In het literatuur werd er ook theoretisch beschreven wat AI is en welke types er zijn, wat en hoe \textit{speech recognition} werkt en hoe men achtergrond lawaai filtert.
 
 Alle eigenschappen van \textit{elderspeak} worden herkend a.d.h.v. Python-bibliotheken en niet op basis van een zelf gemaakt AI-model. De reden hiervoor is dat men het warm water niet opnieuw moet uitvinden. Zo staafde \textcite{Beeckman2021} het volgende over zelf een AI-model te maken voor deze opstelling: ``Deze bachelorproef heeft geen meerwaarde kunnen aantonen voor het gebruik van een CNN. Wegens omstandigheden was het niet mogelijk te beschikken over een grote dataset wat leidt tot slechte voorspellingen van het model. Het model voorspelt een classificatie aan dezelfde accuraatheid dan dat gokken zou teweegbrengen. Dit maakt het huidige model onbruikbaar in de praktijk.''. Door deze bewering is de denkpiste in combinatie met de kleine dataset over zelf een AI-model opstellen al snel van tafel geveegd. Ook de promotor Van Boven haalde aan dat er genoeg Python-bibliotheken ter beschikking waren om de opdracht op die manier tot een goed einde te brengen.
 
@@ -23,11 +23,11 @@ Deze voorbeeldapplicatie, geschreven in Python en gebruikmakend van het \textit{
 De applicatie werd zo gemaakt waarbij men eerst twee jonge vrouwen ziet, een foto van HoGent voor copyrightrechten, waarbij er gevraagd wordt om te spreken zoals men zou doen tegen hen. Eens dat geluid geanalyseerd is, zal er een foto van een oudere vrouw getoond wordt in het rusthuis waarbij er gevraagd wordt om tegen haar te spreken. Hierdoor kan de applicatie eerst de toonhoogte en stemvolume berekenen zodat deze gebruikt kunnen worden om te vergelijken met het geluid van de 2\textsuperscript{e} casus.
 
 \subsection{\textit{Speech recognition}}
-De basis van een groot deel van de applicatie is het herkennen van de spraak die wordt opgenomen op de website. Uiteraard moet dit niet van nul gemaakt worden, maar kan er gebruik gemaakt worden van een bestaande Python-bibliotheek. \textcite{Standaert2021} bestudeerde in zijn bachelorproef afgelopen jaar dat de beste optie is om de Google Speech Recognition-API te gebruiken omdat deze het beste presteert. Hij vatte dit samen in zijn conclusie: ``Uit verschillende onderzoeken of studies waar men verschillende ASR-systemen met elkaar vergeleken kwam de Google Speech-API er altijd als beste uit. En dit in alle aspecten.''. Daarnaast gebruikt de Google Speech-API ook \textit{natural language processing} of NLP om beter te kunnen weten wat er precies gezegd is geweest \autocite{GoogleCloud2022}. Hoe dit precies in elkaar zit is te lezen in het literatuuronderzoek.
+De basis van een groot deel van de applicatie is het herkennen van de spraak die wordt opgenomen op de website. Uiteraard moet dit niet van nul gemaakt worden, maar kan er gebruik gemaakt worden van een bestaande Python-bibliotheek. \textcite{Standaert2021} bestudeerde in zijn bachelorproef afgelopen jaar dat de beste optie is om de Google Speech Recognition-API te gebruiken omdat deze het beste presteert. Hij vatte dit samen in zijn conclusie: ``Uit verschillende onderzoeken of studies waar men verschillende ASR-systemen met elkaar vergeleken kwam de Google Speech-API er altijd als beste uit. En dit in alle aspecten.''. Daarnaast gebruikt de Google Speech-API ook \textit{natural language processing} of NLP om beter te kunnen weten wat er precies gezegd is geweest~\autocite{GoogleCloud2022}. Hoe dit precies in elkaar zit is te lezen in het literatuuronderzoek.
 
 Bij de spraakherkenning kwam er wel een groot probleem de kop op steken. De Google Speech Recognition-API kon alleen overweg met \textit{wav}- en \textit{flac}-bestanden én kan maar een bepaalde periode, ongeveer 2 tot 3 minuten, gratis herkennen, maar de audio werd gecapteerd in \textit{mp3}-bestanden. Hiervoor was het noodzakelijk om eerst een conversie te maken van \textit{mp3} naar \textit{flac} en om het audiobestand op te delen in deelbestandjes of \textit{chuncks}, zodat er geen betalende versie voor nodig was. De gebruikte technologie hierbij was ``ffmpeg''. Hoe de conversie precies gebeurt is te vinden tot in detail in bijlage X.
 
-Het gebruiken van die API is relatief gemakkelijk te gebruiken. Een extra optie is dan ook ter beschikking om achtergrondlawaai een beetje weg te filteren. Door de optie `ajust\_for\_ambient\_noice(source)' aan te zetten, zal de bibliotheek zich wat aanpassen aan de geluidbron zodat het beter de klanken kan horen alvorens die worden doorgestuurd naar de spraakherkenning-API. Deze methode gebruikt de techniek die beschreven is in het literatuuronderzoek over achtergrondlawaai.
+Het gebruiken van die API is relatief gemakkelijk te gebruiken. Een extra optie is dan ook ter beschikking om achtergrondlawaai een beetje weg te filteren. Door de optie `ajust\_for\_ambient\_noice(source)' aan te zetten, zal de bibliotheek zich wat aanpassen aan de geluidsbron zodat het beter de klanken kan horen alvorens die worden doorgestuurd naar de spraakherkenning-API. Deze methode gebruikt de techniek die beschreven is in het literatuuronderzoek over achtergrondlawaai.
 
 Eens dit ingesteld is worden de audiobestanden mee gegeven en krijgt het systeem de tekst terug waarvan het AI-model van Google denkt dat het die woorden en zinnen zijn. Uiteraard werkt dit niet feilloos, maar het is wel redelijk goed voor een gratis versie. Met deze grotere methode is de basis gelegd voor andere methoden die steunen op de tekst die herkend werd.
 
@@ -60,7 +60,7 @@ Hoe dit gerealiseerd werd in de code is te vinden in bijlage X.
 \subsection{Stemvolume}
 De laatste eigenschap die geanalyseerd wordt in de applicatie is om te controleren of er luider gesproken wordt in het 2\textsuperscript{e} fragment dan in het 1\textsuperscript{ste}. Toch moet er hier een duidelijke kanttekening bij gemaakt worden. Wanneer een persoon bij de 2\textsuperscript{e} opname significant verder van de microfoon staat, zal de applicatie dit detecteren dat het niet luider zal zijn. Daarnaast moet er ook geweten zijn dat de meeste oudere mensen slechthorend zijn, waardoor men wel luider moet praten. Ondanks deze twee zaken vond ik het toch belangrijk om deze eigenschap te implementeren zodat men er wel eens bij stil staat dat niet iedereen slechthorend is of een hoorapparaat draagt.
 
-Om een getal te verkrijgen dat het volume voorstelt, is er gebruik gemaakt van de pyln-bibliotheek die een BS.170 geluidmeter aanmaakt. Deze analyseert dan de audio en geeft een getal weer. Hoe dit precies geïmplementeerd werd is te vinden in bijlage X.
+Om een getal te verkrijgen dat het volume voorstelt, is er gebruik gemaakt van de pyln-bibliotheek die een BS.170 geluidsmeter aanmaakt. Deze analyseert dan de audio en geeft een getal weer. Hoe dit precies geïmplementeerd werd is te vinden in bijlage X.
 
 \section{\textit{Front-end}}
 \subsection{Geluid opnemen}
@@ -79,7 +79,7 @@ Met deze resultaten konden er op de eigenschappen verkleinwoorden, hogere toonho
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{./img/confusion_matrix.png}
+    \includegraphics[width=0.6\textwidth]{./img/confusion_matrix}
     \caption{\label{fig:confusion_matrix} Confusion Matrix~\autocite{Jain2020}}
 \end{figure}
 

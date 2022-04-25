@@ -9,7 +9,7 @@
 
 
 \color{blue}
-Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken~\autocite{Pollefliet2011}.
 
 Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz. naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin, gebruik je \texttt{$\backslash${}textcite\{\}}.
 Soms wil je de auteur niet expliciet vernoemen, dan gebruik je \texttt{$\backslash${}autocite\{\}}. In de volgende paragraaf een voorbeeld van elk.
@@ -89,7 +89,7 @@ Dit kan mooi geïllustreerd worden a.d.h.v.\ figuur~\ref{fig:soorten_ai_diagram}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{./img/ai_fields.png}
+    \includegraphics[width=0.6\textwidth]{./img/ai_fields}
     \caption{\label{fig:soorten_ai_diagram} Soorten AI in diagram~\autocite{Bansal2019}}
 \end{figure}
 
@@ -106,7 +106,7 @@ Voorbeelden van het classificatieprobleem zijn spamdetectie, nummerherkenning of
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\textwidth]{./img/classification_regression.png}
+    \includegraphics[width=0.75\textwidth]{./img/classification_regression}
     \caption{\label{fig:classification_vs_regression} Classification vs. Regression~\autocite{JavaTpoint2021}}
 \end{figure}
 
@@ -160,7 +160,7 @@ TODO: meer informatie geven of weglaten?
 \subsection{NLP of \textit{natural language processing}}
 Om te kunnen detecteren of men verkleinwoorden, troetelnamen, collectieve voornaamwoorden of veel tussenwerpsels gebruikt, moet het model of eerder gezegd de Python-bibliotheek - die het model bevat - weten of deze eigenschappen voorkomen. Hiervoor moeten we gebruik maken van \textit{natural language processing}-bibliotheken of kort NLP. Maar wat is NLP precies?
 
-\textit{Natural language processing} of vertaald ``natuurlijke taalverwerking'' zit in de tak van de kunstmatige intelligentie. NLP zit een stuk in \textit{machine learning} en een stukje in \textit{deep learning}.~\autocite{Kleinings2022} De visuele voorstelling van die verhoudingen zijn te vinden in figuur \ref{fig:nlp_field}.
+\textit{Natural language processing} of vertaald ``natuurlijke taalverwerking'' zit in de tak van de kunstmatige intelligentie. NLP zit een stuk in \textit{machine learning} en een stukje in \textit{deep learning}.~\autocite{Kleinings2022} De visuele voorstelling van die verhoudingen zijn te vinden in figuur~\ref{fig:nlp_field}.
 
 Volgens \textcite{Kleinings2022} is die natuurlijke taalverwerking een technologie die gebruikt wordt om computers te helpen om natuurlijke menselijke taal te begrijpen en te interpreteren.
 
@@ -194,7 +194,7 @@ Om de syntaxis aan te leren zijn er twee manieren. Enerzijds kunnen er woorden g
 Daarnaast is het ook aan te raden dat stopwoorden verwijderd worden als het model de tekst wil begrijpen. Stopwoorden zoals ``een, de, euh, inderdaad, echt, oké, eigenlijk, allez, etc.'' moeten verwijderd worden. Daarbij aansluitend zijn er twee andere methoden. Enerzijds lemmatiseren waarbij  werkwoorden naar de tegenwoordige tijd veranderd worden, en anderzijds stemming, waarbij er prefixen of affixen verwijderd worden, ook nodig om de conversie te maken. Een voorbeelden van het converteren is dan: ``wij dachten'' naar ``denk''. Woorden worden daarnaast ook vervangen door meer gebruikte synoniemen zoals van ``enorm'' naar ``groot''.
 
 Als laatste systeem of layer bestaat er \textit{tokenization}. Dit is het proces waarbij het systeem de zin indeelt in verschillende eenheden waaruit informatie kan gehaald worden.
-Er kan een \textit{token} gekozen worden op basis van regels, leestekens, spaties, maar dit geeft wel steeds een ander resultaat wat geïllustreerd is in figuur \ref{fig:tokens}. Hoe die \textit{tokenization} zich verhoudt met die layer van het \textit{deep learning} NLP model is te vinden in figuur \ref{fig:tokens_verhouding_dl}.
+Er kan een \textit{token} gekozen worden op basis van regels, leestekens, spaties, maar dit geeft wel steeds een ander resultaat wat geïllustreerd is in figuur~\ref{fig:tokens}. Hoe die \textit{tokenization} zich verhoudt met die layer van het \textit{deep learning} NLP model is te vinden in figuur~\ref{fig:tokens_verhouding_dl}.
 
 \begin{figure}
     \centering
@@ -221,13 +221,13 @@ de grafiek staat bekend als een spectrogram of watervalgrafiek, zie figuur~\ref{
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{./img/conversion.jpg}
+    \includegraphics[width=0.8\textwidth]{./img/conversion}
     \caption{\label{fig:conversion}Tweedimensionale bron van de spraakgegevens van de oestrusoproep bij runderen (a) en de omzetting naar korte-tijd Fourier transform (STFT) gebied (b).~\autocite{Jung2021}}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{./img/The_original_noise-removed_audio.jpg}
+    \includegraphics[width=0.8\textwidth]{./img/The_original_noise-removed_audio}
     \caption{\label{fig:The_original_noise-removed_audio}De originele audio met ruisonderdrukking (a) en spraakinformatie gecorrigeerd door ruismasker afvlakking (b).~\autocite{Jung2021}}
 \end{figure}
 

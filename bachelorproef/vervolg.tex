@@ -15,7 +15,7 @@ Alle code, bestanden en revisies van deze volledige bachelorproef zijn dan ook t
 \section{Hosting- Bereikbaarheid van de applicatie}
 Om te kunnen spreken hoe we het beste de applicatie beschikbaar maken is het eerst noodzakelijk dat iedereen weet wat dat allemaal betekent.
 
-De huidige opstelling van dit eindwerk is geïllustreerd in figuur \ref{fig:opstelling_bachelorproef}. Daarbij is alle code geïnstalleerd, of eerder gezegd aanwezig op die lokale computer zelf. Wanneer er het bestand `website.py' wordt uitgevoerd, zal Python de code uitvoeren en een webserver opzetten op die lokale machine. In de output verschijnt er dan een website-adres. Als er naar de website gegaan wordt ziet u de applicatie.
+De huidige opstelling van dit eindwerk is geïllustreerd in figuur~\ref{fig:opstelling_bachelorproef}. Daarbij is alle code geïnstalleerd, of eerder gezegd aanwezig op die lokale computer zelf. Wanneer er het bestand `website.py' wordt uitgevoerd, zal Python de code uitvoeren en een webserver opzetten op die lokale machine. In de output verschijnt er dan een website-adres. Als er naar de website gegaan wordt ziet u de applicatie.
 
 \begin{figure}
     \centering
@@ -23,7 +23,7 @@ De huidige opstelling van dit eindwerk is geïllustreerd in figuur \ref{fig:opst
     \caption{\label{fig:opstelling_bachelorproef} Opstelling bachelorproef}
 \end{figure}
 
-Wanneer we de website beschikbaar willen maken voor meerdere computers moeten we de code op een server installeren. Zo kunnen er meerde \textit{clients} een aanvraag of \textit{request} sturen naar de server die alles afhandelt zoals de webpagina tonen en de berekeningen uitvoeren. Een illustratie is te vinden op figuur \ref{fig:webhosting_scheme}. Daarbij is te zien dat wanneer een gebruiker of \textit{user} naar een website surft, er een verzoek verstuurd wordt naar het internet. Het internet weet op zijn beurt aan welke webserver die informatie kan vragen of sturen. De server handelt de website zelf af, de \textit{html}-, en \textit{javascript}pagina's als websitebestanden, en doet ook de berekeningen.
+Wanneer we de website beschikbaar willen maken voor meerdere computers moeten we de code op een server installeren. Zo kunnen er meerde \textit{clients} een aanvraag of \textit{request} sturen naar de server die alles afhandelt zoals de webpagina tonen en de berekeningen uitvoeren. Een illustratie is te vinden op figuur~\ref{fig:webhosting_scheme}. Daarbij is te zien dat wanneer een gebruiker of \textit{user} naar een website surft, er een verzoek verstuurd wordt naar het internet. Het internet weet op zijn beurt aan welke webserver die informatie kan vragen of sturen. De server handelt de website zelf af, de \textit{html}-, en \textit{javascript}pagina's als websitebestanden, en doet ook de berekeningen.
 
 \begin{figure}
     \centering
@@ -53,7 +53,7 @@ uit te voeren zullen alle Python-bibliotheken geïnstalleerd worden die nodig zi
 \end{itemize}
 
 \subsection{Hosten in een lokaal netwerk}
-Het is ook mogelijk om de software op een computer te installeren, deze te laten aanstaan, maar met een speciale parameter. Wanneer er in de Flask-applicatie de volgende parameter wordt meegegeven: `` host=`0.0.0.0' '', zal de applicatie opengesteld worden in het lokale netwerk. Dit laat het mogelijk naar het lokale IP-adres de surfen op een ander toestel en ook de website met de detector te kunnen gebruiken. Als men het argument \textit{threaded} op \textit{true} zet, dan is Flask \textit{multithreaded}~\autocite{Vieira2013}. Hierdoor kunnen er zeker meerdere verbindingen tegelijk verbonden worden.
+Het is ook mogelijk om de software op een computer te installeren, deze te laten aanstaan, maar met een speciale parameter. Wanneer er in de Flask-applicatie de volgende parameter wordt meegegeven: `` host=`0.0.0.0' '', zal de applicatie opengesteld worden in het lokale netwerk. Dit laat het mogelijk naar het lokale IP-adres de surfen op een ander toestel en ook de website met de detector te kunnen gebruiken. Als men het argument \textit{threaded} op \textit{true} zet, dan is Flask \textit{multithreaded}~\autocite{Vieira2013}. Hierdoor kunnen er zeker meerdere verbindingen tegelijk verbonden worden. Een systematische voorstelling is te vinden in figuur~\ref{fig:lokaal_netwerk}
 
 \subsubsection{Mogelijkheden}
 \begin{itemize}
