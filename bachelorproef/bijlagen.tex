@@ -2,7 +2,7 @@
 \label{ch:bijlagen}
 
 \section{Flask code}
-
+\label{bijlage:flask}
 \begin{python}
 from flask import Flask, render_template, url_for, request, redirect, jsonify
 import os
@@ -143,6 +143,7 @@ if __name__ == "__main__":
 \end{python}
 
 \section{Speech Recognition}
+\label{bijlage:speech_recognition}
 \begin{python}
 def speech_recognition(file):
     try:
@@ -217,6 +218,7 @@ def speech_recognition(file):
 \end{python}
 
 \section{Verkleinwoorden}
+\label{bijlage:verkleinwoorden}
 \begin{python}
 def verkleinwoorden(text):
 
@@ -233,6 +235,7 @@ def verkleinwoorden(text):
 \end{python}
 
 \section{Herhalingen}
+\label{bijlage:herhalingen}
 \begin{python}
 def herhalende_zinnen(text):
 
@@ -268,6 +271,7 @@ def herhalende_zinnen(text):
 \end{python}
 
 \section{Collectieve voornaamwoorden}
+\label{bijlage:collectieve_voornaamwoorden}
 \begin{python}
 def collectieve_voornaamwoorden(text):
     collectieve_voornaamwoorden_array = []
@@ -286,6 +290,7 @@ def collectieve_voornaamwoorden(text):
 \end{python}
 
 \section{Tussenwerpsels}
+\label{bijlage:tussenwerpsels}
 \begin{python}
 def tussenwerpsels(text):
     tussenwerpsels_array = []
@@ -304,6 +309,7 @@ def tussenwerpsels(text):
 \end{python}
 
 \section{Toonhoogte}
+\label{bijlage:toonhoogte}
 \begin{python}
 def calculate_pitch(wav_file):
     try:
@@ -364,6 +370,7 @@ def calculate_pitch(wav_file):
 \end{python}
 
 \section{Stemvolume}
+\label{bijlage:stemvolumne}
 \begin{python}
 def loudness(wav):
     data, rate = sf.read(wav)  # load audio (with shape (samples, channels))
@@ -378,6 +385,8 @@ def loudness(wav):
 
 \section{Front-end}
 \subsection{HTML code}
+\label{bijlage:html}
 
 \subsection{Javascript code}
+\label{bijlage:javascript}
 
