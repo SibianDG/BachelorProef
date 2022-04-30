@@ -1,21 +1,21 @@
 \chapter{Vervolg}
 \label{ch:vervolg}
 
-In dit hoofdstuk zullen mogelijke vervolgen en toepassingen van deze bachelorproef beschreven worden. Hoe kunnen anderen toegang krijgen tot de programmeercode, de website raadplegen of hoe kan de \textit{webserver} geïnstalleerd worden binnen het HoGent-netwerk. Ook zal er besproken worden hoe de data beter en objectiever gelabeld kan worden. Omdat het doelpubliek van dit hoofdstuk anders dan het doelpubliek van het meer technische luik van dit onderzoek, zal alles zo makkelijk mogelijk uitgelegd worden.
+In dit hoofdstuk zullen mogelijke vervolgen en toepassingen van deze bachelorproef beschreven worden. Hoe kunnen anderen toegang krijgen tot de programmeercode, de website raadplegen of hoe kan de \textit{webserver} geïnstalleerd worden binnen het HOGENT-netwerk. Ook zal er besproken worden hoe de data beter en objectiever gelabeld kan worden. Omdat het doelpubliek van dit hoofdstuk anders dan het doelpubliek van het meer technische luik van dit onderzoek, zal alles zo makkelijk mogelijk uitgelegd worden.
 
 \section{Applicatie-code delen}
 Om er zeker van te zijn dat deze bachelorproef niet onder het stof verdwijnt en dat de applicatie niet meer gebruikt zal worden, is het noodzakelijk dat de volledige programmacode gedeeld kan worden. Hiervoor zal er gebruik gemaakt worden van ``GitHub''.
 
-Om GitHub te begrijpen is het eerst nodig te begrijpen wat Git zelf is. Git is een open source versiebeheersysteem. TTelkens ontwikkelaars met de eigen code aan de slag gaan en hun eigen wijzigingen aanbrengen, worden op die manier de verschillen in code opgeslagen. Versiebeheersystemen beheren deze revisies door alle wijzigingen op te slaan in een centrale opslagplaats. Hierdoor kunnen ontwikkelaars gemakkelijk samenwerken, omdat ze een nieuwe versie van de software kunnen downloaden, wijzigen en zelf nieuwe revisies kunnen uploaden. Elke programmeur van dat project kan dan op zijn of haar beurt weer zien welke wijzigingen er doorgevoerd zijn en kan deze opnieuw downloaden.~\autocite{Brown2019}
+Om GitHub te begrijpen is het eerst nodig te begrijpen wat Git zelf is. Git is een open source versiebeheersysteem. Telkens ontwikkelaars met de eigen code aan de slag gaan en hun eigen wijzigingen aanbrengen, worden op die manier de verschillen in code opgeslagen. Versiebeheersystemen beheren deze revisies door alle wijzigingen op te slaan in een centrale opslagplaats. Hierdoor kunnen ontwikkelaars gemakkelijk samenwerken, omdat ze een nieuwe versie van de software kunnen downloaden, wijzigen en zelf nieuwe revisies kunnen uploaden. Elke programmeur van dat project kan dan op zijn of haar beurt opnieuw zien welke wijzigingen er doorgevoerd zijn en kan deze opnieuw downloaden.~\autocite{Brown2019}
 
-GitHub is dus zo een voorbeeld van een centrale opslagplaatsplaats waar alle wijzigingen opgeslagen staan in de \textit{cloud}.
+GitHub is dus zo een voorbeeld van een centrale opslagplaats waar alle wijzigingen opgeslagen staan in de \textit{cloud}.
 
 Alle code, bestanden en revisies van deze volledige bachelorproef zijn dan ook te vinden op de persoonlijke GitHub-link: \url{https://github.com/SibianDG/BachelorProef}. Wanneer iemand toegang wil, dan kan men een e-mail sturen naar Jorrit Campens die u dan in contact brengt met de schrijver, Sibian De Gussem.
 
 \section{Hosting en bereikbaarheid van de applicatie}
 Om te kunnen spreken hoe we het beste de applicatie beschikbaar maken, is het eerst noodzakelijk dat iedereen weet wat dat allemaal betekent.
 
-De huidige opstelling van dit eindwerk is geïllustreerd in figuur~\ref{fig:opstelling_bachelorproef}. Daarbij is alle code geïnstalleerd, of eerder gezegd aanwezig op die lokale computer zelf. Wanneer er het bestand `website.py' wordt uitgevoerd, zal Python de code uitvoeren en een webserver opzetten op die lokale machine. In de output verschijnt er dan een website-adres. Als er naar de website gegaan wordt ziet u de applicatie.
+De huidige opstelling van dit eindwerk is geïllustreerd in figuur~\ref{fig:opstelling_bachelorproef}. Daarbij is alle code geïnstalleerd, of eerder gezegd aanwezig op die lokale computer zelf. Wanneer het bestand `website.py' wordt uitgevoerd, zal Python de code uitvoeren en een webserver opzetten op die lokale machine. In de output verschijnt er dan een website-adres. Als er naar de website gegaan wordt ziet u de applicatie.
 
 \begin{figure}
     \centering
@@ -23,7 +23,7 @@ De huidige opstelling van dit eindwerk is geïllustreerd in figuur~\ref{fig:opst
     \caption{\label{fig:opstelling_bachelorproef} Opstelling bachelorproef}
 \end{figure}
 
-Wanneer we de website beschikbaar willen maken voor meerdere computers moeten we de code op een server installeren. Zo kunnen er meerde \textit{clients} een aanvraag of \textit{request} sturen naar de server die alles afhandelt zoals de webpagina tonen en de berekeningen uitvoeren. Een illustratie is te vinden op figuur~\ref{fig:webhosting_scheme}. Daarbij is te zien dat wanneer een gebruiker of \textit{user} naar een website surft, er een verzoek verstuurd wordt naar het internet. Het internet weet op zijn beurt aan welke webserver die informatie kan vragen of sturen. De server handelt de website zelf af, de \textit{html}-, en \textit{javascript}pagina's als websitebestanden, en doet ook de berekeningen.
+Wanneer we de website beschikbaar willen maken voor meerdere computers moeten we de code op een server installeren, maar een server kan ook een gewone computer zijn. Zo kunnen er meerde \textit{clients} een aanvraag of \textit{request} sturen naar de server die alles afhandelt zoals de webpagina tonen en de berekeningen uitvoeren. Een illustratie is te vinden op figuur~\ref{fig:webhosting_scheme}. Daarbij is te zien dat wanneer een gebruiker of \textit{user} naar een website surft, er een verzoek verstuurd wordt naar het internet. Het internet weet op zijn beurt aan welke webserver die informatie kan vragen of sturen. De server handelt de website zelf af, de html-, en JavaScript-pagina's als websitebestanden, en doet ook de berekeningen.
 
 \begin{figure}
     \centering
@@ -48,7 +48,7 @@ uit te voeren zullen alle Python-bibliotheken geïnstalleerd worden die nodig zi
 \subsubsection{Beperkingen}
 \begin{itemize}
     \item Andere computers hebben geen toegang
-    \item Niet-IT'ers kunnen het mogelijks minder makkelijk installeren
+    \item Niet-IT'ers kunnen het mogelijk minder makkelijk installeren
     \item Alles zou geïnstalleerd moeten worden op elke computer opnieuw
 \end{itemize}
 
@@ -58,8 +58,8 @@ Het is ook mogelijk om de software op een computer te installeren, deze te laten
 \subsubsection{Mogelijkheden}
 \begin{itemize}
     \item Een keer installeren op een computer van bijvoorbeeld de docent in kwestie, en nadien kan het programma altijd opgestart worden tijdens een les.
-    \item Een gratis oplossing
     \item Meerdere connecties mogelijk
+    \item Een gratis oplossing
 \end{itemize}
 \subsubsection{Beperkingen}
 \begin{itemize}
@@ -91,4 +91,4 @@ Een opdracht bij de richting verpleegkunde kan het volgende zijn: de studenten m
 
 In een richting van communicatie kan alle data opnieuw gelabeld worden, waar men veel kennis heeft rond dit fenomeen. Zo kan de data zeer nauwkeurig en uitgebreid geanalyseerd worden, terwijl er in dit eindwerk de data gelabeld is door een persoon die geen expert is.
 
-Ook kan dit een opdracht vormen voor studenten toegepaste informatica om de gelabelde data naar de server door te sturen en een resultaat terug te krijgen. Dit is wel al beschikbaar in deze bachelorproef, maar studenten die dat nog moeten leren kunnen zo een echt voorbeeld hebben iets te programmeren.
+Ook kan dit een opdracht vormen voor studenten toegepaste informatica om de gelabelde data naar de server door te sturen en een resultaat terug te krijgen. Dit is wel al beschikbaar in deze bachelorproef, maar studenten die dat nog moeten leren kunnen zo een echt voorbeeld hebben iets te programmeren. Wanneer de data uitgebreider geanalyseerd wordt, moeten de testen lichtjes herschreven worden, dus dit kan ook een voorbeeld zijn van een opdracht.

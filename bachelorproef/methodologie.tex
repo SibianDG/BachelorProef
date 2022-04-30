@@ -47,35 +47,35 @@ Wanneer er geen of minder dan twee collectieve voornaamwoorden gebruikt worden, 
 Natuurlijk duiden twee of meer collectieve voornaamwoorden niet direct op \textit{elderspeak}, maar het geeft wel al een richting. De persoon in kwestie moet natuurlijk de theorie over \textit{elderspeak} weten en moet daarna ook kritisch zijn over het resultaat en dit kan via een zelfreflectie.
 
 \subsection{Tussenwerpsels}
-Het veelvuldig gebruik van tussenwerpsels is een eigenschap van \textit{elderspeak} en ook dit wordt herkend. Enkele voorbeelden van tussenwerpsels die herkend worden zijn: o, oeps, helaas, hallo, hey, voila etc. De Google Speech-API geeft soms verschillende varianten op het woord ``hey''. Zo worden de volgende vormen soms gegeven: hé, hè, he, hey. Om te voorkomen dat foute resultaten geeft, worden al deze varianten herleid naar ``hey''.
+Het veelvuldig gebruik van tussenwerpsels is een eigenschap van \textit{elderspeak} en ook dit wordt herkend. Enkele voorbeelden van tussenwerpsels die herkend worden zijn: ``o'', ``oeps'', ``helaas'', ``hallo'', ``hey'', ``voila'' etc. De Google \textit{Speech Recognition}-API geeft soms verschillende varianten op het woord ``hey''. Zo worden de volgende vormen soms gegeven: ``hé'', ``hè'', ``he'', ``hey''. Om te voorkomen dat dat foute resultaten oplevert, worden al deze varianten herleid naar ``hey''.
 
-De werkwijze om dit te detecteren is ongeveer dezelfde als bij de methode van de collectieve voornaamwoorden die te vinden is in bijlage X.
+De werkwijze om dit te detecteren is ongeveer dezelfde als bij de methode van de collectieve voornaamwoorden die te vinden is in bijlage~\ref{bijlage:tussenwerpsels}.
 
 \subsection{Toonhoogte}
-De toonhoogte is een bijzonder belangrijke eigenschap van \textit{elderspeak}. Deze eigenschap is ook volledig onafhankelijk van de gesproken tekst die herkend werd. Wanneer een persoon merkbaar hoger zal praten, dan zal de andere persoon zich direct voelen dat hij/zij behandelt wordt als een kind. Het is dan ook belangrijk dat deze functie goed werkt zodat de gebruikers direct weten als ze (on)bewust hoger praten.
+De toonhoogte is een bijzonder belangrijke eigenschap van \textit{elderspeak}. Deze eigenschap is ook volledig onafhankelijk van de gesproken tekst die herkend werd. Wanneer een persoon merkbaar hoger zal praten, zal de andere persoon direct voelen dat hij/zij behandeld wordt als een kind. Het is dan ook belangrijk dat deze functie goed werkt zodat de gebruikers direct weten wanneer ze (on)bewust hoger praten.
 
 Deze methode werd al opgesteld door \textcite{Standaert2021} in zijn eindwerk van het vorige jaar. Wat hij berekende was de gemiddelde toonhoogte, uitgedrukt in Hz, van het gegeven audiobestand. Wat er aan deze applicatie toegevoegd is, is het berekenen of de toonhoogte hoger ligt bij de casus met de oudere vrouw dan de casus bij de twee jonger vrouwen.
-Hoe dit gerealiseerd werd in de code is te vinden in bijlage X.
+Hoe dit gerealiseerd werd in de code is te vinden in bijlage~\ref{bijlage:toonhoogte}.
 
 \subsection{Stemvolume}
 De laatste eigenschap die geanalyseerd wordt in de applicatie is om te controleren of er luider gesproken wordt in het 2\textsuperscript{e} fragment dan in het 1\textsuperscript{ste}. Toch moet er hier een duidelijke kanttekening bij gemaakt worden. Wanneer een persoon bij de 2\textsuperscript{e} opname significant verder van de microfoon staat, zal de applicatie dit detecteren dat het niet luider zal zijn. Daarnaast moet er ook geweten zijn dat de meeste oudere mensen slechthorend zijn, waardoor men wel luider moet praten. Ondanks deze twee zaken vond ik het toch belangrijk om deze eigenschap te implementeren zodat men er wel eens bij stil staat dat niet iedereen slechthorend is of een hoorapparaat draagt.
 
-Om een getal te verkrijgen dat het volume voorstelt, is er gebruik gemaakt van de pyln-bibliotheek die een BS.170 geluidsmeter aanmaakt. Deze analyseert dan de audio en geeft een getal weer. Hoe dit precies geïmplementeerd werd is te vinden in bijlage X.
+Om een getal te verkrijgen dat het volume voorstelt, is er gebruik gemaakt van de pyln-bibliotheek die een BS.170 geluidsmeter aanmaakt in de code. Deze analyseert dan de audio en geeft een getal weer. Hoe dit precies geïmplementeerd werd is te vinden in bijlage~\ref{bijlage:stemvolume}.
 
 \section{\textit{Front-end}}
 \subsection{Geluid opnemen}
-Het geluid opnemen gebeurt volledig aan de kant van de \textit{client} of de gebruiker. Wanneer er op de knop wordt geduwd om de audio-opname te starten, zullen er \textit{audiochunks } worden toegevoegd aan een lijst. Die worden na de opname allemaal samengevoegd tot een \textit{blob}, of een \textit{binary-large object}, die dan een mp3-file aanmaakt.
+Het geluid opnemen gebeurt volledig aan de kant van de \textit{client} of de gebruiker. Wanneer er op de knop geduwd wordt om de audio-opname te starten, zullen er \textit{audiochunks } worden toegevoegd aan een lijst. Die worden na de opname allemaal samengevoegd tot een \textit{blob}, of een \textit{binary-large object}, die dan een \textit{mp3}-file aanmaakt.
 Per casus wordt er ook een andere afbeelding en tekst getond boven de opneemknop.
 
 \subsection{API-afhandeling}
-Vanuit de front-end worden er \textit{API-requests} gestuurd met het audiobestand als bijlage. De \textit{back-end} als server krijgt dan het geluid binnen. Dat wordt dan door verschillende methodes geanalyseerd. Wanneer alles onderzocht is wordt alle data verzameld en via een JSON terug gestuurd naar de \textit{client}. Daar worden de resultaten ingevuld in de voorziene html-stukken.
+Vanuit de front-end worden er \textit{API-requests} gestuurd met het audiobestand als bijlage naar de \textit{back-end}. De server analyseert dan de verschillende methodes. Wanneer alles onderzocht is, wordt alle data verzameld en via een JSON-formaat terug gestuurd naar de \textit{client}. Daar worden de resultaten ingevuld in de voorziene html-stukken.
 
 \section{Testen}
-Om een objectief beeld te kunnen verkrijgen hoe goed de applicatie werkt, zijn er automatische testen opgezet. De data die verzameld is via een online formulier, te vinden op:  \url{https://www.jotform.com/form/213524968382060}, in het begin van het twee semester, werd allemaal opgeslagen. Eens de data opgeslagen was werd alle data beluisterd en handmatig gelabeld.
+Om een objectief beeld te kunnen verkrijgen hoe goed de applicatie werkt, zijn er automatische testen opgezet. De data die verzameld is via een online formulier, is te vinden op:  \url{https://www.jotform.com/form/213524968382060}. Deze werd in het begin van het twee semester verzameld. Eens de data opgeslagen was werd alle data beluisterd en handmatig gelabeld.
 
-Nadien werd er een Python script gemaakt die het testen van al die 54 bestanden automatiseerde. De audiobestanden die geklasseerd werden waarbij er geen \textit{elderspeak} aanwezig bij was, werden gebruikt zoals in de echte webapplicatie om het geluid te normaliseren. Nadien werden de geluidsopnames waarbij er wel \textit{elderspeak} bij aanwezig was gebruikt om het te testen. De resultaten werden dan vergelijken met de gelabelde data.
+Nadien werd er een Python-script gemaakt die het testen van al die 54 bestanden automatiseerde. De audiobestanden die geklasseerd werden, waarbij er geen \textit{elderspeak} aanwezig bij was, werden gebruikt zoals in de echte webapplicatie om eerst een normaal stukje audio te hebben. Zo kan er toch vergelijken worden met een normale spraak en de spraak die erna komt. Nadien werden de geluidsopnames,  waarbij er wel \textit{elderspeak} bij aanwezig was, gebruikt voor het te testen van de applicatie zelf. De resultaten werden dan vergeleken met de gelabelde data.
 
-Met deze resultaten konden er op de eigenschappen verkleinwoorden, hogere toonhoogte en hoger volume een \texit{confusion matrix} gemaakt worden. Hierbij wordt er bepaald hoeveel correct negatieve, correct positieve, valse positieve en vals negatieve er aanwezig waren in het testset. Dit wordt dan in een matrix gegoten die visueel te vinden is in figuur~\ref{fig:confusion_matrix}. De resultaten daarvan zijn te vinden in het resultatenhoofdstuk.
+Met deze resultaten konden er over de eigenschappen verkleinwoorden, hogere toonhoogte en hoger volume, een \texit{confusion matrix} gemaakt worden. Hierbij wordt er bepaald hoeveel correct negatieve, correct positieve, valse positieve en vals negatieve er aanwezig waren in het testset. Dit wordt dan in een matrix gegoten die visueel te vinden is in figuur~\ref{fig:confusion_matrix}. De resultaten daarvan zijn te vinden in het resultatenhoofdstuk, namelijk Hoofdstuk~\ref{ch:resultaten}.
 
 \begin{figure}
     \centering
@@ -85,3 +85,5 @@ Met deze resultaten konden er op de eigenschappen verkleinwoorden, hogere toonho
 
 \section{hosting?}
 Om de applicatie te kunnen gebruiken tijdens (werkcolleges?) moet elke student toegang hebben tot de website. Hierdoor werd er bekeken hoe de software geïnstalleerd moest worden op een computer en hoe men de website beschikbaar maakt in het lokale netwerk.
+
+TODO
