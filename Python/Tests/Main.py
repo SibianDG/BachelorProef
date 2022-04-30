@@ -38,9 +38,10 @@ files_filter = dict()
 
 for person in range(1, 10+1):
     p = 'person' + str(person).zfill(2)
-    filtered_list = [x for x in arr if x.startswith(p)]
+    print(f"{p} analysing")
+    person_list = [x for x in arr if x.startswith(p)]
 
-    for f in filtered_list:
+    for f in person_list:
         multipart_form_data = {
             'audio_data': ('files', open('./files/jotform/' + f, 'rb')),
         }
@@ -48,11 +49,11 @@ for person in range(1, 10+1):
         response = requests.post('http://127.0.0.1:5000/receive_elderspeak', files=multipart_form_data, data=values)
         j = json.loads(response.content)
         test = dict()
-        test['verkleinwoord'] = {'expexted': true_false_dict[f[14]], 'result': True if "<span>" in j['verkleinwoorden'] else False}
+        test['verkleinwoord'] = {'expexted': true_false_dict[f[14]], 'result': True if "text-danger" in j['verkleinwoorden'] else False}
         test['loudness'] = {'expexted': true_false_dict[f[16]], 'result': False if "Stiller" in j['loudness'] else True}
         test['pitch'] = {'expexted': true_false_dict[f[18]], 'result': False if "Lager" in j['pitch'] else True}
         files_filter[f] = test
-        d2[p] = j
+        d2[f] = j
 
 print(d2)
 with open('json_resut.json', 'w') as outfile:
@@ -60,6 +61,9 @@ with open('json_resut.json', 'w') as outfile:
 
 with open('test_results.json', 'w') as outfile:
     json.dump(files_filter, outfile)
+
+with open('d2.json', 'w') as outfile:
+    json.dump(d2, outfile)
 
 
 for file, d in files_filter.items():
@@ -83,26 +87,20 @@ for file, d in data.items():
     l = list()
     i = 0
     for k, v in d.items():
+        m = confusion_matrices[k]
         if v["expexted"] != v["result"]:
             l.append(k)
-            m = confusion_matrices[k]
             m[int(v["result"])][int(v["expexted"])] += 1
-            confusion_matrices[k] = m
+        elif v["expexted"] == 0:
+            m[0][0] += 1
+        elif v["expexted"] == 1:
+            m[1][1] += 1
+        confusion_matrices[k] = m
+
     if len(l) != 0:
         print(f'Het systeem heeft in file {file} de volgende fouten gedetecteerd: {l}')
 
 print(confusion_matrices)
-
-for file in arr:
-    if file not in data.keys():
-        for k in confusion_matrices.keys():
-            m = confusion_matrices[k]
-            m[int(file[14])][int(file[14])] += 1
-            m[int(file[16])][int(file[18])] += 1
-            m[int(file[18])][int(file[18])] += 1
-            confusion_matrices[k] = m
-print(confusion_matrices)
-
 
 
 classes = ["True", "False"]

@@ -192,7 +192,7 @@ def calculate_pitch(wav_file):
         tmp_file = './uploads/tmp.wav'
         sf.write(tmp_file, x, 16000)
 
-        chunk = 16384
+        chunk = 16384*2
         with wave.open(tmp_file, 'r') as wf:
             swidth = wf.getsampwidth()
             RATE = wf.getframerate()

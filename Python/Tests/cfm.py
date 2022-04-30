@@ -19,34 +19,50 @@ for file, d in data.items():
     l = list()
     i = 0
     for k, v in d.items():
+        m = confusion_matrices[k]
         if v["expexted"] != v["result"]:
             l.append(k)
-            m = confusion_matrices[k]
+            print("############")
+            print(m)
+            print(f"ERROR {k}")
+
             m[int(v["result"])][int(v["expexted"])] += 1
-            confusion_matrices[k] = m
-        elif v["expexted"] == 0:
-            m = confusion_matrices[k]
-            m[1][1] += 1
-            confusion_matrices[k] = m
-        elif v["expexted"] == 1:
-            m = confusion_matrices[k]
+            print(m)
+            print("############")
+        elif v["expexted"]:
+            if k == "verkleinwoord":
+                print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+            print("############")
+            print(m)
+            print(f"Extra voor true {k}")
             m[0][0] += 1
-            confusion_matrices[k] = m
-    if len(l) != 0:
-        print(f'Het systeem heeft in file {file} de volgende fouten gedetecteerd: {l}')
+            print(m)
+            print("############")
+        elif not v["expexted"]:
+            print("############")
+            print(m)
+            print(f"Extra voor False {k}")
+            m[1][1] += 1
+            print(m)
+            print("############")
+        if k == "verkleinwoord":
+            print(f'EXPECTED: {v["expexted"]}; PREDICTED: {v["expexted"]} in file: {file}; matrix: {m} voor {k}')
+        confusion_matrices[k] = m
+
+    # if len(l) != 0:
+    #     print(f'Het systeem heeft in file {file} de volgende fouten gedetecteerd: {l}')
 
 print(confusion_matrices)
 
-for file in arr:
-    if file not in data.keys():
-        for k in confusion_matrices.keys():
-            m = confusion_matrices[k]
-            m[int(file[14])][int(file[14])] += 1
-            m[int(file[16])][int(file[18])] += 1
-            m[int(file[18])][int(file[18])] += 1
-            confusion_matrices[k] = m
-print(confusion_matrices)
-
+# for file in arr:
+#     if file not in data.keys():
+#         for k in confusion_matrices.keys():
+#             m = confusion_matrices[k]
+#             m[int(file[14])][int(file[14])] += 1
+#             m[int(file[16])][int(file[18])] += 1
+#             m[int(file[18])][int(file[18])] += 1
+#             confusion_matrices[k] = m
+# print(confusion_matrices)
 
 
 classes = ["True", "False"]

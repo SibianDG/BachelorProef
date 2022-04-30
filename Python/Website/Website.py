@@ -68,7 +68,7 @@ def receive_elderspeak():
                                            '<span class="text-success">Lager of niet significant hoger.</span>')
     loudness = Calculations.make_text_compare(pitch_normal,
                                               Calculations.loudness(Calculations.maketempfile_wav(file)),
-                                              5,
+                                              7,
                                               '<span class="text-danger">Luider</span>',
                                               '<span class="text-success">Stiller of niet significant luider.</span>')
     collectieve_voornaamwoorden = Calculations.collectieve_voornaamwoorden(total_text)
