@@ -246,8 +246,10 @@ def calculate_pitch(wav_file):
 
 def make_text_compare(normal, current, difference, danger, success):
     if normal is not None and current is not None and normal != 0 and current != 0:
-        if normal + difference < current:
+        print(f"@@@@@@@@@@@@@@ {difference} ex: {normal} curr {current}")
+        if current > normal + difference:
             return danger
+        print("@@@@@@@@@@@@@@")
         return success
     else:
         return '<span class="text-muted">Er was een probleem met deze functie. Probeer opnieuw.</span>'

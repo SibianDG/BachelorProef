@@ -63,12 +63,12 @@ def receive_elderspeak():
     herhalingen = Calculations.herhalende_zinnen(total_text)
     pitch = Calculations.make_text_compare(pitch_normal,
                                            Calculations.calculate_pitch(Calculations.maketempfile_wav(file)),
-                                           40,
+                                           100,
                                            '<span class="text-danger">Hoger</span>',
                                            '<span class="text-success">Lager of niet significant hoger.</span>')
-    loudness = Calculations.make_text_compare(pitch_normal,
+    loudness = Calculations.make_text_compare(loudness_normal,
                                               Calculations.loudness(Calculations.maketempfile_wav(file)),
-                                              7,
+                                              4,
                                               '<span class="text-danger">Luider</span>',
                                               '<span class="text-success">Stiller of niet significant luider.</span>')
     collectieve_voornaamwoorden = Calculations.collectieve_voornaamwoorden(total_text)
@@ -130,6 +130,9 @@ def receive_normal():
 
 if __name__ == "__main__":
     try:
-        app.run(debug=False, host='0.0.0.0')
+        app.run(
+            debug=False,
+            #host='0.0.0.0'
+        )
     finally:
         remove_uploads()

@@ -45,13 +45,13 @@ for person in range(1, 10+1):
         multipart_form_data = {
             'audio_data': ('files', open('./files/jotform/' + f, 'rb')),
         }
-        values = {'extra_data': f'{d[p]["loudness"]},{d[p]["pitch"]}'}
+        values = {'extra_data': f'{d[p]["pitch"]},{d[p]["loudness"]}'}
         response = requests.post('http://127.0.0.1:5000/receive_elderspeak', files=multipart_form_data, data=values)
         j = json.loads(response.content)
         test = dict()
         test['verkleinwoord'] = {'expexted': true_false_dict[f[14]], 'result': True if "text-danger" in j['verkleinwoorden'] else False}
-        test['loudness'] = {'expexted': true_false_dict[f[16]], 'result': False if "Stiller" in j['loudness'] else True}
-        test['pitch'] = {'expexted': true_false_dict[f[18]], 'result': False if "Lager" in j['pitch'] else True}
+        test['loudness'] = {'expexted': true_false_dict[f[18]], 'result': True if "text-danger" in j['loudness'] else False}
+        test['pitch'] = {'expexted': true_false_dict[f[16]], 'result': True if "text-danger" in j['pitch'] else False}
         files_filter[f] = test
         d2[f] = j
 
@@ -91,6 +91,7 @@ for file, d in data.items():
         if v["expexted"] != v["result"]:
             l.append(k)
             m[int(v["result"])][int(v["expexted"])] += 1
+            print(f'{k} expected {v["expexted"]} but was {v["result"]} in {file}')
         elif v["expexted"] == 0:
             m[0][0] += 1
         elif v["expexted"] == 1:
