@@ -5,13 +5,17 @@ import statistics
 import os
 import re
 
+import pandas as pd
+import seaborn as sn
+import matplotlib.pyplot as plt
+
 true_false_dict = {'0': False, '1': True}
 
 arr = os.listdir('./files/jotform/')
 print(arr)
 d = dict()
 
-for person in range(1, 10):
+for person in range(1, 10+1):
     p = 'person' + str(person).zfill(2)
     print(f"Busy with {p} for normal")
     r = re.compile(f"{p}_sub[0-9]_0_0_0\.mp3")
@@ -32,14 +36,11 @@ print(d)
 d2 = dict()
 files_filter = dict()
 
-for person in range(1, 10):
+for person in range(1, 10+1):
     p = 'person' + str(person).zfill(2)
-    print(f"Busy with {p} for elderspeak")
-    r = re.compile(f"{p}[^.]+\.mp3")
-    s = set(filter(r.match, arr))
-    print("SET:")
-    print(s)
-    for f in s:
+    filtered_list = [x for x in arr if x.startswith(p)]
+
+    for f in filtered_list:
         multipart_form_data = {
             'audio_data': ('files', open('./files/jotform/' + f, 'rb')),
         }
@@ -69,3 +70,50 @@ for file, d in files_filter.items():
     if len(l) != 0:
         print(f'Het systeem heeft in file {file} de volgende fouten gedetecteerd: {l}')
 
+with open('test_results.json') as json_file:
+    data = json.load(json_file)
+
+print(data)
+print(len(data))
+
+confusion_matrices = {"verkleinwoord": [[0, 0], [0, 0]], "pitch": [[0, 0], [0, 0]],
+                      "loudness": [[0, 0], [0, 0]]}  # predicted == row
+
+for file, d in data.items():
+    l = list()
+    i = 0
+    for k, v in d.items():
+        if v["expexted"] != v["result"]:
+            l.append(k)
+            m = confusion_matrices[k]
+            m[int(v["result"])][int(v["expexted"])] += 1
+            confusion_matrices[k] = m
+    if len(l) != 0:
+        print(f'Het systeem heeft in file {file} de volgende fouten gedetecteerd: {l}')
+
+print(confusion_matrices)
+
+for file in arr:
+    if file not in data.keys():
+        for k in confusion_matrices.keys():
+            m = confusion_matrices[k]
+            m[int(file[14])][int(file[14])] += 1
+            m[int(file[16])][int(file[18])] += 1
+            m[int(file[18])][int(file[18])] += 1
+            confusion_matrices[k] = m
+print(confusion_matrices)
+
+
+
+classes = ["True", "False"]
+
+for k, v in confusion_matrices.items():
+    df_cfm = pd.DataFrame(v, index=classes, columns=classes)
+    plt.figure(figsize=(10, 7))
+    plt.title(k)
+    # plt.ylabel('Voorspelde waarde', fontsize=18)
+    cfm_plot = sn.heatmap(df_cfm, annot=True)
+    cfm_plot.set_xlabel('Echte waarde')
+    cfm_plot.set_ylabel('Voorspelde waarde')
+
+    cfm_plot.figure.savefig(f"./plots/cfm_{k}.png")
