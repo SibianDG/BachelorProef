@@ -92,9 +92,9 @@ for file, d in data.items():
             l.append(k)
             m[int(v["result"])][int(v["expexted"])] += 1
             print(f'{k} expected {v["expexted"]} but was {v["result"]} in {file}')
-        elif v["expexted"] == 0:
+        elif v["expexted"]:
             m[0][0] += 1
-        elif v["expexted"] == 1:
+        elif not v["expexted"]:
             m[1][1] += 1
         confusion_matrices[k] = m
 

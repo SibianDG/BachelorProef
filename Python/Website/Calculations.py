@@ -289,11 +289,11 @@ def remove_uploads():
 
 
 def replace_hey(text):
-    text = text.replace("hé", "hey")
-    text = text.replace("hè", "hey")
-    text = text.replace("he", "hey")
-    text = text.replace("hoi", "hey")
-    text = text.replace("hee", "hey")
-    text = text.replace("heyy", "hey")
+    text = text.replace(" hé ", " hey ")
+    text = text.replace(" hè ", " hey ")
+    text = text.replace(" he ", " hey ")
+    text = text.replace(" hoi ", " hey ")
+    text = text.replace(" hee ", " hey ")
+    text = text.replace(" heyy ", " hey ")
     return text
 

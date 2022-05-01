@@ -15,9 +15,11 @@ De data is gelabeld door een persoon, dus het kan zijn dat er fouten in de class
 Meer hierover wordt beschreven in het vervolg verhaal, namelijk Hoofdstuk~\ref{ch:vervolg}.
 
 \section{Resultaten na het testen}
+De testen worden weergegeven in een \textit{confusion matrix}. Daarbij is te zien dat er op de x-as de echte waarden staan, waarbij de echte waarden gelijk staan aan de waarden die gegeven werden bij het labelen van de data. De waarden op de y-as zijn de voorspelde waarden van de applicatie (\textit{back-end} of berekeningen).
+
 \subsection{Verkleinwoorden}
-De \textit{confusion matrix} van de testgevallen van de verkleinwoorden is te vinden in figuur~\ref{fig:cfm_verkleinwoord}. Daarbij is te zien dat er op de x-as de echte waarden staan, waarbij de echte waarden gelijk staan aan de waarden die gegeven werden bij het labelen van de data. De waarden op de y-as zijn de voorspelde waarden van de applicatie (\textit{back-end} of berekeningen). Daarbij is te zien dat er 10 correcte positieven zijn, 11 vals positieven, geen valse negatieve en 6 correctie negatieven.
-Hieruit kunnen we afleiden dat %TODO
+De testgevallen van de verkleinwoorden is te vinden in figuur~\ref{fig:cfm_verkleinwoord}. Daarbij is te zien dat er 8 correcte positieven zijn, 3 vals positieven, 5 valse negatieve en 38 correctie negatieven.
+Hieruit kunnen we afleiden dat de applicatie goed de verkleinwoorden weet te vinden.
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{./img/cfm_verkleinwoord}
@@ -26,7 +28,8 @@ Hieruit kunnen we afleiden dat %TODO
 
 
 \subsection{Toonhoogte}
-De \textit{confusion matrix} van de testgevallen van de toonhoogte is te vinden in figuur~\ref{fig:cfm_pitch}.
+De \textit{confusion matrix} van de testgevallen van de toonhoogte is te vinden in figuur~\ref{fig:cfm_pitch}. Daar is te zien dat er 5 correcte positieven zijn, 10 vals positieven, 7 valse negatieve en 32 correctie negatieven.
+Hieruit kunnen we afleiden dat de applicatie een beetje werkt voor de toonhoogte, maar dat hij er soms wel naast durft te zitten.
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{./img/cfm_pitch}
@@ -35,17 +38,21 @@ De \textit{confusion matrix} van de testgevallen van de toonhoogte is te vinden 
 
 \subsection{Stemvolume}
 
-De \textit{confusion matrix} van de testgevallen van het stemvolume is te vinden in figuur~\ref{fig:cfm_pitch}.
+De \textit{confusion matrix} van de testgevallen van het stemvolume is te vinden in figuur~\ref{fig:cfm_pitch}. Daar is te zien dat er 4 correcte positieven zijn, 2 vals positieven, 4 valse negatieve en 44 correctie negatieven.
+Hieruit kunnen we afleiden dat de applicatie wel goed werkt, maar dat het niet top is.
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{./img/cfm_loudness}
 	\caption{\label{fig:cfm_loudness} Resultaten \textit{confusion matrix} stemvolume}
 \end{figure}
 
+\subsection{Algemeen besluit na testen}
+We kunnen wel goed zien a.d.h.v. deze \textit{confusion matrixes} dat er te weinig testgevallen zijn om een mooi beeld te vormen of de applicatie werkt. We moeten meer gevallen verzamelen waarbij de toonhoogte of stemvolume hoger zijn en waarbij er verkleinwoorden aanwezig zijn.
 
 \section{Rollenspel}
+Wanneer er een rollenspel gespeeld wordt, dan wordt de audio van beide personen geanalyseerd. Het is niet direct mogelijk om een stem weg te filteren als beide personen aanwezig zijn in de kamer. Alleen wanneer een van de twee personen significant verder staan van de microfoon, zal de applicatie die stem kunnen wegfilteren als achtergrondlawaai.
 
-
+Toch kan er nog steeds geanalyseerd worden of er \textit{secondary baby talk} aanwezig is, dus de applicatie kan gebruikt worden om conversaties te oefenen.
 
 \section{Zijn de \textit{requirements} voldaan?}
 De \textit{requirements} zijn weldegelijk voldaan. Zo kan de applicatie de \textit{elderspeak} detecteren, weliswaar met een foutenmarge die te lezen is in de resultaten na het testen.

@@ -18,16 +18,42 @@ Alle eigenschappen van \textit{elderspeak} worden herkend a.d.h.v. Python-biblio
 Sommige methoden konden gekopieerd worden van de bijlagen van de studenten die hiervoor aan gewerkt hebben, maar niet alle code stond beschreven in die bijlage. Daarnaast had \textcite{Standaert2021} geen GitHub-\textit{repository} waardoor de code niet snel kon hergebruikt worden. Ook zaten er af en toe kleine foutjes in de code waarbij het nodig was om die op te lossen. Daardoor zal er in Hoofdstuk~\ref{ch:vervolg} een deeltje aanbod komen over waarom het belangrijk is dat code gedeeld wordt.
 
 \section{Berekeningen in \textit{back-end}}
-Deze voorbeeldapplicatie, geschreven in Python en gebruikmakend van het \textit{micro-framework} Flask, is een webapplicatie die verschillende webpagina’s bevat. De code van de volledige Flask-applicatie is te vinden in bijlage~\ref{bijlage:flask}. Naast de inleidende pagina, zie schermafbeelding X, bevat deze ook een detector, zie schermafbeelding X, en een oplijsting van wat \textit{elderspeak} is, zie schermafbeelding X. Op die manier kunnen mensen, maar specifiek studenten in de zorg, actief en passief leren wat \textit{elderspeak} precies is. Enerzijds kunnen ze de eigenschappen te weten komen door zelf actief stukjes spraak op te nemen. Die wordt dan geanalyseerd zodat men kan zien welke eigenschappen er aanwezig waren. Anderzijds kunnen ze passief bekijken wat de eigenschappen zijn van \textit{elderspeak} en hoe men dat kan voorkomen.
+Deze voorbeeldapplicatie, geschreven in Python en gebruikmakend van het \textit{micro-framework} Flask, is een webapplicatie die verschillende webpagina’s bevat. De code van de volledige Flask-applicatie is te vinden in bijlage~\ref{bijlage:flask}. Naast de inleidende pagina, zie schermafbeelding~\ref{fig:home_page}, bevat deze ook een detector. Voor het begin zie schermafbeelding~\ref{fig:detector_begin_page} en na het analyseren ziet de webpagina er het volgende uit: zie schermafbeelding~\ref{fig:detector_end_page}. Er kan ook bestudeerd worden wat \textit{secondary baby talk} is in de vorm van een oplijsting, zie schermafbeelding~\ref{fig:eigenschappen_page}. Op die manier kunnen mensen, maar specifiek studenten in de zorg, actief en passief leren wat \textit{elderspeak} precies is. Enerzijds kunnen ze de eigenschappen te weten komen door zelf actief stukjes spraak op te nemen. Die wordt dan geanalyseerd zodat men kan zien welke eigenschappen er aanwezig waren. Anderzijds kunnen ze passief bekijken wat de eigenschappen zijn van \textit{elderspeak} en hoe men dat kan voorkomen.
 
 De applicatie werd zo gemaakt waarbij men eerst twee jonge vrouwen ziet, een foto van HOGENT voor copyrightrechten, waarbij er gevraagd wordt om spraak in te spreken zoals men zou doen tegen hen. Dat geluid wordt dan geanalyseerd is voor de eigenschappen van toonhoogte en stemvolume. Daarna zal er een foto van een oudere vrouw getoond wordt in het rusthuis waarbij er gevraagd wordt om tegen haar te spreken. De twee parameters van daarvoor worden dan meegegeven zodat de correcte conclusies dan getrokken kunnen worden.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/home_website}
+    \caption{\label{fig:home_page} Home pagina website}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/eigenschappen_elderspeak_website}
+    \caption{\label{fig:eigenschappen_page} Eigenschappen \textit{elderspeak} op de website}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/detector_begin_elderspeak}
+    \caption{\label{fig:detector_begin_page} Detector bij het begin}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/dector_na_detecteren}
+    \caption{\label{fig:detector_end_page} Detector na het analyseren}
+\end{figure}
+
 
 \subsection{\textit{Speech recognition}}
 De basis van een groot deel van de applicatie is het herkennen van de spraak die wordt opgenomen op de website. Uiteraard moet dit niet van nul gemaakt worden, maar kan er gebruik gemaakt worden van een bestaande Python-bibliotheek. \textcite{Standaert2021} bestudeerde in zijn bachelorproef afgelopen jaar dat de beste optie is om de Google Speech Recognition-API te gebruiken omdat deze het beste presteert. Hij vatte dit samen in zijn conclusie: ``Uit verschillende onderzoeken of studies waar men verschillende ASR-systemen met elkaar vergeleken kwam de Google Speech-API er altijd als beste uit. En dit in alle aspecten.''. Daarnaast gebruikt de Google Speech-API ook \textit{natural language processing} of NLP om beter te kunnen weten wat er precies gezegd is geweest~\autocite{GoogleCloud2022}. Hoe dit precies in elkaar zit is te lezen in het literatuuronderzoek, namelijk in Hoofdstuk~\ref{ch:stand-van-zaken}.
 
 Bij de spraakherkenning kwam er wel een groot probleem de kop op steken. De Google \textit{Speech Recognition}-API kon alleen overweg met \textit{wav}- en \textit{flac}-bestanden én kan maar een bepaalde periode, ongeveer 2 tot 3 minuten, gratis herkennen. Het probleem is dus dat de audio gecapteerd is in een \textit{mp3}-formaat. Hiervoor was het noodzakelijk om eerst een conversie te maken van \textit{mp3} naar \textit{flac} en om het audiobestand op te delen in deelbestandjes of \textit{chuncks}, zodat er geen betalende versie voor nodig was. De gebruikte technologie hierbij was ``ffmpeg''. Hoe de conversie precies gebeurt is te vinden tot in detail in bijlage~\ref{bijlage:speech_recognition}.
 
-Het gebruiken van die API is relatief gemakkelijk. Een extra optie is dan ook ter beschikking om achtergrondlawaai een beetje weg te filteren. Door de optie `ajust\_for\_ambient\_noice(source)' aan te zetten, zal de bibliotheek zich wat aanpassen aan de geluidsbron zodat het beter de klanken kan horen alvorens die worden doorgestuurd naar de spraakherkenning-API. Deze methode gebruikt de techniek die beschreven is in het literatuuronderzoek over achtergrondlawaai.
+Het gebruiken van die API is relatief gemakkelijk. Een extra optie is dan ook ter beschikking om achtergrondlawaai een beetje weg te filteren. Door de optie \newline`ajust\_for\_ambient\_noice(source)' aan te zetten, zal de bibliotheek zich wat aanpassen aan de geluidsbron zodat het beter de klanken kan horen alvorens die worden doorgestuurd naar de spraakherkenning-API. Deze methode gebruikt de techniek die beschreven is in het literatuuronderzoek over achtergrondlawaai.
 
 Eens dit ingesteld is, worden de audiobestanden mee gegeven en krijgt het systeem de tekst terug waarvan het AI-model van Google de tekst herkend heeft. Uiteraard werkt dit niet feilloos, maar het is wel redelijk goed voor een gratis versie. Met deze grotere methode is de basis gelegd voor andere methoden die steunen op de tekst die herkend werd.
 
@@ -82,8 +108,3 @@ Met deze resultaten konden er over de eigenschappen verkleinwoorden, hogere toon
     \includegraphics[width=0.6\textwidth]{./img/confusion_matrix}
     \caption{\label{fig:confusion_matrix} Confusion Matrix~\autocite{Jain2020}}
 \end{figure}
-
-\section{hosting?}
-Om de applicatie te kunnen gebruiken tijdens (werkcolleges?) moet elke student toegang hebben tot de website. Hierdoor werd er bekeken hoe de software geïnstalleerd moest worden op een computer en hoe men de website beschikbaar maakt in het lokale netwerk.
-
-TODO
