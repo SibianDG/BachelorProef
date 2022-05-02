@@ -38,19 +38,19 @@ onderzoek?
 
 \color{black}
 
-Met deze bachelorproef kan er besloten worden dat \textit{elderspeak} of \textit{nursery tone} onrechtstreeks kan gedetecteerd worden met artificiële intelligentie. De kunstmatige intelligentie die gebruikt wordt, is die dat verwerkt zit in de Google \textit{Speech Recognition}-API.
+Met deze bachelorproef kan besloten worden dat \textit{elderspeak} of \textit{nursery tone} onrechtstreeks kan gedetecteerd worden met artificiële intelligentie. Het verkozen type kunstmatige intelligentie zit verwerkt in de Google \textit{Speech Recognition}-API.
 Het type model dat Google gebruikt is natuurlijk niet zomaar online te vinden omdat anders andere mensen dit kunnen kopiëren. Wat er wel geweten is, is dat Google aan \textit{natural language processing} doet.
 
 Het achtergrondlawaai kan makkelijk worden weggefilterd via de volgende methode in de Google \textit{Speech Recognition}-API: `ajust\_for\_ambient\_noice(source)'.
 
-Spraakherkenning in Python gebruiken is mogelijk via een gratis softwarebibliotheek, mits enkele aanpassingen. Zo is het noodzakelijk om \textit{wav}- en \textit{flac}-bestanden te hebben van de audio. Met andere formaten kan de bibliotheek niet overweg. Er is ook een limiet om de software gratis te gebruiken. Wanneer het geluidsbestand langer is dan 2 - 3 minuten, geeft de API een foutboodschap. Wanneer het geluid opgedeeld wordt in deelbestandjes of \textit{chuncks} die dan elk op hun beurt de audio doorsturen, lukt het wel.
+Spraakherkenning in Python is mogelijk via een gratis softwarebibliotheek, mits enkele aanpassingen. Zo is het noodzakelijk om \textit{wav}- en \textit{flac}-bestanden te hebben van de audio. Met andere formaten kan de bibliotheek niet overweg. Er is ook een limiet om de software gratis te gebruiken. Wanneer het geluidsbestand langer is dan 2 - 3 minuten, geeft de API een foutboodschap. Wanneer het geluid opgedeeld wordt in deelbestandjes of \textit{chuncks} die dan elk op hun beurt de audio doorsturen, lukt het wel.
 
 Het opzetten van een ``Flask applicatie'' is bijzonder simpel. Het is een goede manier om snel een webserver op te zetten in Python. Het model ermee verbinden, of in ons geval eerder de methoden aanroepen, is ook gemakkelijk. Er kan gemakkelijk een ander bestand geïmporteerd worden die alle berekeningen heeft.
 
 \section{Discussie}
 In deze discussie wordt er besproken of het nuttig is om deze applicatie in gebruik te nemen voor zorgkundigen.
 
-Ikzelf vind dat de applicatie zeker en vast gebruikt kan worden voor studenten in de zorgsector. Op die manier kunnen studenten \textit{elderspeak} beter ontdekken wat dat fenomeen is. Ze kunnen dat zowel actief, door de detector, als passief leren door de lijst van eigenschappen en tips te lezen.
+Het valt te beargumenteren dat deze applicatie zeker en vast gebruikt kan worden voor studenten in de zorgsector. Op die manier kunnen studenten \textit{elderspeak} beter ontdekken wat dat fenomeen is. Ze kunnen dat zowel actief, door de detector, als passief leren door de lijst van eigenschappen en tips te lezen.
 
 De accuraatheid is misschien niet ideaal, maar dat hoeft ook niet. Wanneer er iemand de detector wil gebruiken, dan moet hij of zij ook aan zelfreflectie doen. Op die manier blijft het begrip en de eigenschappen langer in het geheugen zitten.
 

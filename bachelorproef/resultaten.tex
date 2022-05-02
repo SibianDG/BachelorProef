@@ -10,7 +10,7 @@ Via het formulier van ``JotForm'' waren er 13 inzendingen. Dat lijkt niet veel, 
 
 Toch gaven deze 13 personen 54 audiobestanden ter beschikking. Op die geluidsbestanden kon er gecontroleerd worden of er \textit{elderspeak} aanwezig bij was.
 
-De data is gelabeld door een persoon, dus het kan zijn dat er fouten in de classificatie van de data zit. Dit eindwerk is natuurlijk een van de richting TI, en niet van een communicatie richting. Een interessante opdracht kan dan zijn dat er interdisciplinaire een opdracht komt waarbij studenten verpleegkunde of communicatie nieuwe data labelen en studenten toegepaste informatica testen uitvoeren op de server\ldots
+De data is gelabeld door een persoon, dus het kan zijn dat er fouten in de classificatie van de data zit. Dit eindwerk is natuurlijk een van de richting toegepaste informatica, en niet van een communicatierichting. Een interessante opdracht kan dan zijn dat er een interdisciplinaire opdracht komt waarbij studenten verpleegkunde of communicatie nieuwe data labelen en studenten toegepaste informatica testen uitvoeren op de server.
 
 Meer hierover wordt beschreven in het vervolg verhaal, namelijk Hoofdstuk~\ref{ch:vervolg}.
 
@@ -18,7 +18,7 @@ Meer hierover wordt beschreven in het vervolg verhaal, namelijk Hoofdstuk~\ref{c
 De testen worden weergegeven in een \textit{confusion matrix}. Daarbij is te zien dat er op de x-as de echte waarden staan, waarbij de echte waarden gelijk staan aan de waarden die gegeven werden bij het labelen van de data. De waarden op de y-as zijn de voorspelde waarden van de applicatie (\textit{back-end} of berekeningen).
 
 \subsection{Verkleinwoorden}
-De testgevallen van de verkleinwoorden is te vinden in figuur~\ref{fig:cfm_verkleinwoord}. Daarbij is te zien dat er 8 correcte positieven zijn, 3 vals positieven, 5 valse negatieve en 38 correctie negatieven.
+De testgevallen van de verkleinwoorden zijn te vinden in \textit{confusion matrix}~\ref{fig:cfm_verkleinwoord}. Daarbij is te zien dat er 8 correcte positieven zijn, 3 vals positieven, 5 valse negatieve en 38 correctie negatieven.
 Hieruit kunnen we afleiden dat de applicatie goed de verkleinwoorden weet te vinden.
 \begin{figure}
 	\centering
@@ -39,7 +39,7 @@ Hieruit kunnen we afleiden dat de applicatie een beetje werkt voor de toonhoogte
 \subsection{Stemvolume}
 
 De \textit{confusion matrix} van de testgevallen van het stemvolume is te vinden in figuur~\ref{fig:cfm_pitch}. Daar is te zien dat er 4 correcte positieven zijn, 2 vals positieven, 4 valse negatieve en 44 correctie negatieven.
-Hieruit kunnen we afleiden dat de applicatie wel goed werkt, maar dat het niet top is.
+Hieruit kunnen we afleiden dat de applicatie wel goed werkt, maar toch een zekere foutenmarge heeft.
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{./img/cfm_loudness}
