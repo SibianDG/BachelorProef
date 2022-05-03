@@ -38,14 +38,18 @@ onderzoek?
 
 \color{black}
 
-Met deze bachelorproef kan besloten worden dat \textit{elderspeak} of \textit{nursery tone} onrechtstreeks kan gedetecteerd worden met artificiële intelligentie. Het verkozen type kunstmatige intelligentie zit verwerkt in de Google \textit{Speech Recognition}-API.
-Het type model dat Google gebruikt is natuurlijk niet zomaar online te vinden omdat anders andere mensen dit kunnen kopiëren. Wat er wel geweten is, is dat Google aan \textit{natural language processing} doet.
+Met deze bachelorproef kan besloten worden dat \textit{elderspeak} of \textit{nursery tone} onrechtstreeks kan gedetecteerd worden met artificiële intelligentie. Het verkozen type kunstmatige intelligentie zit verwerkt in de Google \textit{Speech Recognition}-API. Op basis van die spraakherkenning wordt er gedetecteerd of er verkleinwoorden, herhalingen, collectieve voornaamwoorden en tussenwerpsels aanwezig zijn. Daarnaast worden ook de toonhoogte en het stemvolume berekend via Python-bibliotheken, die geen gebruik maken van kunstmatige intelligentie.
 
+Het type model dat de Google \textit{Speech Recognition}-API gebruikt is natuurlijk niet zomaar online te vinden omdat anders andere mensen dit kunnen kopiëren. Wat er wel geweten is, is dat Google aan \textit{natural language processing} doet.
 Het achtergrondlawaai kan makkelijk worden weggefilterd via de volgende methode in de Google \textit{Speech Recognition}-API: `ajust\_for\_ambient\_noice(source)'.
 
 Spraakherkenning in Python is mogelijk via een gratis softwarebibliotheek, mits enkele aanpassingen. Zo is het noodzakelijk om \textit{wav}- en \textit{flac}-bestanden te hebben van de audio. Met andere formaten kan de bibliotheek niet overweg. Er is ook een limiet om de software gratis te gebruiken. Wanneer het geluidsbestand langer is dan 2 - 3 minuten, geeft de API een foutboodschap. Wanneer het geluid opgedeeld wordt in deelbestandjes of \textit{chuncks} die dan elk op hun beurt de audio doorsturen, lukt het wel.
 
 Het opzetten van een ``Flask applicatie'' is bijzonder simpel. Het is een goede manier om snel een webserver op te zetten in Python. Het model ermee verbinden, of in ons geval eerder de methoden aanroepen, is ook gemakkelijk. Er kan gemakkelijk een ander bestand geïmporteerd worden die alle berekeningen heeft.
+
+Om te kunnen staven dat \textit{elderspeak} goed gedetecteerd kan worden, zullen er meer testgevallen moeten gemaakt worden. Zo is het momenteel nog niet volledig duidelijk of de methoden die de toonhoogte en het stemvolume bepalen, goed genoeg werken. Wat de mogelijke vervolgopdrachten of -studies zijn, is te vinden in Hoofdstuk~\ref{ch:vervolg}.
+
+
 
 \section{Discussie}
 In deze discussie wordt er besproken of het nuttig is om deze applicatie in gebruik te nemen voor zorgkundigen.
