@@ -35,7 +35,7 @@ function sendData(blob, kind) {
   data_to_send.append('audio_data', blob);
   if (kind.toLowerCase().includes("saved")){
     data_to_send.append('extra_data', [pitch_normal, loudness_normal])
-    fetch('http://127.0.0.1:5000/receive_elderspeak', {
+    fetch('/receive_elderspeak', {
         method: 'POST',
         body: data_to_send
     }).then(response => {
@@ -62,7 +62,7 @@ function sendData(blob, kind) {
         console.log(error);
     });
   } else {
-      fetch('http://127.0.0.1:5000/receive_normal', {
+      fetch('/receive_normal', {
         method: 'POST',
         body: data_to_send
     }).then(response => {

@@ -4,6 +4,7 @@ from datetime import datetime
 import Calculations
 from Calculations import remove_uploads
 import shutil
+import ssl
 
 app = Flask(__name__)
 app.config['UPLOAD_EXTENSIONS'] = ['.wav', '.mp3']
@@ -88,7 +89,8 @@ def receive_elderspeak():
     shutil.rmtree('./uploads/chunks')
     if os.path.exists(file):
         os.remove(file)
-
+    if os.path.exists('./uploads/tmp.wav'):
+        os.remove('./uploads/tmp.wav')
     try:
         remove_uploads()
     except Exception as e:
@@ -111,7 +113,6 @@ def receive_normal():
     with open(os.path.abspath(file), 'wb') as f:
         f.write(data)
 
-    print("PITCH BEREKENEN")
     pitch = Calculations.calculate_pitch(Calculations.maketempfile_wav(file))
     loudness = Calculations.loudness(Calculations.maketempfile_wav(file))
 
@@ -120,6 +121,8 @@ def receive_normal():
 
     if os.path.exists(file):
         os.remove(file)
+    if os.path.exists('./uploads/tmp.wav'):
+        os.remove('./uploads/tmp.wav')
 
     print(response_data)
     response = jsonify(response_data)
@@ -130,9 +133,14 @@ def receive_normal():
 
 if __name__ == "__main__":
     try:
+        context = ssl.SSLContext()
+        context.load_cert_chain("cert.pem", "key.pem")
         app.run(
             debug=False,
-            #host='0.0.0.0'
+            #host='192.168.1.185',
+            host='0.0.0.0',
+            port=5001,
+            ssl_context=context
         )
     finally:
         remove_uploads()

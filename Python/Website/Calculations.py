@@ -42,8 +42,6 @@ def speech_recognition(file):
         duration_in_sec = len(myaudio) / 1000  # Length of audio in sec
         sample_rate = myaudio.frame_rate
 
-        print("sample_width=", sample_width)
-        print("channel_count=", channel_count)
         print("duration_in_sec=", duration_in_sec)
         print("frame_rate=", sample_rate)
         bit_rate = 16  # assumption , you can extract from mediainfo("test.wav") dynamically
@@ -187,12 +185,12 @@ def maketempfile_wav(wav_file):
 
 
 def calculate_pitch(wav_file):
-    try:
+    # try:
         x, _ = librosa.load(wav_file, sr=16000)
         tmp_file = './uploads/tmp.wav'
         sf.write(tmp_file, x, 16000)
 
-        chunk = 16384*2
+        chunk = 16384
         with wave.open(tmp_file, 'r') as wf:
             swidth = wf.getsampwidth()
             RATE = wf.getframerate()
@@ -235,21 +233,21 @@ def calculate_pitch(wav_file):
         print("Average: %0.2f Hz." % (freqlistavg))
         stream.close()
         p.terminate()
-        return round(freqlistavg, 2)
-    except Exception as error:
-        print(f'Fout bij het berekenen van de toonhoogte: {error}.')
+        if type(freqlistavg) == int or type(freqlistavg) == float:
+            return round(freqlistavg, 2)
         return -10000
-    finally:
-        if tmp_file is not None and os.path.exists(tmp_file):
-            os.remove(tmp_file)
+    # except Exception as error:
+    #     print(f'Fout bij het berekenen van de toonhoogte: {error}.')
+    #     return -10000
+    # finally:
+    #     if tmp_file is not None and os.path.exists(tmp_file):
+    #         os.remove(tmp_file)
 
 
 def make_text_compare(normal, current, difference, danger, success):
     if normal is not None and current is not None and normal != 0 and current != 0:
-        print(f"@@@@@@@@@@@@@@ {difference} ex: {normal} curr {current}")
         if current > normal + difference:
             return danger
-        print("@@@@@@@@@@@@@@")
         return success
     else:
         return '<span class="text-muted">Er was een probleem met deze functie. Probeer opnieuw.</span>'
@@ -282,10 +280,13 @@ def highlight_words_in_text(text: str, words: set):
 
 
 def remove_uploads():
+
+    if os.path.exists('./uploads/tmp.wav'):
+        os.remove('tmp.wav')
     uploads = os.listdir('./uploads/')
-    uploads.remove('tmp.wav')
-    for file in uploads:
-        os.remove(file)
+    if len(uploads) > 0:
+        for file in uploads:
+            os.remove(file)
 
 
 def replace_hey(text):
