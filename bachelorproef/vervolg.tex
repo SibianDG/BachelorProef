@@ -37,7 +37,7 @@ In de hoofdmap met alle code is er een bestand te vinden genaamd ``requirements.
 \begin{python}
     pip install -r requirements.txt
 \end{python}
-uit te voeren zullen alle Python-bibliotheken geïnstalleerd worden die nodig zijn om het project uit te voeren. Op Windows moet er wel nog een extra stap gebeuren en dat is FFmpeg apart installeren. De stappen daarvan staan beschreven op de volgende website: \url{https://www.wikihow.com/Install-FFmpeg-on-Windows}.
+uit te voeren zullen alle Python-bibliotheken geïnstalleerd worden die nodig zijn om het project uit te voeren. Er wel nog een extra stap gebeuren en dat is dat FFmpeg apart geïnstalleerd moet worden. De stappen daarvan staan beschreven op de volgende website: \url{https://www.wikihow.com/Install-FFmpeg-on-Windows} voor een Windows besturingssysteem.
 
 \subsubsection{Mogelijkheden}
 \begin{itemize}
@@ -53,7 +53,7 @@ uit te voeren zullen alle Python-bibliotheken geïnstalleerd worden die nodig zi
 \end{itemize}
 
 \subsection{Hosten in een lokaal netwerk}
-Het is ook mogelijk om de software op een computer te installeren, deze te laten aanstaan, maar met een speciale parameter. Wanneer er in de Flask-applicatie de volgende parameter wordt meegegeven: `` host=`0.0.0.0' '', zal de applicatie opengesteld worden in het lokale netwerk. Dit laat het mogelijk naar het lokale IP-adres de surfen op een ander toestel en ook de website met de detector te kunnen gebruiken. Als men het argument \textit{threaded} op \textit{true} zet, dan is Flask \textit{multithreaded}~\autocite{Vieira2013}. Hierdoor kunnen er zeker meerdere verbindingen tegelijk verbonden worden. Een systematische voorstelling is te vinden in figuur~\ref{fig:lokaal_netwerk}
+Het is ook mogelijk om de software op een computer te installeren, deze te laten aanstaan, maar met een speciale parameter. Wanneer er in de Flask-applicatie de volgende parameter wordt meegegeven: `` host=`0.0.0.0' '', zal de applicatie opengesteld worden in het lokale netwerk. Dit laat het mogelijk naar het lokale IP-adres de surfen op een ander toestel en ook de website met de detector te kunnen gebruiken. Als men het argument \textit{threaded} op \textit{true} zet, dan is Flask \textit{multithreaded}~\autocite{Vieira2013}. Hierdoor kunnen er zeker meerdere verbindingen tegelijk verbonden worden. Een systematische voorstelling is te vinden in figuur~\ref{fig:lokaal_netwerk}. Wanneer men verbonden is met het Eduroam-netwerk, het netwerk dat in elke hogeschool of universiteit aanwezig is, dan zal dit niet lukken volgens de IT-dienst van HOGENT: ``Binnen het Eduroam-netwerk is het niet mogelijk dat andere toestellen aan jouw eigen toestel kunnen.''.
 
 \subsubsection{Mogelijkheden}
 \begin{itemize}
@@ -64,6 +64,8 @@ Het is ook mogelijk om de software op een computer te installeren, deze te laten
 \subsubsection{Beperkingen}
 \begin{itemize}
     \item Het maximale aantal connecties is afhankelijk van de computer waar de applicatie wordt opgestart. Hoe beter en sneller de computer, hoe meer connecties mogelijk en hoe sneller.
+    \item Er moet een SS- certificaat gemaakt en geïnstalleerd worden voor een beveiligde HTTPS-verbinding.
+    \item Niet mogelijk op het Eduroam-netwerk
 \end{itemize}
 
 \begin{figure}
@@ -72,12 +74,12 @@ Het is ook mogelijk om de software op een computer te installeren, deze te laten
     \caption{\label{fig:lokaal_netwerk} Lokaal netwerk}
 \end{figure}
 
-\subsection{Gratis hosting online}
-De applicatie kan ook online gehost worden, maar dit zal natuurlijk geld kosten. Zo'n applicatie kan dan gehost worden op Microsoft Azure als webapplicatie.
+\subsection{Hosting online}
+De applicatie kan ook online gehost worden, maar dit zal natuurlijk geld kosten. Zo'n applicatie kan dan gehost worden op Microsoft Azure als webapplicatie, maar ook via Combell. Elke student en docent krijgt zo een website om de drie jaar op de volgende link: \url{https://www.academicsoftware.eu/software/298/857}.
 \subsubsection{Mogelijkheden}
 \begin{itemize}
     \item Eens opgezet is het altijd beschikbaar van overal
-    \item Wanneer er veel verbindingen en berekeningen nodig zijn, zal Microsoft de servers \textit{upgraden} zodat ze alles kunnen bolwerken
+    \item Wanneer er veel verbindingen en berekeningen nodig zijn, zullen de servers van de aanbieder automatisch geüpgraded worden zodat ze alles kunnen bolwerken.
     \item Heel snel
 \end{itemize}
 \subsubsection{Beperkingen}

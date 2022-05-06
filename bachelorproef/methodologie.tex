@@ -108,3 +108,27 @@ Met deze resultaten konden er over de eigenschappen verkleinwoorden, hogere toon
     \includegraphics[width=0.6\textwidth]{./img/confusion_matrix}
     \caption{\label{fig:confusion_matrix} Confusion Matrix~\autocite{Jain2020}}
 \end{figure}
+
+\section{Hosting}
+\subsection{Installatie op host}
+Om de website te kunnen hosten moet de nodige software eerst geïnstalleerd worden. Zo kunnen alle Python-bibliotheken geïnstalleerd worden via het volgende commando:
+\begin{python}
+	pip install -r requirements.txt
+\end{python}
+
+Daarnaast moet ook FFmpeg apart geïnstalleerd worden. De stappen daarvan staan beschreven op de volgende website: \url{https://www.wikihow.com/Install-FFmpeg-on-Windows} voor een Windows besturingssysteem.
+
+\subsection{SSL-certificaat}
+Zodat andere toestellen aan de laptop of server zou kunnen moet er een SSL-certificaat geïnstalleerd worden. Dit kan bekomen worden door de volgende stappen uit te voeren:
+\begin{itemize}
+	\item Installeer ``pyopenssl''; voorbeeld via \textit{installer} ``chocolatey''.
+	\item ``openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365''
+	\item Kopieer ``cert.pem'' en ``key.pem'' naar de plaats van de Flask-applicatie.
+	\item Voeg de opties toe:
+	\begin{python}
+		import ssl
+  		context = ssl.SSLContext()
+		context.load_cert_chain("cert.pem", "key.pem")
+		app.run(ssl_context=context, host='0.0.0.0', ...)
+	\end{python}
+\end{itemize}
