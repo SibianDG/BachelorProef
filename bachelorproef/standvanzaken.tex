@@ -5,27 +5,11 @@
 % dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
 % bijzonder aan wat de link is met het vorige en volgende hoofdstuk.
 
-% Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
+% : Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 
-
-\color{blue}
-Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken~\autocite{Pollefliet2011}.
-
-Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz. naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin, gebruik je \texttt{$\backslash${}textcite\{\}}.
-Soms wil je de auteur niet expliciet vernoemen, dan gebruik je \texttt{$\backslash${}autocite\{\}}. In de volgende paragraaf een voorbeeld van elk.
-
-\textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
-
-\color{black}
-
-\section{Verkennend onderzoek}
-\label{sec:verkennend-onderzoek}
 ``Kan \textit{elderspeak} gedetecteerd worden door Artificiële Intelligentie en kan dit toegepast worden in de praktijk?'', is de centrale onderzoeksvraag. 
 Om te kunnen staven of dit wel degelijk mogelijk is, moeten twee begrippen uitgelegd en begrepen worden.
-Er zal dus eerst beschreven worden wat \textit{elderspeak} precies is. 
-Waarom ergeren ouderen zich hieraan? 
-% TODO: Extra stukken
-Wat zijn de eigenschappen en hoe kan je het voorkomen?
+Er zal dus eerst beschreven worden wat \textit{elderspeak} precies is, hoe het ontstaat, wat de schadelijke effecten zijn, maar ook wat de eigenschappen zijn en hoe kan met het voorkomen?
 Ten tweede moeten we ook begrijpen wat Artificiële Intelligentie is, daarbij alle verschillende types, vormen en gradaties ervan.
 
 \section{Elderspeak}
@@ -119,18 +103,18 @@ Voorbeelden van het classificatieprobleem zijn spamdetectie, nummerherkenning of
 
 De meest prominente taak bij \textit{unsupervised learning} is \textit{clustering}, d.w.z.\ de ontdekking van coherente groepen. Andere mogelijke taken zijn anomaliedetectie en hoofdcomponentenanalyse (PCA).
 
-Een voorbeeld van clustering is marktsegmentatie waarbij klanten worden opgedeeld in verschillende segmenten zoals trouwe klant, mogelijke vertrekkende klant, ontevreden klant etc. Op basis van aankoopdata, tijdstippen en online activiteit kan men de klanten indelen in clusters. Die informatie kan dan weer gebruikt worden om mensen die behoren tot bepaalde clusters korting te geven of op te bellen waarom ze bijvoorbeeld niet tevreden zijn.
-Daarnaast zijn er algoritmen die fraude opsporen op een website die niet normaal gedrag detecteren. Dit is dan een voorbeeld van anomalie detectie.
-Bij PCA wordt de data gereduceerd zodat de minder relevante data weggefilterd wordt in de dataset.
+Een voorbeeld van clustering is marktsegmentatie waarbij klanten worden opgedeeld in verschillende segmenten zoals trouwe klant, mogelijke vertrekkende klant, ontevreden klant etc. Op basis van aankoopdata, tijdstippen en online activiteit kan men de klanten indelen in clusters. Die informatie kan dan weer gebruikt worden om mensen die behoren tot bepaalde clusters korting te geven of te contacteren i.v.m. hun ontevredenheid.
+Daarnaast zijn er algoritmen die fraude opsporen door het analyseren van abnormaal gedrag op een website. Dit is dan een voorbeeld van anomaliedetectie.
+Bij PCA wordt de data gereduceerd zodat de minder relevante data weggefilterd wordt uit de dataset.
 
 \subsubsection{Reinforcement learning}
-\textcite{Lievens2021} beschrijft leren door bekrachtiging door een techniek die niet echt een dataset gebruikt, maar eerder via een identiteit die leeft in een (on)bekende wereld. Die identiteit krijgt dan beloningssignalen. De opdracht is dan om uit te zoeken welke regels leiden tot een grote beloning.
+\textcite{Lievens2021} beschrijft \textit{reinforcement learning} als een techniek die niet echt een dataset gebruikt, maar wel een identiteit die leeft in een (on)bekende wereld. Die identiteit krijgt dan beloningssignalen. De opdracht is dan om uit te zoeken welke regels leiden tot een grote beloning.
 
 Het bekendste voorbeeld van \textit{reinforcement learning} is dat van zelfrijdende wagens. Hierbij moet het model zelf aanleren in welke mate het moet remmen, gas geven en sturen. Dit is een lang en iteratief proces waarbij het model zichzelf de hele tijd bijstuurt en leert van wat het net ervaren heeft.
 
 \subsection{\textit{Deep Learning}}
 \textit{Deep learning} is het onderdeel van \textit{machine learning} dat neurale netwerken bevat.
-``Een artificieel neuraal netwerk bestaat uit een groot aantal eenvoudige rekende eenheden, units of neuronen die de volgende eigenschap hebben: `Als de (gewogen) input van een neuron groot is, zal het 'vuren' en dit neuron zal een grote waarde op zijn axon zetten. Bovendien zijn deze eenheden verbonden door middel van gerichte links waarbij een reëel getal de sterkte van elke verbinding aangeeft.'', aldus \textcite{Lievens2021} in zijn cursus \textit{Distributed Databases}.
+``Een artificieel neuraal netwerk bestaat uit een groot aantal eenvoudige rekenende eenheden, units of neuronen die de volgende eigenschap hebben: `Als de (gewogen) input van een neuron groot is, zal het 'vuren' en dit neuron zal een grote waarde op zijn axon zetten. Bovendien zijn deze eenheden verbonden door middel van gerichte links waarbij een reëel getal de sterkte van elke verbinding aangeeft.'', aldus \textcite{Lievens2021} in zijn cursus \textit{Distributed Databases}.
 
 De systematische voorstelling van een neuron is te vinden in figuur~\ref{fig:neuron}.
 Een volledig neuraal netwerk zoals in figuur~\ref{fig:layers}. De data wordt gevoed aan de \textit{input layer}. Daarna komen een x-aantal \textit{hidden layers} die dan de bewerkingen uitvoeren en als laatste stap heb je de \textit{output layer}. Het aantal \textit{nodes} of knopen in de \textit{output layer} is gelijk aan het aantal klassen dat een probleem heeft. Als er een \textit{deep learning} model gemaakt wordt van het detecteren van spam, dan zou de \textit{output layer} twee knopen moeten hebben.
@@ -151,13 +135,13 @@ Een volledig neuraal netwerk zoals in figuur~\ref{fig:layers}. De data wordt gev
 \section{AI-technieken die gebruikt worden om elderspeak te detecteren}
 
 \subsection{NLP of \textit{natural language processing}}
-Om te kunnen detecteren of de spreker verkleinwoorden, troetelnamen, collectieve voornaamwoorden of te veel tussenwerpsels gebruikt, moet het model of eerder gezegd de Python-bibliotheek - die het model bevat - weten of deze eigenschappen voorkomen. Hiervoor moeten we gebruik maken van \textit{natural language processing}-bibliotheken of afgekort NLP.
+Om te kunnen detecteren of de spreker verkleinwoorden, troetelnamen, collectieve voornaamwoorden of te veel tussenwerpsels gebruikt, moet het model, of eerder gezegd de Python-bibliotheek die het model bevat, weten of deze eigenschappen voorkomen. Hiervoor moeten we gebruik maken van \textit{natural language processing}-bibliotheken of afgekort NLP.
 
 \textit{Natural language processing} of ``natuurlijke taalverwerking'' situeert zicht in de tak van de kunstmatige intelligentie. NLP behoort deels tot \textit{machine learning} en deels tot \textit{deep learning} \autocite{Kleinings2022}. De visuele voorstelling van die verhoudingen is te vinden in figuur~\ref{fig:nlp_field}.
 
 Volgens \textcite{Kleinings2022} is die natuurlijke taalverwerking een technologie die gebruikt wordt om computers te helpen om natuurlijke menselijke taal te begrijpen en te interpreteren.
 
-NLP combineert computationele linguïstiek - op regels gebaseerde modellering van menselijke taal - met statistische, \textit{machine learning}- en \textit{deep learning}-modellen. Samen stellen deze technologieën computers in staat menselijke taal - in de vorm van tekst of spraakgegevens - te verwerken en de volledige betekenis ervan te ``begrijpen'', met inbegrip van bedoeling en het sentiment van de spreker of schrijver.~\autocite{IBMCloudEducation2021}
+NLP combineert computationele linguïstiek (op regels gebaseerde modellering van menselijke taal) met statistische, \textit{machine learning}- en \textit{deep learning}-modellen. Samen stellen deze technologieën computers in staat menselijke taal in de vorm van tekst of spraakgegevens te verwerken en de volledige betekenis ervan te ``begrijpen'', met inbegrip van bedoeling en het sentiment van de spreker of schrijver.~\autocite{IBMCloudEducation2021}
 
 NLP stuurt computerprogramma's aan die tekst van de ene taal naar de andere kunnen vertalen, die reageren op gesproken opdrachten en die grote hoeveelheden tekst samenvatten, zelfs in realtime. Enkele voorbeelden van NLP-systemen in het dagelijkse leven zijn: spraakgestuurde GPS-systemen, digitale assistenten, spraak-naar-tekst dicteersoftware (o.a. in smartphones of Microsoft Word), chatbots voor de klantenservice en andere `gemakken' voor de consument. Maar NLP speelt ook een steeds grotere rol in bedrijfsoplossingen die helpen bij het stroomlijnen van de bedrijfsvoering, het verhogen van de productiviteit van werknemers en het vereenvoudigen van bedrijfskritische bedrijfsprocessen, aldus \textcite{IBMCloudEducation2021}.
 
@@ -173,21 +157,23 @@ Volgens \textcite{Kleinings2022} zijn er vele redenen waarom het verwerken van t
 Eerst en vooral heb je alle linguïstische regels per taal. Zo zijn er meer dan 6500 talen die gesproken worden en die elke hun eigen regels hebben.
 Daarnaast is er het probleem van de uniformiteit. Om taal te kunnen verwerken moet die eerst omgezet worden in een systeem of formaat dat de computer kan begrijpen. Door middel van machinaal leren identificeert het model ongestructureerde taal, en zet deze om naar bruikbare, niet-dubbelzinnige informatie. De computer kan dit begrijpen en er verder mee rekenen. Dit onderdeel wordt de \textit{pre-processing} genoemd.
 
-Bovendien speelt de context ook vaak parten. \textit{Natural Language Processing} werkt fundamenteel door de hiërarchie van linguïstische dictie tussen elk woord te begrijpen en deze om te zetten in een vorm die computers kunnen interpreteren. Onze talen zijn niet eenvoudig, zo hebben woorden meerdere betekenissen, die alleen begrepen worden door het verschil in context.~\autocite{Kleinings2022} Een voorbeeld hiervan is het woord ``bank''. In de ene context is het de financiële instelling en in een andere context is het de rustbank in het park.
-Als laatste kan de toon van de stem ook nog verschillen. Mensen kunnen sarcasme of ironie in hun taal steken zodat het een andere betekenis krijgt. Om deze andere betekenis uit een tekst te halen is er heel veel moeite voor nodig.
+Bovendien speelt de context NLP ook vaak parten. \textit{Natural Language Processing} werkt immers fundamenteel door de hiërarchie van linguïstische dictie tussen elk woord te begrijpen en deze om te zetten in een vorm die computers kunnen interpreteren. Onze talen zijn niet eenvoudig, zo hebben woorden meerdere betekenissen die alleen begrepen worden door het verschil in context.~\autocite{Kleinings2022} Een voorbeeld hiervan is het woord ``bank''. In de ene context is het de financiële instelling en in een andere context is het de rustbank in het park.
 
-\subsubsection{Hoe werkt NLP?}
+Als laatste kan de toon van de stem ook nog verschillen. Mensen kunnen d.m.v. intonatie en toonhoogte sarcasme of ironie uiten, zodat de zin een andere betekenis krijgt. Er is veel moeite nodig om dit correct te interpreteren.
+
+\subsubsection{Werking van NLP}
 NLP is niet één statische methode, maar een ketting van manipulaties van de tekst zodat er meer lagen informatie tevoorschijn komen. Dit wordt gerealiseerd met neurale netwerken waarbij elke node een bepaalde functie uitvoert.
-Er zijn vier grote stappen i.v.m. de taalverwerking: morfologie, syntaxis, semantiek en pragmatiek, schrijft \textcite{Kleinings2022}, wat te lezen is op een \textit{low-code/no-code} platform genaamd Levity die dus veel kennis hebben over AI. Daar kan men blokken slepen en gebruiken om een AI-model op te stellen.
+Er zijn vier grote stappen i.v.m. de taalverwerking namelijk morfologie, syntaxis, semantiek en pragmatiek, schrijft \textcite{Kleinings2022}. Dit is te lezen is op een \textit{low-code/no-code} platform, genaamd Levity, dat dus veel kennis heeft over AI. Daar kan men blokken slepen en gebruiken om een AI-model op te stellen.
 
 Met behulp van morfologie kan er per woord een type geclassificeerd worden zoals een zelfstandig naamwoord, bijvoeglijk naamwoord, voornaamwoord, lidwoord enzovoort. Denk hierbij aan het voorbeeld met de bank.
 
-Om de syntaxis aan te leren zijn er twee manieren. Enerzijds kunnen er woorden gelabeld worden waarbij er gezegd wordt dat woord A de stam is, woord B de 2e persoon enkelvoud, woord C het voltooid deelwoord etc. Anderzijds kan er een \textit{unsupervised machine learning} model gemaakt worden waarbij de computer de regels afleidt uit verschillende gelabelde teksten en die logica gebruikt om nieuwe, niet-gelabelde, teksten te begrijpen met dezelfde logica.
+Om de syntaxis aan te leren zijn er twee manieren. Enerzijds kunnen er woorden gelabeld worden waarbij er aangeduid wordt dat woord A de stam is, woord B de 2\textsuperscript{e} persoon enkelvoud, woord C het voltooid deelwoord etc. Anderzijds kan er een \textit{unsupervised machine learning} model gemaakt worden waarbij de computer de regels afleidt uit verschillende gelabelde teksten en die logica gebruikt om nieuwe, niet-gelabelde, teksten te begrijpen.
 
-Daarnaast is het ook aan te raden dat stopwoorden verwijderd worden als het model de tekst wil begrijpen. Stopwoorden zoals ``een, de, euh, inderdaad, echt, oké, eigenlijk, allez, etc.'' moeten verwijderd worden. Daarbij aansluitend zijn er twee andere methoden. Enerzijds lemmatiseren waarbij  werkwoorden naar de tegenwoordige tijd veranderd worden, en anderzijds stemming, waarbij er prefixen of affixen verwijderd worden, ook nodig om de conversie te maken. Een voorbeelden van het converteren is dan: ``wij dachten'' naar ``denk''. Woorden worden daarnaast ook vervangen door meer gebruikte synoniemen zoals van ``enorm'' naar ``groot''.
+Daarnaast is het ook aan te raden dat stopwoorden verwijderd worden als het model de tekst wil begrijpen. Stopwoorden zoals ``een, de, euh, inderdaad, echt, oké, eigenlijk, allez, etc.'' moeten verwijderd worden. Daarbij aansluitend zijn er twee andere methoden. Enerzijds lemmatiseren, waarbij  werkwoorden naar de tegenwoordige tijd veranderd worden.
+Anderzijds is er stamming, waarbij er prefixen of affixen verwijderd worden. Een voorbeeld van conversie is dan: ``wij dachten'' naar ``denk''. Woorden worden daarnaast ook vervangen door meer gebruikte synoniemen zoals van ``enorm'' naar ``groot''.
 
 Als laatste systeem of layer bestaat er \textit{tokenization}. Dit is het proces waarbij het systeem de zin indeelt in verschillende eenheden waaruit informatie kan gehaald worden.
-Er kan een \textit{token} gekozen worden op basis van regels, leestekens, spaties, maar dit geeft wel steeds een ander resultaat wat geïllustreerd is in figuur~\ref{fig:tokens}. Hoe die \textit{tokenization} zich verhoudt met die layer van het \textit{deep learning} NLP model is te vinden in figuur~\ref{fig:tokens_verhouding_dl}.
+Er kan een \textit{token} gekozen worden op basis van regels, leestekens, spaties, maar dit geeft wel steeds een ander resultaat, wat geïllustreerd is in figuur~\ref{fig:tokens}. Hoe die \textit{tokenization} zich verhoudt met die \textit{layer} van het \textit{deep learning} NLP model is te vinden in figuur~\ref{fig:tokens_verhouding_dl}.
 
 \begin{figure}
     \centering
@@ -203,12 +189,12 @@ Er kan een \textit{token} gekozen worden op basis van regels, leestekens, spatie
 
 %\clearpage
 
-\subsection{Filteren van achtergrond lawaai}
-Volgens \textcite{Jung2021} helpen \textit{convolutional neural networks} of CNN's - een specifieke opstelling van een \textit{deep learning} model waarbij een
-data-array van twee of meer dimensies, zoals een afbeelding of geluidsfragment, wordt gestapeld door een veelvoud van tweedimensionale filters - bijzonder veel om achtergrondlawaai weg te filteren.
+\subsection{Filteren van achtergrondlawaai}
+Volgens \textcite{Jung2021} helpen \textit{convolutional neural networks} of CNN's bijzonder veel om achtergrondlawaai weg te filteren. Een CNN is een specifieke opstelling van een \textit{deep learning} model waarbij een
+data-array van twee of meer dimensies, zoals een afbeelding of geluidsfragment, wordt gestapeld door een veelvoud van tweedimensionale filters.
 
-Om achtergrond lawaai weg te werken zijn AI gebaseerde filters zoals de \textit{short-time Fourier transform} of STFT ideaal. De STFT-filter verbetert in het algemeen de kwaliteit van het inkomende geluidssignaal door ruis uit het geluidssignaal te verwijderen.
-De STFT is een Fourier-gerelateerde transformatie die wordt gebruikt om de sinusoïdale frequentie- en fase-inhoud van plaatselijke delen van een signaal te bepalen terwijl dit in de tijd verandert, zie figuur~\ref{fig:conversion}. In de praktijk worden STFT's berekend door een tijdsignaal op te delen in kortere segmenten van gelijke lengte en de Fouriertransformatie afzonderlijk te berekenen voor elk korter segment. Aldus wordt het Fourier-spectrum voor elk korter segment onthuld. Gewoonlijk zet men dan de veranderende spectra als functie van de tijd; de grafiek staat bekend als een spectrogram of watervalgrafiek, zie figuur~\ref{fig:The_original_noise-removed_audio}.~\autocite{Jung2021}
+Om achtergrondlawaai weg te werken zijn AI-gebaseerde filters, zoals de \textit{short-time Fourier transform} of STFT, ideaal. De STFT-filter verbetert in het algemeen de kwaliteit van het inkomende geluidssignaal door ruis uit het geluidssignaal te verwijderen.
+De STFT is een Fourier-gerelateerde transformatie die wordt gebruikt om de sinusoïdale frequentie- en fase-inhoud van plaatselijke delen van een signaal te bepalen terwijl dit in de tijd verandert, zie figuur~\ref{fig:conversion}. In de praktijk worden STFT's berekend door een geluidssignaal op te delen in kortere segmenten van gelijke lengte en de Fouriertransformatie afzonderlijk te berekenen voor elk korter segment. Aldus wordt het Fourier-spectrum voor elk korter segment onthuld. Gewoonlijk zet men dan de veranderende spectra uit in functie van de tijd; de grafiek staat bekend als een spectrogram of watervalgrafiek, zie figuur~\ref{fig:The_original_noise-removed_audio}.~\autocite{Jung2021}
 
 \begin{figure}
     \centering
@@ -222,4 +208,4 @@ De STFT is een Fourier-gerelateerde transformatie die wordt gebruikt om de sinus
     \caption{\label{fig:The_original_noise-removed_audio}De originele audio met ruisonderdrukking (a) en spraakinformatie gecorrigeerd door ruismasker afvlakking (b).~\autocite{Jung2021}}
 \end{figure}
 
-In de opstelling van het onderzoek van \textcite{Jung2021} gebruikte men de \textit{librosa} en de \textit{noisereduce} Python-bibliotheken. Deze twee bibliotheken zullen ook gebruikt worden in het praktische gedeelte van deze bachelorproef.
+In de opstelling van het onderzoek van \textcite{Jung2021} gebruikt men de \textit{librosa} en de \textit{noisereduce} Python-bibliotheken. Deze twee bibliotheken zullen ook gebruikt worden in het praktische gedeelte van deze bachelorproef.
