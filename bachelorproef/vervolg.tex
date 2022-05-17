@@ -1,21 +1,21 @@
 \chapter{Vervolg}
 \label{ch:vervolg}
 
-In dit hoofdstuk zullen mogelijke vervolgen en toepassingen van deze bachelorproef beschreven worden. Hoe kunnen anderen toegang krijgen tot de programmeercode, de website raadplegen of hoe kan de \textit{webserver} geïnstalleerd worden binnen het HOGENT-netwerk. Ook zal er besproken worden hoe de data beter en objectiever gelabeld kan worden. Omdat het doelpubliek van dit hoofdstuk anders is dan het doelpubliek van het meer technische luik van dit onderzoek, zal alles zo makkelijk mogelijk uitgelegd worden.
+In dit hoofdstuk zullen mogelijke vervolgen en toepassingen van deze bachelorproef beschreven worden. Hoe kunnen anderen toegang krijgen tot de programmeercode, de website raadplegen of hoe kan de \textit{webserver} geïnstalleerd worden binnen het HOGENT-netwerk. Ook zal er besproken worden hoe de data beter en objectiever gelabeld kan worden. Omdat het doelpubliek van dit hoofdstuk anders is dan het doelpubliek van het meer technische luik van dit onderzoek, zal alles zo eenvoudig mogelijk uitgelegd worden.
 
 \section{Applicatie-code delen}
-Om er zeker van te zijn dat deze bachelorproef niet onder het stof verdwijnt en dat de applicatie niet meer gebruikt zal worden, is het noodzakelijk dat de volledige programmacode gedeeld kan worden. Hiervoor zal er gebruik gemaakt worden van ``GitHub''.
+Om er zeker van te zijn dat deze bachelorproef niet onder het stof verdwijnt en dat de applicatie niet meer gebruikt zal worden, is het noodzakelijk dat de volledige programmacode gedeeld kan worden. Hiervoor zal ``GitHub'' gebruikt worden.
 
-Om GitHub te begrijpen is het eerst nodig te begrijpen wat Git zelf is. Git is een open source versiebeheersysteem. Telkens ontwikkelaars met de eigen code aan de slag gaan en hun eigen wijzigingen aanbrengen, worden op die manier de verschillen in code opgeslagen. Versiebeheersystemen beheren deze revisies door alle wijzigingen op te slaan in een centrale opslagplaats. Hierdoor kunnen ontwikkelaars gemakkelijk samenwerken, omdat ze een nieuwe versie van de software kunnen downloaden, wijzigen en zelf nieuwe revisies kunnen uploaden. Elke programmeur van dat project kan dan op zijn of haar beurt opnieuw zien welke wijzigingen er doorgevoerd zijn en kan deze opnieuw downloaden.~\autocite{Brown2019}
+Om het principe van GitHub te begrijpen, is het eerst nodig te verstaan wat Git zelf is. Git is een open source versiebeheersysteem. Telkens ontwikkelaars met de eigen code aan de slag gaan en hun eigen wijzigingen aanbrengen, worden op die manier de verschillen in code opgeslagen. Versiebeheersystemen beheren deze revisies door alle wijzigingen op te slaan in een centrale opslagplaats. Hierdoor kunnen ontwikkelaars gemakkelijk samenwerken, omdat ze een nieuwe versie van de software kunnen downloaden, wijzigen en zelf nieuwe revisies kunnen uploaden. Elke programmeur van dat project kan dan op zijn of haar beurt opnieuw zien welke wijzigingen er doorgevoerd zijn en kan deze opnieuw downloaden.~\autocite{Brown2019}
 
-GitHub is dus zo een voorbeeld van een centrale opslagplaats waar alle wijzigingen opgeslagen staan in de \textit{cloud}.
+GitHub is dus zo een voorbeeld van een centrale opslagplaats waar alle wijzigingen opgeslagen zijn in de \textit{cloud}.
 
-Alle code, bestanden en revisies van deze volledige bachelorproef zijn dan ook te vinden op de persoonlijke GitHub-link: \url{https://github.com/SibianDG/BachelorProef}. Wanneer iemand toegang wil, dan kan men een e-mail sturen naar Jorrit Campens die u dan in contact brengt met de schrijver, Sibian De Gussem.
+Alle code, bestanden en revisies van deze volledige bachelorproef zijn dan ook te vinden op de persoonlijke GitHub-link: \url{https://github.com/SibianDG/BachelorProef}. Wanneer iemand toegang wil, dan kan die een e-mail sturen naar Jorrit Campens die u dan in contact brengt met de schrijver, Sibian De Gussem.
 
 \section{Hosting en bereikbaarheid van de applicatie}
-Om te kunnen spreken hoe we het beste de applicatie beschikbaar maken, is het eerst noodzakelijk dat iedereen weet wat alles rond hosting precies betekent.
+Om te kunnen bespreken hoe men de applicatie het best beschikbaar maakt, is het nodig om de theoretische achtergrond van hosting te vermelden.
 
-De huidige opstelling van dit eindwerk is geïllustreerd in figuur~\ref{fig:opstelling_bachelorproef}. Daarbij is alle code geïnstalleerd, of eerder gezegd aanwezig op die lokale computer zelf. Wanneer het bestand `website.py' wordt uitgevoerd, zal Python de code uitvoeren en een webserver opzetten op die lokale machine. In de output verschijnt er dan een website-adres. Als er naar de website gegaan wordt ziet u de applicatie.
+De huidige opstelling van dit eindwerk is geïllustreerd in figuur~\ref{fig:opstelling_bachelorproef}. Daarbij is alle code geïnstalleerd,op die lokale computer. Wanneer het bestand `website.py' wordt uitgevoerd, zal Python de code uitvoeren en een webserver opzetten op die lokale machine. In de output verschijnt er dan een website adres, langs waar de applicatie gebruikt kan worden.
 
 \begin{figure}
     \centering
@@ -23,7 +23,8 @@ De huidige opstelling van dit eindwerk is geïllustreerd in figuur~\ref{fig:opst
     \caption{\label{fig:opstelling_bachelorproef} Opstelling bachelorproef}
 \end{figure}
 
-Wanneer we de website beschikbaar willen maken voor meerdere computers moeten we de code op een server installeren, maar een server kan ook een gewone computer zijn. Zo kunnen er meerde \textit{clients} een aanvraag of \textit{request} sturen naar de server die alles afhandelt zoals de webpagina tonen en de berekeningen uitvoeren. Een illustratie is te vinden op figuur~\ref{fig:webhosting_scheme}. Daarbij is te zien dat wanneer een gebruiker of \textit{user} naar een website surft, er een verzoek verstuurd wordt naar het internet. Het internet weet op zijn beurt aan welke webserver die informatie kan vragen of sturen. De server handelt de website zelf af, de html-, en JavaScript-pagina's als websitebestanden, en doet ook de berekeningen.
+Wanneer de website beschikbaar gemaakt moet worden voor meerdere computers moeten de code op een server geïnstalleerd worden, maar een server kan ook een gewone computer zijn. Zo kunnen er meerde \textit{clients} een aanvraag of \textit{request} sturen naar de server. Die zal alles verder afhandelen, waaronder het tonen van de webpagina en het uitvoeren van de berekeningen. Een illustratie is te vinden in figuur~\ref{fig:webhosting_scheme}. Daarbij is te zien dat een verzoek verstuurd wordt naar het internet wanneer een gebruiker of \textit{user} naar een website surft. Het internet weet op zijn beurt aan welke webserver het informatie kan vragen of sturen.
+De rol van de server is het afhandelen van de html-, en JavaScript-pagina's, websitebestanden, en doet ook de berekeningen.
 
 \begin{figure}
     \centering
@@ -32,40 +33,39 @@ Wanneer we de website beschikbaar willen maken voor meerdere computers moeten we
 \end{figure}
 
 \subsection{Installeren op een computer}
-Hoe kan men alles installeren op een enkele computer?
 In de hoofdmap met alle code is er een bestand te vinden genaamd ``requirements.txt''. Door het commando:
 \begin{python}
     pip install -r requirements.txt
 \end{python}
-uit te voeren zullen alle Python-bibliotheken geïnstalleerd worden die nodig zijn om het project uit te voeren. Er wel nog een extra stap gebeuren en dat is dat FFmpeg apart geïnstalleerd moet worden. De stappen daarvan staan beschreven op de volgende website: \url{https://www.wikihow.com/Install-FFmpeg-on-Windows} voor een Windows besturingssysteem.
+uit te voeren zullen alle Python-bibliotheken geïnstalleerd worden die nodig zijn om het project uit te voeren. Er wel nog een extra stap gebeuren, namelijk FFmpeg apart installeren. De instructies daarvan staan beschreven op de volgende website: \url{https://www.wikihow.com/Install-FFmpeg-on-Windows} voor een Windows besturingssysteem.
 
-\subsubsection{Mogelijkheden}
+\subsubsection{Voordelen}
 \begin{itemize}
-    \item Snelle opzet voor IT'ers
-    \item Snelle verwerking omdat het op dezelfde computer gebeurt en er maar een persoon aan kan
-    \item Gratis oplossing
+    \item Snelle opzet voor IT'ers.
+    \item Snelle verwerking, omdat het op één computer gebeurt en er maar een persoon toegang heeft.
+    \item Gratis oplossing.
 \end{itemize}
 \subsubsection{Beperkingen}
 \begin{itemize}
     \item Andere computers hebben geen toegang
     \item Niet-IT'ers kunnen het mogelijk minder makkelijk installeren
-    \item Alles zou geïnstalleerd moeten worden op elke computer opnieuw
+    \item De software zou op elke computer opnieuw geïnstalleerd moeten worden.
 \end{itemize}
 
 \subsection{Hosten in een lokaal netwerk}
-Het is ook mogelijk om de software op een computer te installeren, deze te laten aanstaan, maar met een speciale parameter. Wanneer er in de Flask-applicatie de volgende parameter wordt meegegeven: `` host=`0.0.0.0' '', zal de applicatie opengesteld worden in het lokale netwerk. Dit laat het mogelijk naar het lokale IP-adres te surfen op een ander toestel en ook de website met de detector te kunnen gebruiken. Als men het argument \textit{threaded} op \textit{true} zet, dan is Flask \textit{multithreaded}~\autocite{Vieira2013}. Hierdoor kunnen er zeker meerdere verbindingen tegelijk verbonden worden. Een systematische voorstelling is te vinden in figuur~\ref{fig:lokaal_netwerk}. Wanneer men verbonden is met het Eduroam-netwerk, het netwerk dat in elke hogeschool of universiteit aanwezig is, dan zal dit niet lukken volgens de IT-dienst van HOGENT: ``Binnen het Eduroam-netwerk is het niet mogelijk dat andere toestellen aan jouw eigen toestel kunnen.''.
+Het is ook mogelijk om de software op een computer te installeren, met een speciale parameter. Wanneer in de Flask-applicatie de volgende parameter `` host=`0.0.0.0' '' wordt meegegeven, zal de applicatie opengesteld worden in het lokale netwerk. Dit maakt het mogelijk om naar het lokale IP-adres te surfen met een ander toestel en ook de website met de detector te gebruiken. Als men het argument \textit{threaded} op \textit{true} zet, dan is Flask \textit{multithreaded}~\autocite{Vieira2013}. Hierdoor kunnen er zeker meerdere toestellen tegelijk verbonden worden. Een systematische voorstelling is te vinden in figuur~\ref{fig:lokaal_netwerk}. Wanneer men verbonden is met het Eduroam-netwerk, het netwerk dat in elke hogeschool of universiteit aanwezig is, dan zal dit niet lukken volgens de IT-dienst van HOGENT: ``Binnen het Eduroam-netwerk is het niet mogelijk dat andere toestellen aan jouw eigen toestel kunnen.''.
 
-\subsubsection{Mogelijkheden}
+\subsubsection{Voordelen}
 \begin{itemize}
-    \item Een keer installeren op een computer van bijvoorbeeld de docent in kwestie, en nadien kan het programma altijd opgestart worden tijdens een les.
-    \item Meerdere connecties mogelijk
-    \item Een gratis oplossing
+    \item Een eenmalige installatie op een computer, bijvoorbeeld de docent, is voldoende om het programma altijd te kunnen opstarten in de les.
+    \item Meerdere connecties zijn mogelijk.
+    \item Het is een gratis oplossing
 \end{itemize}
 \subsubsection{Beperkingen}
 \begin{itemize}
-    \item Het maximale aantal connecties is afhankelijk van de computer waar de applicatie wordt opgestart. Hoe beter en sneller de computer, hoe meer connecties mogelijk en hoe sneller.
-    \item Er moet een SS- certificaat gemaakt en geïnstalleerd worden voor een beveiligde HTTPS-verbinding.
-    \item Niet mogelijk op het Eduroam-netwerk
+    \item Het maximale aantal connecties is afhankelijk van de computer waarop de applicatie wordt opgestart. Hoe beter en sneller de computer is, hoe meer connecties mogelijk zijn en hoe sneller de applicatie functioneert.
+    \item Er moet een SSL-certificaat gemaakt en geïnstalleerd worden voor een beveiligde HTTPS-verbinding.
+    \item Het is niet mogelijk op het Eduroam-netwerk.
 \end{itemize}
 
 \begin{figure}
@@ -78,19 +78,19 @@ Het is ook mogelijk om de software op een computer te installeren, deze te laten
 De applicatie kan ook online gehost worden, maar dit zal natuurlijk geld kosten. Zo'n applicatie kan dan gehost worden op Microsoft Azure als webapplicatie, maar ook via Combell. Elke student en docent krijgt zo een website om de drie jaar op de volgende link: \url{https://www.academicsoftware.eu/software/298/857}.
 \subsubsection{Mogelijkheden}
 \begin{itemize}
-    \item Eens opgezet is het altijd beschikbaar van overal
+    \item Eens opgezet is het altijd en overal beschikbaar.
     \item Wanneer er veel verbindingen en berekeningen nodig zijn, zullen de servers van de aanbieder automatisch geüpgraded worden zodat ze alles kunnen bolwerken.
-    \item Heel snel
+    \item Heel snelle bewerkingen.
 \end{itemize}
 \subsubsection{Beperkingen}
 \begin{itemize}
-    \item Grote financiële kost
+    \item Dit zorgt voor een grote financiële kost.
 \end{itemize}
 \section{Testen}
-De testen die verzameld zijn, is niet van een bijzonder grote grootteorde. Er kunnen extra testen in de vorm van nieuwe audio-opnames opgenomen worden in een vervolgopdracht. Dit kan een interdisciplinaire opdracht zijn met de richting verpleegkunde en/of communicatie en eventueel samen met de richting toegepaste informatica. Hoe meer testen, hoe accurater de productiviteit van de applicatie.
+Het aantal testen dat verzameld werd, is niet van een bijzonder grote grootteorde. Er kunnen extra testen, in de vorm van nieuwe audio-opnames, opgenomen worden in een vervolgopdracht. Dit kan een interdisciplinaire opdracht zijn met de richting verpleegkunde, communicatie en eventueel toegepaste informatica. Immers hoe meer testen, hoe groter de accuraatheid van de applicatie.
 
-Een opdracht bij de richting verpleegkunde kan het volgende zijn: de studenten maken en/of klasseren audio-opnames van eventuele \textit{elderspeak}. Hierna kan de gelabelde data gevoed worden aan het Python-script dat er geschreven is voor deze bachelorproef. Hierna kan er achterhaald worden hoe goed de applicatie presteert.
+Een mogelijke opzet van deze opdracht wordt hier besproken. De studenten verpleegkunde maken en/of klasseren audio-opnames van eventuele \textit{elderspeak}. 
 
-In een richting communicatie kan alle data opnieuw gelabeld worden, waar men veel kennis heeft rond dit fenomeen. Zo kan de data zeer nauwkeurig en uitgebreid geanalyseerd worden, terwijl er in dit eindwerk de data gelabeld is door een persoon die geen expert is.
+Studenten uit communicatierichtingen kunnen alle data dan opnieuw labelen, aangezien zij veel kennis hebben rond dit fenomeen. Zo kan de data zeer nauwkeurig en uitgebreid geanalyseerd worden, terwijl in dit eindwerk de data gelabeld werd door een persoon die geen expert is.
 
-Ook kan dit een opdracht vormen voor studenten toegepaste informatica om de gelabelde data naar de server door te sturen en een resultaat terug te krijgen. Dit is wel al beschikbaar in deze bachelorproef, maar studenten die dat nog moeten leren kunnen zo een echt voorbeeld en een duidelijk doel om dat te programmeren. Wanneer de data uitgebreider geanalyseerd wordt, moeten de testen lichtjes herschreven worden, dus dit kan ook een voorbeeld zijn van een opdracht.
+Toch kunnen de studenten informatica ook betrokken worden. Ze kunnen zelf een programma schrijven om de gelabelde data te laten analyseren door de applicatie. Dit is evenwel al beschikbaar in de bachelorproef, maar beginnende studenten kunnen door deze opdracht gestimuleerd worden met een goed voorbeeld en een duidelijk doel. Wanneer de data uitgebreider geanalyseerd wordt, moeten de testen lichtjes herschreven worden, wat ook een oefening kan zijn.

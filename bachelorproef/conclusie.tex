@@ -14,22 +14,22 @@
 % Heeft het onderzoek geleid tot nieuwe vragen die uitnodigen tot verder
 %onderzoek?
 
-Met deze bachelorproef kan besloten worden dat \textit{elderspeak} of \textit{nursery tone} onrechtstreeks kan gedetecteerd worden met artificiële intelligentie. Het verkozen type kunstmatige intelligentie zit verwerkt in de Google \textit{Speech Recognition}-API. Op basis van die spraakherkenning wordt er gedetecteerd of er verkleinwoorden, herhalingen, collectieve voornaamwoorden en tussenwerpsels aanwezig zijn. Daarnaast worden ook de toonhoogte en het stemvolume berekend via Python-bibliotheken, die geen gebruik maken van kunstmatige intelligentie.
+Uit deze bachelorproef kan besloten worden dat \textit{elderspeak} of \textit{nursery tone} onrechtstreeks kan gedetecteerd worden met artificiële intelligentie. Het verkozen type AI is verwerkt in de Google \textit{Speech Recognition}-API. Op basis van die spraakherkenning wordt er gedetecteerd of verkleinwoorden, herhalingen, collectieve voornaamwoorden en/of tussenwerpsels aanwezig zijn. Daarnaast worden ook de toonhoogte en het stemvolume berekend via Python-bibliotheken die geen gebruik maken van kunstmatige intelligentie.
 
-Het type model dat de Google \textit{Speech Recognition}-API gebruikt is natuurlijk niet zomaar online te vinden omdat anders andere mensen dit kunnen kopiëren. Wat er wel geweten is, is dat Google aan \textit{natural language processing} doet.
-Het achtergrondlawaai kan makkelijk worden weggefilterd via de volgende methode in de Google \textit{Speech Recognition}-API: `ajust\_for\_ambient\_noice(source)'.
+Het type model dat de Google \textit{Speech Recognition}-API gebruikt, is natuurlijk niet zomaar online terug te vinden. Het is wel algemeen bekend dat Google aan \textit{natural language processing} doet.
+Het achtergrondlawaai kan gemakkelijk worden weggefilterd via de volgende methode in de Google \textit{Speech Recognition}-API: `ajust\_for\_ambient\_noice(source)'.
 
-Spraakherkenning in Python is mogelijk via een gratis softwarebibliotheek, mits enkele aanpassingen. Zo is het noodzakelijk om \textit{wav}- en \textit{flac}-bestanden te hebben van de audio. Met andere formaten kan de bibliotheek niet overweg. Er is ook een limiet om de software gratis te gebruiken. Wanneer het geluidsbestand langer is dan 2 - 3 minuten, geeft de API een foutboodschap. Wanneer het geluid opgedeeld wordt in deelbestandjes of \textit{chuncks} die dan elk op hun beurt de audio doorsturen, lukt het wel.
+Spraakherkenning in Python is mogelijk via een gratis softwarebibliotheek, mits enkele aanpassingen. Zo is het noodzakelijk om \textit{wav}- en \textit{flac}-bestanden van de audio te hebben. Met andere formaten kan de bibliotheek niet overweg. Gratis gebruik van de software is ook gelimiteerd. Wanneer het geluidsbestand langer is dan 2 à 3 minuten, geeft de API een foutboodschap. Wanneer het geluid opgedeeld wordt in deelbestandjes of \textit{chunks} lukt het wel.
 
-Het opzetten van een ``Flask applicatie'' is bijzonder simpel. Het is een goede manier om snel een webserver op te zetten in Python. Het model ermee verbinden, of in ons geval eerder de methoden aanroepen, is ook gemakkelijk. Er kan gemakkelijk een ander bestand geïmporteerd worden die alle berekeningen heeft.
+Het opzetten van een ``Flask applicatie'' is bijzonder simpel. Het is een goede manier om snel een webserver op te zetten in Python. Het model ermee verbinden of, in ons geval, de methoden aanroepen, is ook eenvoudig. Er kan gemakkelijk een ander bestand dat alle berekeningen heeft, geïmporteerd worden.
 
-Om te kunnen staven dat \textit{elderspeak} goed gedetecteerd kan worden, zullen er meer testgevallen moeten gemaakt worden. Zo is het momenteel nog niet volledig duidelijk of de methoden die de toonhoogte en het stemvolume bepalen, goed genoeg werken. Wat de mogelijke vervolgopdrachten of -studies zijn, is te vinden in Hoofdstuk~\ref{ch:vervolg}.
+Om te kunnen staven dat \textit{elderspeak} goed gedetecteerd kan worden, is er nood aan meer testgevallen. Zo is het momenteel nog niet volledig duidelijk of de methoden die de toonhoogte en het stemvolume bepalen, goed genoeg werken. Wat de mogelijke vervolgopdrachten of -studies zijn, is te vinden in Hoofdstuk~\ref{ch:vervolg}.
 
 \section{Discussie}
-In deze discussie wordt er besproken of het nuttig is om deze applicatie in gebruik te nemen voor zorgkundigen.
+In deze discussie wordt besproken of het nuttig is voor verpleegkundigen om deze applicatie in gebruik te nemen.
 
-Het valt te beargumenteren dat deze applicatie zeker en vast gebruikt kan worden voor studenten in de zorgsector. Op die manier kunnen studenten \textit{elderspeak} beter ontdekken wat dat fenomeen is. Ze kunnen dat zowel actief, door de detector, als passief leren door de lijst van eigenschappen en tips te lezen.
+Concluderend kunnen we stellen dat deze applicatie zeker en vast gebruikt kan worden voor studenten in de zorgsector. Op die manier kunnen ze \textit{elderspeak} ontdekken en het fenomeen beter leren herkennen. Dat kan zowel actief, via de detector, als passief, door de lijst van eigenschappen en tips te lezen.
 
-De accuraatheid is misschien niet ideaal, maar dat hoeft ook niet. Wanneer er iemand de detector wil gebruiken, dan moet hij of zij ook aan zelfreflectie doen. Op die manier blijft het begrip en de eigenschappen langer in het geheugen zitten.
+De accuraatheid is niet ideaal, maar dat hoeft ook niet. Wanneer iemand de detector gebruikt, is het belangrijk dat hij of zij ook aan zelfreflectie doet. Op die manier blijven het begrip en de eigenschappen langer aanwezig in het geheugen.
 
-Met alle argumenten die aangehaald zijn, kan er toch wel besloten worden dat deze applicatie nuttig zal zijn in de toekomst. Het is natuurlijk hopen dat de website wel degelijk ingezet wordt tijdens de lessen \textit{elderspeak} in de richting verpleegkunde.
+Met alle argumenten die aangehaald zijn in deze tekst, kan er toch wel besloten worden dat deze applicatie nuttig zal zijn in de toekomst. Hopelijk wordt de website wel degelijk ingezet tijdens de lessen \textit{elderspeak} in de richting verpleegkunde.
