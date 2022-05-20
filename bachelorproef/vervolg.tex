@@ -4,7 +4,7 @@
 In dit hoofdstuk zullen mogelijke vervolgen en toepassingen van deze bachelorproef beschreven worden. Hoe kunnen anderen toegang krijgen tot de programmeercode, de website raadplegen of hoe kan de \textit{webserver} geïnstalleerd worden binnen het HOGENT-netwerk. Ook zal er besproken worden hoe de data beter en objectiever gelabeld kan worden. Omdat het doelpubliek van dit hoofdstuk anders is dan het doelpubliek van het meer technische luik van dit onderzoek, zal alles zo eenvoudig mogelijk uitgelegd worden.
 
 \section{Applicatie-code delen}
-Om er zeker van te zijn dat deze bachelorproef niet onder het stof verdwijnt en dat de applicatie niet meer gebruikt zal worden, is het noodzakelijk dat de volledige programmacode gedeeld kan worden. Hiervoor zal ``GitHub'' gebruikt worden.
+Om er zeker van te zijn dat deze bachelorproef niet onder het stof verdwijnt en de applicatie niet meer gebruikt zal worden, is het noodzakelijk dat de volledige programmacode gedeeld kan worden. Hiervoor zal ``GitHub'' gebruikt worden.
 
 Om het principe van GitHub te begrijpen, is het eerst nodig te verstaan wat Git zelf is. Git is een open source versiebeheersysteem. Telkens ontwikkelaars met de eigen code aan de slag gaan en hun eigen wijzigingen aanbrengen, worden op die manier de verschillen in code opgeslagen. Versiebeheersystemen beheren deze revisies door alle wijzigingen op te slaan in een centrale opslagplaats. Hierdoor kunnen ontwikkelaars gemakkelijk samenwerken, omdat ze een nieuwe versie van de software kunnen downloaden, wijzigen en zelf nieuwe revisies kunnen uploaden. Elke programmeur van dat project kan dan op zijn of haar beurt opnieuw zien welke wijzigingen er doorgevoerd zijn en kan deze opnieuw downloaden~\autocite{Brown2019}.
 
@@ -17,7 +17,7 @@ De code zal ook bijgevoegd worden op de scriptietool van HOGENT als bijlage, maa
 \section{Hosting en bereikbaarheid van de applicatie}
 Om te kunnen bespreken hoe men de applicatie het best beschikbaar maakt, is het nodig om de theoretische achtergrond van hosting te vermelden.
 
-De huidige opstelling van dit eindwerk is geïllustreerd in figuur~\ref{fig:opstelling_bachelorproef}. Daarbij is alle code geïnstalleerd,op die lokale computer. Wanneer het bestand `website.py' wordt uitgevoerd, zal Python de code uitvoeren en een webserver opzetten op die lokale machine. In de output verschijnt er dan een website adres, langs waar de applicatie gebruikt kan worden.
+De huidige opstelling van dit eindwerk is geïllustreerd in figuur~\ref{fig:opstelling_bachelorproef}. Daarbij is alle code geïnstalleerd, op die lokale computer. Wanneer het bestand `website.py' wordt uitgevoerd, zal Python de code uitvoeren en een webserver opzetten op die lokale machine. In de output verschijnt er dan een website adres, langs waar de applicatie gebruikt kan worden.
 
 \begin{figure}
     \centering
@@ -25,7 +25,7 @@ De huidige opstelling van dit eindwerk is geïllustreerd in figuur~\ref{fig:opst
     \caption{\label{fig:opstelling_bachelorproef} Opstelling bachelorproef}
 \end{figure}
 
-Wanneer de website beschikbaar gemaakt moet worden voor meerdere computers moeten de code op een server geïnstalleerd worden, maar een server kan ook een gewone computer zijn. Zo kunnen er meerde \textit{clients} een aanvraag of \textit{request} sturen naar de server. Die zal alles verder afhandelen, waaronder het tonen van de webpagina en het uitvoeren van de berekeningen. Een illustratie is te vinden in figuur~\ref{fig:webhosting_scheme}. Daarbij is te zien dat een verzoek verstuurd wordt naar het internet wanneer een gebruiker of \textit{user} naar een website surft. Het internet weet op zijn beurt aan welke webserver het informatie kan vragen of sturen.
+Wanneer de website beschikbaar gemaakt moet worden voor meerdere computers moet de code op een server geïnstalleerd worden, maar een server kan ook een gewone computer zijn. Zo kunnen er meerde \textit{clients} een aanvraag of \textit{request} sturen naar de server. Die zal alles verder afhandelen, waaronder het tonen van de webpagina en het uitvoeren van de berekeningen. Een illustratie is te vinden in figuur~\ref{fig:webhosting_scheme}. Daarbij is te zien dat een verzoek verstuurd wordt naar het internet wanneer een gebruiker of \textit{user} naar een website surft. Het internet weet op zijn beurt aan welke webserver het informatie kan vragen of sturen.
 De rol van de server is het afhandelen van de html-, en JavaScript-pagina's, websitebestanden, en doet ook de berekeningen.
 
 \begin{figure}
@@ -39,12 +39,12 @@ In de hoofdmap met alle code is er een bestand te vinden genaamd ``requirements.
 \begin{python}
     pip install -r requirements.txt
 \end{python}
-uit te voeren zullen alle Python-bibliotheken geïnstalleerd worden die nodig zijn om het project uit te voeren. Er wel nog een extra stap gebeuren, namelijk FFmpeg apart installeren. De instructies daarvan staan beschreven op de volgende website: \url{https://www.wikihow.com/Install-FFmpeg-on-Windows} voor een Windows besturingssysteem.
+uit te voeren zullen alle Python-bibliotheken geïnstalleerd worden die nodig zijn om het project uit te voeren. Er dient wel nog een extra stap gebeuren, namelijk FFmpeg apart installeren. De instructies daarvan staan beschreven op de volgende website: \url{https://www.wikihow.com/Install-FFmpeg-on-Windows} voor een Windows besturingssysteem.
 
 \subsubsection{Voordelen}
 \begin{itemize}
     \item Snelle opzet voor IT'ers.
-    \item Snelle verwerking, omdat het op één computer gebeurt en er maar een persoon toegang heeft.
+    \item Snelle verwerking, omdat het op één computer gebeurt en er maar één persoon toegang heeft.
     \item Gratis oplossing.
 \end{itemize}
 \subsubsection{Beperkingen}
@@ -77,7 +77,7 @@ Het is ook mogelijk om de software op een computer te installeren, met een speci
 \end{figure}
 
 \subsection{Hosting online}
-De applicatie kan ook online gehost worden, maar dit zal natuurlijk geld kosten. Zo'n applicatie kan dan gehost worden op Microsoft Azure als webapplicatie, maar ook via Combell. Elke student en docent krijgt zo een website om de drie jaar op de volgende link: \url{https://www.academicsoftware.eu/software/298/857}.
+De applicatie kan ook online gehost worden, maar dit zal natuurlijk geld kosten. Zo'n applicatie kan dan gehost worden op Microsoft Azure als webapplicatie, maar ook via Combell. Elke student en docent krijgt zo driejaarlijks een website op de volgende link: \url{https://www.academicsoftware.eu/software/298/857}.
 \subsubsection{Mogelijkheden}
 \begin{itemize}
     \item Eens opgezet is het altijd en overal beschikbaar.
@@ -99,4 +99,4 @@ Een mogelijke opzet van deze opdracht wordt hier besproken. De studenten verplee
 
 Studenten uit communicatierichtingen kunnen alle data dan opnieuw labelen, aangezien zij veel kennis hebben rond dit fenomeen. Zo kan de data zeer nauwkeurig en uitgebreid geanalyseerd worden, terwijl in dit eindwerk de data gelabeld werd door een persoon die geen expert is.
 
-Toch kunnen de studenten informatica ook betrokken worden. Ze kunnen zelf een programma schrijven om de gelabelde data te laten analyseren door de applicatie. Dit is evenwel al beschikbaar in de bachelorproef, maar beginnende studenten kunnen door deze opdracht gestimuleerd worden met een goed voorbeeld en een duidelijk doel. Wanneer de data uitgebreider geanalyseerd wordt, moeten de testen lichtjes herschreven worden, wat ook een oefening kan zijn.
+Toch kunnen de studenten informatica ook betrokken worden. Ze kunnen zelf een programma schrijven om de gelabelde data te laten analyseren door de applicatie. Dit is evenwel al beschikbaar in de bachelorproef, maar beginnende studenten kunnen door deze opdracht gestimuleerd worden met een goed voorbeeld en een duidelijk doel. Wanneer de data uitgebreider geanalyseerd wordt, moeten de testen enigszins herschreven worden, wat ook een oefening kan zijn.
