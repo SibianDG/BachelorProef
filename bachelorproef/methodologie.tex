@@ -13,7 +13,7 @@
 
 Na het literatuuronderzoek is het doel van deze bachelorproef om een website te ontwikkelen waarmee \textit{elderspeak} kan gedetecteerd worden via een detector. In het literatuurgedeelte werd ook theoretisch beschreven wat AI is en welke types er zijn, wat en hoe \textit{natural language processing} werkt en hoe men achtergrondlawaai filtert.
 
-Alle eigenschappen van \textit{elderspeak} worden herkend a.d.h.v. Python-bibliotheken en niet op basis van een zelfgemaakt AI-model. Men moet immers het warm water nieuw opnieuw uitvinden. Zo stelde \textcite{Beeckman2021} het volgende: ``Deze bachelorproef heeft geen meerwaarde kunnen aantonen voor het gebruik van een CNN. Wegens omstandigheden was het niet mogelijk te beschikken over een grote dataset wat leidt tot slechte voorspellingen van het model. Het model voorspelt een classificatie aan dezelfde accuraatheid dan dat gokken zou teweegbrengen. Dit maakt het huidige model onbruikbaar in de praktijk.''. De denkpiste om zelf een AI-model te maken, werd door deze stelling snel ontkracht. Ook de promotor Van Boven haalde aan dat er genoeg Python-bibliotheken ter beschikking zijn om de opdracht op die manier tot een goed einde te brengen.
+Alle eigenschappen van \textit{elderspeak} worden herkend a.d.h.v.\ Python-bibliotheken en niet op basis van een zelfgemaakt AI-model. Men moet immers het warm water nieuw opnieuw uitvinden. Zo stelde \textcite{Beeckman2021} het volgende: ``Deze bachelorproef heeft geen meerwaarde kunnen aantonen voor het gebruik van een CNN. Wegens omstandigheden was het niet mogelijk te beschikken over een grote dataset wat leidt tot slechte voorspellingen van het model. Het model voorspelt een classificatie aan dezelfde accuraatheid dan dat gokken zou teweegbrengen. Dit maakt het huidige model onbruikbaar in de praktijk.''. De denkpiste om zelf een AI-model te maken, werd door deze stelling snel ontkracht. Ook de promotor Van Boven haalde aan dat er genoeg Python-bibliotheken ter beschikking zijn om de opdracht op die manier tot een goed einde te brengen.
 
 Sommige methoden konden gekopieerd worden van de bijlagen van de studenten die hiervoor aan dit project gewerkt hebben, maar niet alle code stond beschreven in die bijlage. Daarnaast had \textcite{Standaert2021} geen GitHub-\textit{repository} waardoor de code niet snel kon hergebruikt worden. Ook zaten er af en toe kleine foutjes in de code waarbij het nodig was om die op te lossen. Om die reden zal er in Hoofdstuk~\ref{ch:vervolg} een deeltje aan bod komen over belang van het delen van code.
 
@@ -34,24 +34,24 @@ Vervolgens wordt er een foto van een oudere vrouw getoond waarbij er gevraagd wo
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/eigenschappen_elderspeak_website}
-    \caption{\label{fig:eigenschappen_page} Eigenschappen \textit{elderspeak} op de website}
+    \caption{\label{fig:eigenschappen_page} Eigenschappen \textit{elderspeak} op de website.}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/detector_begin_elderspeak}
-    \caption{\label{fig:detector_begin_page} Detector bij het begin}
+    \caption{\label{fig:detector_begin_page} Detector bij het begin.}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/dector_na_detecteren}
-    \caption{\label{fig:detector_end_page} Detector na het analyseren}
+    \caption{\label{fig:detector_end_page} Detector na het analyseren.}
 \end{figure}
 
 
 \subsection{Speech recognition}
-De basis van de applicatie is het herkennen van de spraak die wordt opgenomen op de website. Uiteraard moet dit niet van nul gebouwd worden, maar kan er gebruikgemaakt worden van een bestaande Python-bibliotheek. \textcite{Standaert2021} bemerkte in zijn bachelorproef dat  de Google Speech Recognition-API de beste optie is om te gebruiken, omdat deze het beste presteert. Hij vatte dit samen in zijn conclusie: ``Uit verschillende onderzoeken of studies waar men verschillende ASR-systemen met elkaar vergeleken [sic] kwam de Google Speech-API er altijd als beste uit. En dit in alle aspecten.''. Daarnaast gebruikt de Google Speech-API ook \textit{natural language processing} of NLP om beter te kunnen begrijpen wat er precies gezegd werd ~\autocite{GoogleCloud2022}. Hoe dit precies werkt, is na te lezen in het literatuuronderzoek, namelijk in Hoofdstuk~\ref{ch:stand-van-zaken}.
+De basis van de applicatie is het herkennen van de spraak die wordt opgenomen op de website. Uiteraard moet dit niet van nul gebouwd worden, maar kan er gebruikgemaakt worden van een bestaande Python-bibliotheek. \textcite{Standaert2021} bemerkte in zijn bachelorproef dat  de Google Speech Recognition-API de beste optie is om te gebruiken, omdat deze het beste presteert. Hij vatte dit samen in zijn conclusie: ``Uit verschillende onderzoeken of studies waar men verschillende ASR-systemen met elkaar vergeleken [sic] kwam de Google Speech-API er altijd als beste uit. En dit in alle aspecten.''. Daarnaast gebruikt de Google Speech-API ook \textit{natural language processing} of NLP om beter te kunnen begrijpen wat er precies gezegd werd~\autocite{GoogleCloud2022}. Hoe dit precies werkt, is na te lezen in het literatuuronderzoek, namelijk in Hoofdstuk~\ref{ch:stand-van-zaken}.
 
 Bij de spraakherkenning kwam er wel een groot probleem aan het licht. De Google \textit{Speech Recognition}-API kan alleen overweg met \textit{wav}- en \textit{flac}-bestanden én kan maar een bepaalde periode, ongeveer 2 tot 3 minuten, gratis herkennen. Het probleem is dat de audio gecapteerd werd in een \textit{mp3}-formaat. Het was dus noodzakelijk om eerst een conversie te maken van \textit{mp3} naar \textit{flac}, en om het audiobestand op te delen in deelbestandjes of \textit{chuncks}, zodat er geen betalende versie voor nodig was. De gebruikte technologie hierbij was ``ffmpeg''. Hoe de conversie precies gebeurt, is gedetailleerd te vinden in bijlage~\ref{bijlage:speech_recognition}.
 
