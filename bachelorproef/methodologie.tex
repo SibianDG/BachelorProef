@@ -53,17 +53,20 @@ Vervolgens wordt er een foto van een oudere vrouw getoond waarbij er gevraagd wo
 \subsection{Speech recognition}
 De basis van de applicatie is het herkennen van de spraak die wordt opgenomen op de website. Uiteraard moet dit niet van nul gebouwd worden, maar kan er gebruikgemaakt worden van een bestaande Python-bibliotheek. \textcite{Standaert2021} bemerkte in zijn bachelorproef dat  de Google Speech Recognition-API de beste optie is om te gebruiken, omdat deze het beste presteert. Hij vatte dit samen in zijn conclusie: ``Uit verschillende onderzoeken of studies waar men verschillende ASR-systemen met elkaar vergeleken [sic] kwam de Google Speech-API er altijd als beste uit. En dit in alle aspecten.''. Daarnaast gebruikt de Google Speech-API ook \textit{natural language processing} of NLP om beter te kunnen begrijpen wat er precies gezegd werd~\autocite{GoogleCloud2022}. Hoe dit precies werkt, is na te lezen in het literatuuronderzoek, namelijk in Hoofdstuk~\ref{ch:stand-van-zaken}.
 
-Bij de spraakherkenning kwam er wel een groot probleem aan het licht. De Google \textit{Speech Recognition}-API kan alleen overweg met \textit{wav}- en \textit{flac}-bestanden én kan maar een bepaalde periode, ongeveer 2 tot 3 minuten, gratis herkennen. Het probleem is dat de audio gecapteerd werd in een \textit{mp3}-formaat. Het was dus noodzakelijk om eerst een conversie te maken van \textit{mp3} naar \textit{flac}, en om het audiobestand op te delen in deelbestandjes of \textit{chuncks}, zodat er geen betalende versie voor nodig was. De gebruikte technologie hierbij was ``ffmpeg''. Hoe de conversie precies gebeurt, is gedetailleerd te vinden in bijlage~\ref{bijlage:speech_recognition}.
+Bij de spraakherkenning kwam er wel een groot probleem aan het licht. De Google \textit{Speech Recognition}-API kan alleen overweg met \textit{wav}- en \textit{flac}-bestanden én kan maar een bepaalde periode, ongeveer 2 tot 3 minuten, gratis herkennen. Het probleem is dat de audio gecapteerd werd in een \textit{mp3}-formaat. Het was dus noodzakelijk om eerst een conversie te maken van \textit{mp3} naar \textit{flac}, en om het audiobestand op te delen in deelbestandjes of \textit{chuncks}, zodat er geen betalende versie voor nodig was. De gebruikte technologie hierbij was ``ffmpeg''. Hierbij was het nodig dat de lengte van het bestand berekend werd, in hoeveel \texit{chunks} het bestand opgedeeld moet worden a.d.h.v.\ de limiet die de gratis Google \textit{Speech Recognition}-API toeliet. Hoe de conversie heel precies gebeurt, is gedetailleerd te vinden in bijlage~\ref{bijlage:speech_recognition}.
 
 Het gebruiken van die API is relatief gemakkelijk. Een extra optie is dan ook ter beschikking om achtergrondlawaai een beetje weg te filteren. Door de optie \newline`ajust\_for\_ambient\_noice(source)' aan te zetten, zal de bibliotheek zich aanpassen aan de geluidsbron om de klanken beter op te nemen alvorens die worden doorgestuurd naar de spraakherkenning-API. Deze methode gebruikt de techniek die beschreven is in het literatuuronderzoek over achtergrondlawaai.
 
-Eens dit ingesteld is, worden de audiobestanden meegegeven en krijgt het systeem de tekst terug waarvan het AI-model van Google de tekst herkend heeft. Uiteraard werkt dit niet feilloos, maar het is wel redelijk goed voor een gratis versie. Dit vormt de basis voor de volgende methoden.
+
+Eens dit ingesteld is, worden de audiobestanden meegegeven en krijgt het systeem de tekst terug waarvan het AI-model van Google de tekst herkend heeft. Uiteraard werkt dit niet feilloos, maar het is wel redelijk goed voor een gratis versie. Dit vormt de basis voor de volgende methoden. Die zijn te vinden in de tussentitels hieronder:
 
 \subsection{Verkleinwoorden}
-Om verkleinwoorden te herkennen werd de methode van \textcite{Standaert2021} gehanteerd. Daarbij wordt er gekeken of woorden langer zijn dan 3 letters en ze niet voorkomen in de lijst die geen verkleinwoorden zijn. Enkele voorbeelden die wel eindigen op ``-je'', ``-ke'', ``-kes'' of ``-jes'', maar geen verkleinwoorden zijn, zijn: poffertje, meisje, koopje, etentje, dutje, toetje, mannelijke, vrouwelijke etc. De code voor deze methode kan gevonden worden in bijlage~\ref{bijlage:verkleinwoorden}.
+Om verkleinwoorden te herkennen werd de methode van \textcite{Standaert2021} gehanteerd. Daarbij wordt er gekeken of woorden langer zijn dan 3 letters en ze niet voorkomen in de lijst die geen verkleinwoorden zijn. Enkele voorbeelden die wel eindigen op ``-je'', ``-ke'', ``-kes'' of ``-jes'', maar geen verkleinwoorden zijn, zijn: poffertje, meisje, koopje, etentje, dutje, toetje, mannelijke, vrouwelijke etc.
+Die herkende verkleinwoorden worden dan bijgehouden in een lijst. Op het einde wordt ofwel bepaald dat er geen verkleinwoorden aanwezig waren, of worden alle verkleinwoorden in de tekst in het rood aangeduid. De code voor deze methode kan gevonden worden in bijlage~\ref{bijlage:verkleinwoorden}.
 
 \subsection{Herhalingen}
-Om herhalingen te herkennen werd er eveneens gebruik gemaakt van de methode die \textcite{Standaert2021} beschreven heeft. Daarbij worden de voorbije 25 woorden bijgehouden waarin eventuele herhalingen bewaard worden in een lijst. Die zullen later gebruikt worden om een mooie weergave te maken van de aanwezige herhalingen.
+Om herhalingen te herkennen werd er eveneens gebruik gemaakt van de methode die \textcite{Standaert2021} beschreven heeft. Daarbij worden de voorbije 25 woorden bijgehouden waarin eventuele herhalingen bewaard worden in een lijst.
+Die zullen later gebruikt worden om een mooie weergave te maken van de aanwezige herhalingen.
 De code om herhalingen te detecteren is te vinden in bijlage~\ref{bijlage:herhalingen}.
 
 \subsection{Collectieve voornaamwoorden}
@@ -91,12 +94,15 @@ Ten slotte analyseert de applicatie of er luider gesproken wordt in het 2\textsu
 Om een getal te verkrijgen dat het volume voorstelt, is er gebruik gemaakt van de pyln-bibliotheek die een BS.170 geluidsmeter aanmaakt in de code. Deze analyseert dan de audio en geeft een getal weer. Hoe dit precies geïmplementeerd werd, is te vinden in bijlage~\ref{bijlage:stemvolume}.
 
 \section{Front-end}
+De \textit{front-end} wordt verwerkt op de server zelf, dus het Flask-\textit{framework} is een volledig \textit{back-end-framework} en dus geen \textit{front-end-framework}. Dit wil zeggen dat de volledige html-pagina op de server gemaakt wordt met alles er op en er aan en dat die daarna pas wordt doorgestuurd naar de browser. Hierdoor zal de server meer werk hebben om alles te kunnen verwerken. Maar de \texit{front-end} precies gemaakt wordt, is hieronder te lezen:
+
 \subsection{Geluid opnemen}
-Het geluid opnemen gebeurt volledig aan de kant van de \textit{client} of de gebruiker. Wanneer op de knop gedrukt wordt om de audio-opname te starten, zullen er \textit{audiochunks } worden toegevoegd aan een lijst. Die worden na de opname allemaal samengevoegd tot een \textit{blob}, of een \textit{binary-large object}, die dan een \textit{mp3}-file aanmaakt.
+Het geluid opnemen gebeurt volledig aan de kant van de \textit{client} of de gebruiker. Dit gebeurt volledig met ingebouwde functies van JavaScript, de programmeertaal op een website dynamisch te bewerken. Wanneer op de knop gedrukt wordt om de audio-opname te starten, zullen er \textit{audiochunks } worden toegevoegd aan een lijst. Die worden na de opname allemaal samengevoegd tot een \textit{blob}, of een \textit{binary-large object}, die dan een \textit{mp3}-file aanmaakt.
 Per casus wordt er ook een andere afbeelding en tekst getoond boven de opneemknop.
 
 \subsection{API-afhandeling}
-Vanuit de \textit{front-end} worden er \textit{API-requests} gestuurd met het audiobestand als bijlage naar de \textit{back-end}. De server analyseert dan de verschillende methodes. Wanneer alles onderzocht is, wordt alle data verzameld en via een JSON-formaat teruggestuurd naar de \textit{client}. Daar worden de resultaten ingevuld in de voorziene html-stukken.
+De \textit{mp3}-file staat dan nog steeds op het toestel van de gebruiker zelf. Dat bestand moet verstuurd worden naar de server of de \texit{back-end} kant van de applicatie.
+Vanuit de \textit{front-end} worden er dus \textit{API-requests}, of netwerkverzoeken, gestuurd met het audiobestand als bijlage naar de \textit{back-end} of de server. De server analyseert dan de verschillende methodes. Wanneer alles onderzocht is, wordt alle data verzameld en via een JSON-formaat, een algemeen leesbaar formaat op het internet, teruggestuurd naar de \textit{client}. Daar worden de resultaten ingevuld in de voorziene html-stukken.
 
 \section{Testen}
 Om de werking, specificiteit en de sensibiliteit van de applicatie te objectiveren, zijn er automatische testen opgezet. De data die verzameld is via een online formulier, is te vinden op:  \url{https://www.jotform.com/form/213524968382060}. Deze werd in het begin van het tweede semester verzameld. Eens de data opgeslagen was, werd alle data beluisterd en handmatig gelabeld.
@@ -112,11 +118,15 @@ Met deze resultaten kon er een \textit{confusion matrix} gemaakt worden over  de
 \end{figure}
 
 \section{Hosting}
+\subsection{Hosten op lokaal netwerk}
+Wanneer er de parameter ``host'' wordt meegegeven aan het programma zelf met als waarde ``0.0.0.0'', dan zal de applicatie opengesteld worden in het lokaal netwerk. De applicatie zal dan draaien op het lokaal IP-adres van de computer of server. Op Windows kan men dit opzoeken door ``ipconfig'' in te typen in \textit{command prompt}. Het IP-adres is dan terug te vinden bij ofwel Ethernet-adapter of WLAN-adapter.
+
 \subsection{Installatie op host}
 Om de website te kunnen hosten, moet de nodige software eerst geïnstalleerd worden. Zo kunnen alle Python-bibliotheken geïnstalleerd worden via het volgende commando:
 \begin{python}
 	pip install -r requirements.txt
 \end{python}
+Dit commando zorgt er voor dat alle Python-bibliotheken uit dat bestand geïnstalleerd worden zoals het tijdens de \textit{proof-of-concept} geïnstalleerd was.
 
 Daarnaast moet ook FFmpeg apart geïnstalleerd worden. De stappen daarvan staan beschreven op de volgende website: \url{https://www.wikihow.com/Install-FFmpeg-on-Windows} voor een Windows besturingssysteem.
 
@@ -134,3 +144,4 @@ Zodat andere toestellen aan de laptop of server zou kunnen moet er een SSL-certi
 		app.run(ssl_context=context, host='0.0.0.0', ...)
 	\end{python}
 \end{itemize}
+
