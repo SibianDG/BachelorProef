@@ -61,7 +61,7 @@ Het gebruiken van die API is relatief gemakkelijk. Een extra optie is dan ook te
 Eens dit ingesteld is, worden de audiobestanden meegegeven en krijgt het systeem de tekst terug waarvan het AI-model van Google de tekst herkend heeft. Uiteraard werkt dit niet feilloos, maar het is wel redelijk goed voor een gratis versie. Dit vormt de basis voor de volgende methoden. Die zijn te vinden in de tussentitels hieronder:
 
 \subsection{Verkleinwoorden}
-Om verkleinwoorden te herkennen werd de methode van \textcite{Standaert2021} gehanteerd. Daarbij wordt er gekeken of woorden langer zijn dan 3 letters en ze niet voorkomen in de lijst die geen verkleinwoorden zijn. Enkele voorbeelden die wel eindigen op ``-je'', ``-ke'', ``-kes'' of ``-jes'', maar geen verkleinwoorden zijn, zijn: poffertje, meisje, koopje, etentje, dutje, toetje, mannelijke, vrouwelijke etc. Extra woorden die geen verkleinwoorden zijn, heeft \textcite{Standaert2021} in zijn project gedefinieerd. Daarover schrijft hij het volgende: 
+Om verkleinwoorden te herkennen werd de methode van \textcite{Standaert2021} gehanteerd. Daarbij wordt er gekeken of woorden langer zijn dan 3 letters en ze niet voorkomen in de lijst die geen verkleinwoorden zijn. Enkele voorbeelden die wel eindigen op ``-je'', ``-ke'', ``-kes'' of ``-jes'', maar geen verkleinwoorden zijn, zijn: poffertje, meisje, koopje, etentje, dutje, toetje, mannelijke, vrouwelijke etc. Extra woorden die geen verkleinwoorden zijn, heeft \textcite{Standaert2021} in zijn project gedefinieerd. Daarover schrijft hij het volgende:
 ``Na verder onderzoek en testen blijkt dat er nog een hoop andere woorden zijn die eindigen
 op -ke. Namelijk bijna alle bijvoeglijke naamwoorden. Denk maar aan ’sterke’ of ’leuke’.
 Maar omdat er niet direct een onderscheid te maken valt tussen bijvoeglijke naamwoorden
@@ -73,9 +73,9 @@ op -ke, simpelweg door een lijst te trekken van alle steden, gemeenten en deelge
 en te gaan kijken welke er eindigen op -ke. Want bijvoorbeeld de gemeente Merelbeke
 eindigt op -ke maar zou ook niet als verkleinwoord aanschouwd mogen worden. De lijst
 bestaat dus uit alle bijvoeglijke naamwoorden die eindigen op -ke, alle gemeentes die
-eindigen op -ke én ook nog een aantal uitzonderingen. Zoals ’ter zake’ of ’ter sprake’.''~\autocite{Standaert2021}.
+eindigen op -ke én ook nog een aantal uitzonderingen. Zoals ’ter zake’ of ’ter sprake’.''~\autocite{Standaert2021}. Dus alle casusen die hierboven beschreven staan, zijn dan ook opgeslagen in de applicatie. Hierdoor zullen deze woorden niet geklasseerd worden als verkleinwoord.
 
-Die herkende verkleinwoorden worden dan bijgehouden in een lijst. Op het einde wordt ofwel bepaald dat er geen verkleinwoorden aanwezig waren, of worden alle verkleinwoorden in de tekst in het rood aangeduid. De code voor deze methode kan gevonden worden in bijlage~\ref{bijlage:verkleinwoorden}.
+Wanneer een woord eindigt op ``-je'', ``-ke'', ``-kes'' of ``-jes'' én niet op de bovenstaande lijst staan, wordt deze dan bijgehouden in een lijst. Op het einde wordt ofwel bepaald dat er geen verkleinwoorden aanwezig waren, of worden alle verkleinwoorden in de tekst in het rood aangeduid. De code voor deze methode kan gevonden worden in bijlage~\ref{bijlage:verkleinwoorden}.
 
 \subsection{Herhalingen}
 Om herhalingen te herkennen werd er eveneens gebruik gemaakt van de methode die \textcite{Standaert2021} beschreven heeft. Daarbij worden de voorbije 25 woorden bijgehouden waarin eventuele herhalingen bewaard worden in een lijst.
@@ -102,9 +102,10 @@ Deze methode werd al opgesteld door \textcite{Standaert2021} in zijn eindwerk. H
 ``Ten eerste is het moeilijk om ingesproken audio zuiver te krijgen, dit betekent dat er altijd
 ruis of achtergrond geluid bij is, en deze hebben ook frequenties. Hierdoor kan er niet
 gezien worden of een frequentiepiek door achtergrondgeluid komt of door de sprekende
-persoon.
+persoon.''~\autocite{Standaert2021}. Dus deze methode zal nooit feilloos werken.
 
-Ten tweede is deze technologie die frequenties opmeet vooral bedoeld voor vaste tonen
+Daarnaast schrijft \textit{Standaert2021} ook het volgende over dezelfde methode:
+``Ten tweede is deze technologie die frequenties opmeet vooral bedoeld voor vaste tonen
 die geïsoleerd zijn. Bij spraak gaan mensen niet een aantal tonen perfect aanhouden maar
 zitten er ook veel andere geluiden behalve tonen; zoals medeklinkers. Deze zijn niet
 geproduceerd door de stembanden maar door luchtblokkering, lucht die door de keel of
@@ -118,10 +119,9 @@ beschouwen als kenmerk van elderspeak of anderzijds is het gewoon een medeklinke
 er is niet echt een manier om deze twee van elkaar te onderscheiden. Bijkomend is er dan
 ook nog eens het ruis en achtergrondgeluid die ook pieken zal geven. Er is bewezen dat bij
 spraakopnames voor toonhoogte-onderzoeken de achtergrondgeluiden steeds de grootste
-boosdoener was (Microphones, 2021).''~\autocite{Standaert2021}.
+boosdoener was (Microphones, 2021).''~\autocite{Standaert2021}. Hieruit kan er geconcludeerd worden dat het achtergrondgeluid altijd zeer goed in de gaten moet gehouden worden.
 
-
-Deze applicatie zorgde voor uitbreiding namelijk door het berekenen of de toonhoogte hoger ligt bij de casus met de oudere vrouw dan in de casus met de twee jongere vrouwen.
+Deze applicatie zorgde voor uitbreiding, namelijk door het berekenen of de toonhoogte hoger ligt bij de casus met de oudere vrouw dan in de casus met de twee jongere vrouwen.
 Hoe dit gerealiseerd werd in de code is te vinden in bijlage~\ref{bijlage:toonhoogte}.
 
 \subsection{Stemvolume}
@@ -130,7 +130,7 @@ Ten slotte analyseert de applicatie of er luider gesproken wordt in het 2\textsu
 Om een getal te verkrijgen dat het volume voorstelt, is er gebruik gemaakt van de pyln-bibliotheek die een BS.170 geluidsmeter aanmaakt in de code. Deze analyseert dan de audio en geeft een getal weer. Hoe dit precies geïmplementeerd werd, is te vinden in bijlage~\ref{bijlage:stemvolume}.
 
 \subsection{Problemen met Python-versies}
-\textit{Standaert2021} schreef dat er problemen waren bij verschillende versies van Python. Sommige Python-bibliotheken waren niet compatibel met met een bepaalde Python-versie. Zo schreef hij het volgende: 
+\textit{Standaert2021} schreef dat er problemen waren bij verschillende versies van Python. Sommige Python-bibliotheken waren niet compatibel met met een bepaalde Python-versie. Zo schreef hij het volgende:
 ``Bij de ontwikkeling van de applicatie komen er een aantal problemen kijken. Het belangrijkste
 probleem is dat voor sommige plugins te gebruiken men een versie van Python
 nodig heeft die men soms niet wil gebruiken. Bijvoorbeeld voor de stemherkenning en
@@ -144,7 +144,6 @@ die de verkleinwoorden gaat herkennen gebruikt. Deze werken enkel in Python 3.7.
 Het komt er dus op neer dat we deze verschillende delen van de applicatie pas later zullen
 kunnen samenvoegen als de plugins gepubliceerd worden voor een gemeenschappelijke
 Python versie. Dit duurt normaal niet super lang.''~\autocite{Standaert2021}.
-
 Een jaar later waren alle problemen van de baan en kon alles gemakkelijk met elkaar samen werken.
 
 \section{Front-end}
