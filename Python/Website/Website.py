@@ -138,7 +138,7 @@ if __name__ == "__main__":
         app.run(
             debug=False,
             #host='192.168.1.185',
-            host='0.0.0.0',
+            #host='0.0.0.0',
             port=5001,
             ssl_context=context
         )

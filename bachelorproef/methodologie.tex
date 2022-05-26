@@ -51,14 +51,13 @@ Vervolgens wordt er een foto van een oudere vrouw getoond waarbij er gevraagd wo
 
 
 \subsection{Speech recognition}
-De basis van de applicatie is het herkennen van de spraak die wordt opgenomen op de website. Uiteraard moet dit niet van nul gebouwd worden, maar kan er gebruikgemaakt worden van een bestaande Python-bibliotheek. \textcite{Standaert2021} bemerkte in zijn bachelorproef dat  de Google Speech Recognition-API de beste optie is om te gebruiken, omdat deze het beste presteert. Hij vatte dit samen in zijn conclusie: ``Uit verschillende onderzoeken of studies waar men verschillende ASR-systemen met elkaar vergeleken [sic] kwam de Google Speech-API er altijd als beste uit. En dit in alle aspecten.''. Daarnaast gebruikt de Google Speech-API ook \textit{natural language processing} of NLP om beter te kunnen begrijpen wat er precies gezegd werd~\autocite{GoogleCloud2022}. Hoe dit precies werkt, is na te lezen in het literatuuronderzoek, namelijk in Hoofdstuk~\ref{ch:stand-van-zaken}.
+De basis van de applicatie is het herkennen van de spraak die wordt opgenomen op de website. Uiteraard moet dit niet van nul opgebouwd worden, maar kan er gebruikgemaakt worden van een bestaande Python-bibliotheek. \textcite{Standaert2021} bemerkte in zijn bachelorproef dat  de Google Speech Recognition-API de beste optie is om te gebruiken, omdat deze het beste presteert. Hij vatte dit samen in zijn conclusie: ``Uit verschillende onderzoeken of studies waar men verschillende ASR-systemen met elkaar vergeleken [\textit{sic}] kwam de Google Speech-API er altijd als beste uit. En dit in alle aspecten.''. Daarnaast gebruikt de Google Speech-API ook \textit{natural language processing} of NLP om beter te kunnen begrijpen wat er precies gezegd werd~\autocite{GoogleCloud2022}. Hoe dit precies werkt, is na te lezen in het literatuuronderzoek, namelijk in Hoofdstuk~\ref{ch:stand-van-zaken}.
 
 Bij de spraakherkenning kwam er wel een groot probleem aan het licht. De Google \textit{Speech Recognition}-API kan alleen overweg met \textit{wav}- en \textit{flac}-bestanden én kan maar een bepaalde periode, ongeveer 2 tot 3 minuten, gratis herkennen. Het probleem is dat de audio gecapteerd werd in een \textit{mp3}-formaat. Het was dus noodzakelijk om eerst een conversie te maken van \textit{mp3} naar \textit{flac}, en om het audiobestand op te delen in deelbestandjes of \textit{chuncks}, zodat er geen betalende versie voor nodig was. De gebruikte technologie hierbij was ``ffmpeg''. Hierbij was het nodig dat de lengte van het bestand berekend werd, in hoeveel \texit{chunks} het bestand opgedeeld moet worden a.d.h.v.\ de limiet die de gratis Google \textit{Speech Recognition}-API toeliet. Hoe de conversie heel precies gebeurt, is gedetailleerd te vinden in bijlage~\ref{bijlage:speech_recognition}.
 
 Het gebruiken van die API is relatief gemakkelijk. Een extra optie is dan ook ter beschikking om achtergrondlawaai een beetje weg te filteren. Door de optie \newline`ajust\_for\_ambient\_noice(source)' aan te zetten, zal de bibliotheek zich aanpassen aan de geluidsbron om de klanken beter op te nemen alvorens die worden doorgestuurd naar de spraakherkenning-API. Deze methode gebruikt de techniek die beschreven is in het literatuuronderzoek over achtergrondlawaai.
 
-
-Eens dit ingesteld is, worden de audiobestanden meegegeven en krijgt het systeem de tekst terug waarvan het AI-model van Google de tekst herkend heeft. Uiteraard werkt dit niet feilloos, maar het is wel redelijk goed voor een gratis versie. Dit vormt de basis voor de volgende methoden. Die zijn te vinden in de tussentitels hieronder:
+Eens dit ingesteld is, worden de audiobestanden meegegeven en krijgt het systeem de tekst terug waarvan het AI-model van Google de tekst herkend heeft. Uiteraard werkt dit niet feilloos, maar  het functioneert behoorlijk goed voor een gratis versie. Dit vormt de basis voor de volgende methoden. Die zijn te vinden in de tussentitels hieronder:
 
 \subsection{Verkleinwoorden}
 Om verkleinwoorden te herkennen werd de methode van \textcite{Standaert2021} gehanteerd. Daarbij wordt er gekeken of woorden langer zijn dan 3 letters en ze niet voorkomen in de lijst die geen verkleinwoorden zijn. Enkele voorbeelden die wel eindigen op ``-je'', ``-ke'', ``-kes'' of ``-jes'', maar geen verkleinwoorden zijn, zijn: poffertje, meisje, koopje, etentje, dutje, toetje, mannelijke, vrouwelijke etc. Extra woorden die geen verkleinwoorden zijn, heeft \textcite{Standaert2021} in zijn project gedefinieerd. Daarover schrijft hij het volgende:
@@ -119,7 +118,7 @@ beschouwen als kenmerk van elderspeak of anderzijds is het gewoon een medeklinke
 er is niet echt een manier om deze twee van elkaar te onderscheiden. Bijkomend is er dan
 ook nog eens het ruis en achtergrondgeluid die ook pieken zal geven. Er is bewezen dat bij
 spraakopnames voor toonhoogte-onderzoeken de achtergrondgeluiden steeds de grootste
-boosdoener was (Microphones, 2021).''~\autocite{Standaert2021}. Hieruit kan er geconcludeerd worden dat het achtergrondgeluid altijd zeer goed in de gaten moet gehouden worden.
+boosdoener was (Microphones, 2021).''~\autocite{Standaert2021}. Hieruit kan er geconcludeerd worden dat het achtergrondgeluid altijd zo veel mogelijk moet beperkt worden.
 
 Deze applicatie zorgde voor uitbreiding, namelijk door het berekenen of de toonhoogte hoger ligt bij de casus met de oudere vrouw dan in de casus met de twee jongere vrouwen.
 Hoe dit gerealiseerd werd in de code is te vinden in bijlage~\ref{bijlage:toonhoogte}.
@@ -132,8 +131,8 @@ Om een getal te verkrijgen dat het volume voorstelt, is er gebruik gemaakt van d
 \subsection{Problemen met Python-versies}
 \textit{Standaert2021} schreef dat er problemen waren bij verschillende versies van Python. Sommige Python-bibliotheken waren niet compatibel met met een bepaalde Python-versie. Zo schreef hij het volgende:
 ``Bij de ontwikkeling van de applicatie komen er een aantal problemen kijken. Het belangrijkste
-probleem is dat voor sommige plugins te gebruiken men een versie van Python
-nodig heeft die men soms niet wil gebruiken. Bijvoorbeeld voor de stemherkenning en
+probleem is dat voor [\textit{sic}] sommige plugins [\textit{sic}] te gebruiken men een versie van Python
+nodig heeft die men soms niet wil gebruiken. Bijvoorbeeld voor [\textit{sic}] de stemherkenning en
 de emotie-herkenner te gebruiken hebben de de library librosa en numpy nodig. Librosa
 werkt namelijk niet in Python 3.7 maar wel in Python 3.6, 3.8 en hoger. En numpy werkt
 bijvoorbeeld enkel voor Python 3.7 of hoger. Dus er zijn een paar overlappende Python
@@ -144,13 +143,13 @@ die de verkleinwoorden gaat herkennen gebruikt. Deze werken enkel in Python 3.7.
 Het komt er dus op neer dat we deze verschillende delen van de applicatie pas later zullen
 kunnen samenvoegen als de plugins gepubliceerd worden voor een gemeenschappelijke
 Python versie. Dit duurt normaal niet super lang.''~\autocite{Standaert2021}.
-Een jaar later waren alle problemen van de baan en kon alles gemakkelijk met elkaar samen werken.
+Een jaar later waren alle problemen van de baan en kon alles vlot met elkaar samen werken.
 
 \section{Front-end}
-De \textit{front-end} wordt verwerkt op de server zelf, dus het Flask-\textit{framework} is een volledig \textit{back-end-framework} en dus geen \textit{front-end-framework}. Dit wil zeggen dat de volledige html-pagina op de server gemaakt wordt met alles er op en er aan en dat die daarna pas wordt doorgestuurd naar de browser. Hierdoor zal de server meer werk hebben om alles te kunnen verwerken. Maar de \texit{front-end} precies gemaakt wordt, is hieronder te lezen:
+De \textit{front-end} wordt verwerkt op de server zelf, dus het Flask-\textit{framework} is een volledig \textit{back-end-framework} en dus geen \textit{front-end-framework}. Dit wil zeggen dat de volledige html-pagina op de server gemaakt wordt met alles er op en er aan en dat die daarna pas wordt doorgestuurd naar de browser. Hierdoor zal de server meer werk hebben om alles te kunnen verwerken, maar hoe de \texit{front-end} precies gemaakt wordt, is hieronder te lezen:
 
 \subsection{Geluid opnemen}
-Het geluid opnemen gebeurt volledig aan de kant van de \textit{client} of de gebruiker. Dit gebeurt volledig met ingebouwde functies van JavaScript, de programmeertaal op een website dynamisch te bewerken. Wanneer op de knop gedrukt wordt om de audio-opname te starten, zullen er \textit{audiochunks } worden toegevoegd aan een lijst. Die worden na de opname allemaal samengevoegd tot een \textit{blob}, of een \textit{binary-large object}, die dan een \textit{mp3}-file aanmaakt.
+Het geluid opnemen gebeurt volledig aan de kant van de \textit{client} of de gebruiker. Dit gebeurt met ingebouwde functies van JavaScript, de programmeertaal op een website dynamisch te bewerken. Wanneer op de knop gedrukt wordt om de audio-opname te starten, zullen er \textit{audiochunks } worden toegevoegd aan een lijst. Die worden na de opname allemaal samengevoegd tot een \textit{blob}, of een \textit{binary-large object}, die dan een \textit{mp3}-file aanmaakt.
 Per casus wordt er ook een andere afbeelding en tekst getoond boven de opneemknop.
 
 \subsection{API-afhandeling}
@@ -184,7 +183,7 @@ Dit commando zorgt er voor dat alle Python-bibliotheken uit dat bestand geïnsta
 Daarnaast moet ook FFmpeg apart geïnstalleerd worden. De stappen daarvan staan beschreven op de volgende website: \url{https://www.wikihow.com/Install-FFmpeg-on-Windows} voor een Windows besturingssysteem.
 
 \subsection{SSL-certificaat}
-Zodat andere toestellen aan de laptop of server zou kunnen moet er een SSL-certificaat geïnstalleerd worden. Dit kan bekomen worden door de volgende stappen uit te voeren:
+Zodat andere toestellen aan de laptop of server zouden kunnen moet er een SSL-certificaat geïnstalleerd worden. Dit kan bekomen worden door de volgende stappen uit te voeren:
 \begin{itemize}
 	\item Installeer ``pyopenssl''; voorbeeld via \textit{installer} ``chocolatey''.
 	\item ``openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365''
