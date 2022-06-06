@@ -2,7 +2,7 @@ import math
 import os
 import re
 import wave
-from collections import Counter
+import collections.abc
 from unidecode import unidecode
 
 import numpy as np
