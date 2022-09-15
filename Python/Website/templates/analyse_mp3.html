@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Elderspeak detector</title>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <h1>Elderspeak detector</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Audio uploaden</h3>
+                <img src="{{ url_for('static', filename='img/rusthuis.jpg') }}" alt="rusthuis foto" class="img-fluid img-medium" id="picture">
+                <br><span class="text-muted">(HOGENT, 2022)</span>
+                <br>
+                <input type="file" class="my-3"
+                   id="mp3_file" name="mp3_file"
+                   accept="audio/mpeg, audio/mpeg3,.mp3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Pitch: </span>
+                  <input id="input_pitch" type="number" class="form-control" placeholder="Pitch" aria-label="Pitch" aria-describedby="Pitch">
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Loudness: </span>
+                  <input id="input_loudness" type="number" class="form-control" placeholder="Loudness" aria-label="Loudness" aria-describedby="Loudness">
+                </div>
+                <a id="send_data" class="btn btn-primary">Data analyseren</a>
+                <div id="loading" class="hidden">
+                    <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-6 hidden my-3" id="eigenschappen_elderspeak">
+                <h3>Eigenschappen van <i>Elderspeak</i>:</h3>
+                <div id="loading_eigenschappen">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div id="eigenschappen_content" class="hidden">
+                    <div class="row" id="big-content"></div>
+                    <div class="row" id="small-content"></div>
+                </div>
+                <div class="hidden text-danger" id="errors">Er zijn fouten in het verwerken van de data...</div>
+                <button class="btn btn-warning" id="reset">Reset</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/elderspeak_analyse_mp3.js') }}"></script>
+{% endblock %}

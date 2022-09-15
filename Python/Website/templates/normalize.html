@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Elderspeak normalizer</title>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <h1>Elderspeak normalizer</h1>
+        <div class="row">
+            <div class="col-12">
+                <input type="file"
+                   id="mp3_file" name="mp3_file"
+                   accept="audio/mpeg, audio/mpeg3,.mp3">
+            </div>
+            <div class="col-3 my-2">
+                <a class="btn btn-primary" id="normalize">Krijg de normale waarden</a>
+            </div>
+            <div id="loading" class="hidden">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div>Pitch: <span id="pitch"></span></div>
+            <div>Loudness: <span id="loudness"></span></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/elderspeak_normalizer.js') }}"></script>
+{% endblock %}

@@ -43,6 +43,15 @@ def elderspeak():
     return render_template('elderspeak.html')
 
 
+@app.route('/normalizer', methods=['GET'])
+def normalizer():
+    return render_template('normalize.html')
+
+@app.route('/analyse_mp3', methods=['GET'])
+def analyse_mp3():
+    return render_template('analyse_mp3.html')
+
+
 @app.route('/receive_elderspeak', methods=['POST'])
 def receive_elderspeak():
     now = datetime.now()
