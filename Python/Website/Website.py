@@ -63,7 +63,7 @@ def receive_elderspeak():
     pitch_normal, loudness_normal = extra_data
     file = f'./uploads/{d1}.wav'
 
-    response_data = {"Hello": "World"}
+    response_data = {}
     with open(os.path.abspath(file), 'wb') as f:
         f.write(data)
 
@@ -72,12 +72,12 @@ def receive_elderspeak():
     verkleinwoorden = Calculations.verkleinwoorden(total_text)
     herhalingen = Calculations.herhalende_zinnen(total_text)
     pitch = Calculations.make_text_compare(pitch_normal,
-                                           Calculations.calculate_pitch(Calculations.maketempfile_wav(file)),
+                                           Calculations.calculate_pitch(Calculations.maketempfile_wav(file), True),
                                            100,
                                            '<span class="text-danger">Hoger</span>',
                                            '<span class="text-success">Lager of niet significant hoger.</span>')
     loudness = Calculations.make_text_compare(loudness_normal,
-                                              Calculations.loudness(Calculations.maketempfile_wav(file)),
+                                              Calculations.loudness(Calculations.maketempfile_wav(file), True),
                                               4,
                                               '<span class="text-danger">Luider</span>',
                                               '<span class="text-success">Stiller of niet significant luider.</span>')
@@ -118,12 +118,12 @@ def receive_normal():
     file = f'./uploads/{d1}.wav'
     data = request.files['audio_data'].read()
 
-    response_data = {"Hello": "World"}
+    response_data = {}
     with open(os.path.abspath(file), 'wb') as f:
         f.write(data)
 
-    pitch = Calculations.calculate_pitch(Calculations.maketempfile_wav(file))
-    loudness = Calculations.loudness(Calculations.maketempfile_wav(file))
+    pitch = Calculations.calculate_pitch(Calculations.maketempfile_wav(file), False)
+    loudness = Calculations.loudness(Calculations.maketempfile_wav(file), False)
 
     response_data["pitch"] = pitch
     response_data["loudness"] = loudness

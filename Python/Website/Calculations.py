@@ -186,7 +186,7 @@ def maketempfile_wav(wav_file):
     return tmp_file
 
 
-def calculate_pitch(wav_file):
+def calculate_pitch(wav_file, elderspeak):
     # try:
         x, _ = librosa.load(wav_file, sr=16000)
         tmp_file = './uploads/tmp.wav'
@@ -231,11 +231,15 @@ def calculate_pitch(wav_file):
                 data = wf.readframes(chunk)
         if data:
             stream.write(data)
-        freqlistavg = sum(freqlist) / len(freqlist)
+        freqlistavg = float(sum(freqlist) / len(freqlist))
         print("Average: %0.2f Hz." % (freqlistavg))
         stream.close()
         p.terminate()
         if type(freqlistavg) == int or type(freqlistavg) == float:
+            if elderspeak:
+                print(f"De gemiddelde frequentie bij het elderspeak bestand is {round(freqlistavg, 2)} Hz.")
+            else:
+                print(f"De gemiddelde frequentie bij het neutrale bestand is {round(freqlistavg, 2)} Hz.")
             return round(freqlistavg, 2)
         return -10000
     # except Exception as error:
@@ -255,7 +259,7 @@ def make_text_compare(normal, current, difference, danger, success):
         return '<span class="text-muted">Er was een probleem met deze functie. Probeer opnieuw.</span>'
 
 
-def loudness(wav):
+def loudness(wav, elderspeak):
     data, rate = sf.read(wav)  # load audio (with shape (samples, channels))
     meter = pyln.Meter(rate)  # create BS.1770 meter
     loudness_range = meter.integrated_loudness(data)  # measure loudness
@@ -263,6 +267,11 @@ def loudness(wav):
         loudness_range = 10000
     elif float('-inf') == loudness_range:
         loudness_range = -10000
+
+    if elderspeak:
+        print(f"Het aantal decibel is: {loudness_range} bij het elderspeak bestand.")
+    else:
+        print(f"Het aantal decibel is: {loudness_range} bij het neutrale bestand.")
     return loudness_range
 
 
